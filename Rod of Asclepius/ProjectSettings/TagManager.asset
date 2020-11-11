@@ -7,6 +7,10 @@ TagManager:
   - Enemy
   - Vampire
   - Wizard
+  - HealingItem
+  - ObjectiveItem
+  - Trap
+  - Ability
   layers:
   - Default
   - TransparentFX
@@ -16,7 +20,7 @@ TagManager:
   - UI
   - 
   - 
-  - 
+  - ItemTriggerCollision
   - 
   - 
   - 
