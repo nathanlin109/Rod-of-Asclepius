@@ -4,8 +4,11 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
+    // Fields
+    public float speed;
+
     // Start is called before the first frame update
-    void Start()
+    protected virtual void Start()
     {
         // set render queue to properly mask
         GetComponent<MeshRenderer>().material.renderQueue = 3002;
@@ -15,5 +18,18 @@ public class Enemy : MonoBehaviour
     void Update()
     {
         
+    }
+
+    // Collisions (traps/abilities)
+    protected virtual void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.tag == "Trap")
+        {
+            speed = 0;
+        }
+        else if (collision.gameObject.tag == "Ability")
+        {
+
+        }
     }
 }
