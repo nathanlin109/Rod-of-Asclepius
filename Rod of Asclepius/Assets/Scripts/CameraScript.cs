@@ -8,6 +8,7 @@ public class CameraScript : MonoBehaviour
     GameObject player;
     SceneMan sceneMan;
     public float moveSpeed;
+    private Vector3 moveVector;
 
     // Start is called before the first frame update
     void Start()
@@ -28,22 +29,28 @@ public class CameraScript : MonoBehaviour
     // Process keyboard inputs
     void KeyBoardInputs()
     {
+        moveVector = Vector3.zero;
+
         // Movements
         if (Input.GetKey(KeyCode.W))
         {
-            gameObject.transform.Translate(new Vector3(0, 1.0f, 0) * moveSpeed * Time.deltaTime);
+            moveVector += new Vector3(0, 1.0f, 0);
         }
         if (Input.GetKey(KeyCode.A))
         {
-            gameObject.transform.Translate(new Vector3(-1.0f, 0, 0) * moveSpeed * Time.deltaTime);
+            moveVector += new Vector3(-1.0f, 0, 0);
         }
         if (Input.GetKey(KeyCode.S))
         {
-            gameObject.transform.Translate(new Vector3(0, -1.0f, 0) * moveSpeed * Time.deltaTime);
+            moveVector += new Vector3(0, -1.0f, 0);
         }
         if (Input.GetKey(KeyCode.D))
         {
-            gameObject.transform.Translate(new Vector3(1.0f, 0, 0) * moveSpeed * Time.deltaTime);
+            moveVector += new Vector3(1.0f, 0, 0);
         }
+
+        // Applies the transformation
+        moveVector.Normalize();
+        gameObject.transform.Translate(moveVector * moveSpeed * Time.deltaTime);
     }
 }

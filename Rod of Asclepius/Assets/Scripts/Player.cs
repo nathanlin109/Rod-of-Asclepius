@@ -40,8 +40,5 @@ public class Player : MonoBehaviour
             mouseWorldPos.x - gameObject.transform.position.x) * Mathf.Rad2Deg - 90.0f;
 
         gameObject.transform.rotation = Quaternion.Euler(0, -angleOfRotation, 0);
-        Debug.Log("Player Pos: " + gameObject.transform.position);
-        Debug.Log("Mouse Pos: " + mouseWorldPos);
-        Debug.Log("Angle: " + angleOfRotation);
     }
 }
