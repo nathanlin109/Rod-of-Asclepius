@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 3300000}
   - component: {fileID: 2300000}
   - component: {fileID: 11100000}
+  - component: {fileID: 2634561312565042496}
   m_Layer: 0
   m_Name: fence_pillar_01
   m_TagString: Untagged
@@ -97,3 +98,16 @@ Animation:
   m_PlayAutomatically: 1
   m_AnimatePhysics: 0
   m_CullingType: 0
+--- !u!65 &2634561312565042496
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 100000}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.25129378, y: 1.6549577, z: 0.2512942}
+  m_Center: {x: 0.0000022128224, y: 0.8274788, z: -0.000000037252903}

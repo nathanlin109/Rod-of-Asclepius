@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 3300000}
   - component: {fileID: 2300000}
   - component: {fileID: 11100000}
+  - component: {fileID: -1434224590381062412}
   m_Layer: 0
   m_Name: fence_tile_01
   m_TagString: Untagged
@@ -97,3 +98,16 @@ Animation:
   m_PlayAutomatically: 1
   m_AnimatePhysics: 0
   m_CullingType: 0
+--- !u!65 &-1434224590381062412
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 100000}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.9998114, y: 1.186889, z: 0.08201317}
+  m_Center: {x: -0.0000022947788, y: 0.5934445, z: 0.00000010430813}

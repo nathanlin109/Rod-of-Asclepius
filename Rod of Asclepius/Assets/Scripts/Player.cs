@@ -6,7 +6,7 @@ public class Player : MonoBehaviour
 {
     // Fields
     public int health;
-    SceneMan sceneMan;
+    GameObject sceneMan;
     Vector3 middleModel;
     public float moveSpeed;
     private Vector3 moveVector;
@@ -21,7 +21,7 @@ public class Player : MonoBehaviour
     void Start()
     {
         health = 2;
-        sceneMan = GameObject.Find("SceneManager").GetComponent<SceneMan>();
+        sceneMan = GameObject.Find("SceneManager");
         middleModel = gameObject.transform.position +
             new Vector3(0, gameObject.GetComponent<BoxCollider>().bounds.size.y / 2, 0);
         moveVector = Vector3.zero;
@@ -33,7 +33,7 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (sceneMan.gameState == GameState.Game)
+        if (sceneMan.GetComponent<SceneMan>().gameState == GameState.Game)
         {
             KeyBoardInputs();
             MouseInputs();
@@ -114,10 +114,13 @@ public class Player : MonoBehaviour
     // Handles triggers with items
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag == "HealingItem" && health == 1)
+        if (sceneMan.GetComponent<SceneMan>().gameState == GameState.Game)
         {
-            health++;
-            Destroy(other.gameObject);
+            if (other.gameObject.tag == "HealingItem" && health == 1)
+            {
+                health++;
+                Destroy(other.gameObject);
+            }
         }
     }
 }
