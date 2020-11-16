@@ -28188,7 +28188,7 @@ MonoBehaviour:
   ButtonPromptText: {fileID: 1532730898}
   cutscene1Text: {fileID: 964166319}
   cutscene2Text: {fileID: 1887671325}
-  pickupTrapText: {fileID: 0}
+  pickupTrapText: {fileID: 407782802}
 --- !u!1 &1094094261 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 100000, guid: 0c6a1b709e81ef54297ce22bcaca285d, type: 3}
