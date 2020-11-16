@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    // Fields
+    // Player Fields
     public int health;
     GameObject sceneMan;
     Vector3 middleModel;
@@ -16,6 +16,13 @@ public class Player : MonoBehaviour
     private float immunityTimer;
     private float flashingTimer;
     public bool hasCollided;
+
+    // Trap/ability
+    public GameObject trapPrefab;
+    private float trapDeployTimer;
+    public float trapDeployTime;
+    private float trapMoveSpeedMultiplier;
+    private bool placedTrap;
 
     // Movement during UI prompts
     public bool shouldMove; // Set false when trigger UI prompt, set true when press space on UI prompt
@@ -32,6 +39,9 @@ public class Player : MonoBehaviour
         immunityTimer = 0;
         flashingTimer = 0;
         shouldMove = true;
+        trapDeployTimer = 0;
+        trapMoveSpeedMultiplier = 1;
+        placedTrap = false;
     }
 
     // Update is called once per frame
@@ -40,13 +50,14 @@ public class Player : MonoBehaviour
         // Game Movement
         if (sceneMan.GetComponent<SceneMan>().gameState == GameState.Game)
         {
-            KeyBoardInputs();
+            MovementKeyBoardInputs();
             MouseInputs();
+            TrapAbilityKeyboardInputs();
             CollisionCooldown();
         }
         else if (sceneMan.GetComponent<SceneMan>().gameState == GameState.GameNoCombat && shouldMove)
         {
-            KeyBoardInputs();
+            MovementKeyBoardInputs();
             MouseInputs();
         }
         else if (sceneMan.GetComponent<SceneMan>().gameState == GameState.Cutscene1 && shouldMove == true)
@@ -56,7 +67,7 @@ public class Player : MonoBehaviour
     }
 
     // Process keyboard inputs
-    void KeyBoardInputs()
+    void MovementKeyBoardInputs()
     {
         moveVector = Vector3.zero;
 
@@ -80,13 +91,13 @@ public class Player : MonoBehaviour
 
         // Applies the transformation
         moveVector.Normalize();
-        GetComponent<Rigidbody>().transform.Translate(moveVector * moveSpeed * Time.deltaTime, Space.World);
+        GetComponent<Rigidbody>().transform.Translate(moveVector * moveSpeed * trapMoveSpeedMultiplier * Time.deltaTime, Space.World);
     }
 
     // Process mouse inputs
     void MouseInputs()
     {
-        // Gets mosue position
+        // Gets mouse position
         Vector3 mousePos = Input.mousePosition;
         mousePos.z = Camera.main.transform.position.y - transform.position.y;
         Vector3 mouseWorldPos = Camera.main.ScreenToWorldPoint(mousePos);
@@ -96,6 +107,34 @@ public class Player : MonoBehaviour
             mouseWorldPos.x - gameObject.transform.position.x) * Mathf.Rad2Deg - 90.0f;
 
         GetComponent<Rigidbody>().rotation = Quaternion.Euler(0, -angleOfRotation, 0);
+    }
+
+    // Traps/abilities
+    void TrapAbilityKeyboardInputs()
+    {
+        if (Input.GetKey(KeyCode.Space) && placedTrap == false)
+        {
+            trapDeployTimer += Time.deltaTime;
+            trapMoveSpeedMultiplier = .3f;
+
+            // Deploys trap
+            if (trapDeployTimer >= trapDeployTime)
+            {
+                trapDeployTimer = 0;
+                trapMoveSpeedMultiplier = 1;
+
+                GameObject.Instantiate(trapPrefab,
+                    new Vector3(transform.position.x,
+                    .25f,
+                    transform.position.z),
+                    Quaternion.identity);
+            }
+        }
+        else if (Input.GetKeyUp(KeyCode.Space))
+        {
+            trapDeployTimer = 0;
+            trapMoveSpeedMultiplier = 1;
+        }
     }
 
     // Prevents player from colliding too much
@@ -127,14 +166,27 @@ public class Player : MonoBehaviour
     // Handles triggers with items
     private void OnTriggerEnter(Collider other)
     {
+        // Game state
         if (sceneMan.GetComponent<SceneMan>().gameState == GameState.Game)
         {
+            // Healing item
             if (other.gameObject.tag == "HealingItem" && health == 1)
             {
                 health++;
                 Destroy(other.gameObject);
             }
+
+            // Trap pickup prompt
+            else if (other.gameObject.tag == "Trap" && other.gameObject.GetComponent<Item>().enemyCurrentlyCaught == false)
+            {
+                if (sceneMan.GetComponent<InputManager>().pickupTrapText.activeSelf == false)
+                {
+                    sceneMan.GetComponent<InputManager>().pickupTrapText.SetActive(true);
+                }
+            }
         }
+
+        // Cutscene1 to GameNoCombat trigger
         else if (sceneMan.GetComponent<SceneMan>().gameState == GameState.Cutscene1)
         {
             if (other.gameObject.tag == "TriggerOpenGate")
@@ -149,6 +201,8 @@ public class Player : MonoBehaviour
                 shouldMove = false;
             }
         }
+
+        // GameNoCombat to Cutscene2 trigger
         else if (sceneMan.GetComponent<SceneMan>().gameState == GameState.GameNoCombat)
         {
             if (other.gameObject.tag == "TriggerMotherGrave")
@@ -163,6 +217,43 @@ public class Player : MonoBehaviour
                     coffin.transform.position.x - gameObject.transform.position.x) * Mathf.Rad2Deg - 90.0f;
 
                 GetComponent<Rigidbody>().rotation = Quaternion.Euler(0, -angleOfRotation, 0);
+            }
+        }
+    }
+
+    private void OnTriggerStay(Collider other)
+    {
+        // Game state
+        if (sceneMan.GetComponent<SceneMan>().gameState == GameState.Game)
+        {
+            if (other.gameObject.tag == "Trap")
+            {
+                if (other.gameObject.GetComponent<Item>().enemyCurrentlyCaught == false && Input.GetKey(KeyCode.E))
+                {
+                    if (sceneMan.GetComponent<InputManager>().pickupTrapText.activeSelf == true)
+                    {
+                        sceneMan.GetComponent<InputManager>().pickupTrapText.SetActive(false);
+                    }
+
+                    Destroy(other.gameObject);
+                    placedTrap = false;
+                }
+            }
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        // Game state
+        if (sceneMan.GetComponent<SceneMan>().gameState == GameState.Game)
+        {
+            // Trap pickup prompt
+            if (other.gameObject.tag == "Trap")
+            {
+                if (sceneMan.GetComponent<InputManager>().pickupTrapText.activeSelf == true)
+                {
+                    sceneMan.GetComponent<InputManager>().pickupTrapText.SetActive(false);
+                }
             }
         }
     }

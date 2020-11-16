@@ -10,6 +10,7 @@ public class InputManager : MonoBehaviour
     public GameObject ButtonPromptText;
     public GameObject cutscene1Text;
     public GameObject cutscene2Text;
+    public GameObject pickupTrapText;
 
     // Start is called before the first frame update
     void Start()
