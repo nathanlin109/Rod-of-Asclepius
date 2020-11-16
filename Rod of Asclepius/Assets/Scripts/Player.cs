@@ -17,8 +17,8 @@ public class Player : MonoBehaviour
     private float flashingTimer;
     public bool hasCollided;
 
-    // Movement during cutscenes
-    private bool cutsceneShouldMove;
+    // Movement during UI prompts
+    public bool shouldMove; // Set false when trigger UI prompt, set true when press space on UI prompt
 
     // Start is called before the first frame update
     void Start()
@@ -31,7 +31,7 @@ public class Player : MonoBehaviour
         hasCollided = false;
         immunityTimer = 0;
         flashingTimer = 0;
-        cutsceneShouldMove = true;
+        shouldMove = true;
     }
 
     // Update is called once per frame
@@ -44,12 +44,12 @@ public class Player : MonoBehaviour
             MouseInputs();
             CollisionCooldown();
         }
-        else if (sceneMan.GetComponent<SceneMan>().gameState == GameState.GameNoCombat)
+        else if (sceneMan.GetComponent<SceneMan>().gameState == GameState.GameNoCombat && shouldMove)
         {
             KeyBoardInputs();
             MouseInputs();
         }
-        else if (sceneMan.GetComponent<SceneMan>().gameState == GameState.Cutscene1 && cutsceneShouldMove == true)
+        else if (sceneMan.GetComponent<SceneMan>().gameState == GameState.Cutscene1 && shouldMove == true)
         {
             GetComponent<Rigidbody>().transform.Translate(new Vector3(0, 0, 1.0f) * moveSpeed / 2 * Time.deltaTime, Space.World);
         }
@@ -137,16 +137,32 @@ public class Player : MonoBehaviour
         }
         else if (sceneMan.GetComponent<SceneMan>().gameState == GameState.Cutscene1)
         {
-            if (other.gameObject.tag == "OpenGate")
+            if (other.gameObject.tag == "TriggerOpenGate")
             {
                 GameObject.Find("gate_01").GetComponent<Animation>().Play("Gate Open");
             }
-            else if (other.gameObject.tag == "CloseGate")
+            else if (other.gameObject.tag == "TriggerCloseGate")
             {
                 GameObject.Find("gate_01").GetComponent<Animation>().Play("Gate Close");
                 sceneMan.GetComponent<InputManager>().ButtonPromptText.SetActive(true);
                 sceneMan.GetComponent<InputManager>().cutscene1Text.SetActive(true);
-                cutsceneShouldMove = false;
+                shouldMove = false;
+            }
+        }
+        else if (sceneMan.GetComponent<SceneMan>().gameState == GameState.GameNoCombat)
+        {
+            if (other.gameObject.tag == "TriggerMotherGrave")
+            {
+                sceneMan.GetComponent<InputManager>().ButtonPromptText.SetActive(true);
+                sceneMan.GetComponent<InputManager>().cutscene2Text.SetActive(true);
+                shouldMove = false;
+
+                // find the angle to rotate the player so that it points towards the mother's grave
+                GameObject coffin = GameObject.Find("StaticLevelAssets/OtherObjects/Coffin Closed Standing");
+                float angleOfRotation = Mathf.Atan2(coffin.transform.position.z - gameObject.transform.position.z,
+                    coffin.transform.position.x - gameObject.transform.position.x) * Mathf.Rad2Deg - 90.0f;
+
+                GetComponent<Rigidbody>().rotation = Quaternion.Euler(0, -angleOfRotation, 0);
             }
         }
     }
