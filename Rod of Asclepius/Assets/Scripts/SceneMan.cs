@@ -13,7 +13,7 @@ public class SceneMan : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        gameState = GameState.Game;
+        gameState = GameState.Cutscene1;
     }
 
     // Update is called once per frame

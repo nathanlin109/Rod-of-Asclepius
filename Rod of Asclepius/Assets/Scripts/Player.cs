@@ -17,6 +17,9 @@ public class Player : MonoBehaviour
     private float flashingTimer;
     public bool hasCollided;
 
+    // Movement during cutscenes
+    private bool cutsceneShouldMove;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -28,17 +31,27 @@ public class Player : MonoBehaviour
         hasCollided = false;
         immunityTimer = 0;
         flashingTimer = 0;
+        cutsceneShouldMove = true;
     }
 
     // Update is called once per frame
     void Update()
     {
+        // Game Movement
         if (sceneMan.GetComponent<SceneMan>().gameState == GameState.Game)
         {
             KeyBoardInputs();
             MouseInputs();
             CollisionCooldown();
-            Debug.Log(health);
+        }
+        else if (sceneMan.GetComponent<SceneMan>().gameState == GameState.GameNoCombat)
+        {
+            KeyBoardInputs();
+            MouseInputs();
+        }
+        else if (sceneMan.GetComponent<SceneMan>().gameState == GameState.Cutscene1 && cutsceneShouldMove == true)
+        {
+            GetComponent<Rigidbody>().transform.Translate(new Vector3(0, 0, 1.0f) * moveSpeed / 2 * Time.deltaTime, Space.World);
         }
     }
 
@@ -120,6 +133,20 @@ public class Player : MonoBehaviour
             {
                 health++;
                 Destroy(other.gameObject);
+            }
+        }
+        else if (sceneMan.GetComponent<SceneMan>().gameState == GameState.Cutscene1)
+        {
+            if (other.gameObject.tag == "OpenGate")
+            {
+                GameObject.Find("gate_01").GetComponent<Animation>().Play("Gate Open");
+            }
+            else if (other.gameObject.tag == "CloseGate")
+            {
+                GameObject.Find("gate_01").GetComponent<Animation>().Play("Gate Close");
+                sceneMan.GetComponent<InputManager>().ButtonPromptText.SetActive(true);
+                sceneMan.GetComponent<InputManager>().cutscene1Text.SetActive(true);
+                cutsceneShouldMove = false;
             }
         }
     }

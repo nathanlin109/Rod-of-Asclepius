@@ -11,6 +11,9 @@ TagManager:
   - ObjectiveItem
   - Trap
   - Ability
+  - lb_bird
+  - OpenGate
+  - CloseGate
   layers:
   - Default
   - TransparentFX
