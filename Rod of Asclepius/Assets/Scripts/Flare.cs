@@ -19,6 +19,10 @@ public class Flare : Ability
     {
         base.Update();
         RemoveEffect();
+        if (transform.position.y <= 0 && hasHit == false)
+        {
+            Destroy(gameObject);
+        }
     }
 
     // Trigger enter
@@ -65,7 +69,7 @@ public class Flare : Ability
                     //wizard.GetComponent<Wizard>().spotLight.SetActive(true);
                 }
 
-                Destroy(this);
+                Destroy(gameObject);
             }
         }
     }

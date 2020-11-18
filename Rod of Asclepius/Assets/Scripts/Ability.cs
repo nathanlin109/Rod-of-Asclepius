@@ -5,7 +5,7 @@ using UnityEngine;
 public class Ability : MonoBehaviour
 {
     // Fields
-    protected float effectTime;
+    public float effectTime;
     protected float timeActive;
     protected bool hasHit;
 
