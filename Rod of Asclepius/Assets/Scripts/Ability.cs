@@ -4,15 +4,22 @@ using UnityEngine;
 
 public class Ability : MonoBehaviour
 {
+    // Fields
+    protected float effectTime;
+    protected float timeActive;
+    protected bool hasHit;
+
     // Start is called before the first frame update
-    void Start()
+    protected virtual void Start()
     {
-        
+        timeActive = 0;
+        hasHit = false;
+        GetComponent<MeshRenderer>().material.renderQueue = 3002;
     }
 
     // Update is called once per frame
-    void Update()
+    protected virtual void Update()
     {
-        
+
     }
 }

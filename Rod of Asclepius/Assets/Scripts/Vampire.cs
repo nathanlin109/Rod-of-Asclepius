@@ -8,6 +8,7 @@ public class Vampire : Enemy
     // Fields
     private GameObject player;
     private GameObject sceneMan;
+    public GameObject spotLight;
 
     // Start is called before the first frame update
     protected override void Start()
@@ -23,7 +24,11 @@ public class Vampire : Enemy
         base.Update();
         if (sceneMan.GetComponent<SceneMan>().gameState == GameState.Game)
         {
-            SeekPlayer();
+            GetComponent<NavMeshAgent>().destination = player.transform.position;
+        }
+        else
+        {
+            GetComponent<NavMeshAgent>().destination = transform.position;
         }
     }
 
@@ -40,10 +45,5 @@ public class Vampire : Enemy
             player.GetComponent<Player>().health--;
             player.GetComponent<Player>().hasCollided = true;
         }
-    }
-
-    void SeekPlayer()
-    {
-        GetComponent<NavMeshAgent>().destination = player.transform.position;
     }
 }

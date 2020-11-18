@@ -10,6 +10,7 @@ public class InputManager : MonoBehaviour
     public GameObject ButtonPromptText;
     public GameObject cutscene1Text;
     public GameObject cutscene2Text;
+    public GameObject cutscene3Text;
     public GameObject pickupTrapText;
 
     // Start is called before the first frame update
@@ -38,12 +39,11 @@ public class InputManager : MonoBehaviour
                     cutscene1Text.SetActive(false);
                     ButtonPromptText.SetActive(false);
                     sceneMan.GetComponent<SceneMan>().gameState = GameState.GameNoCombat;
-                    player.GetComponent<Player>().shouldMove = true;
                 }
             }
         }
-        // GameNoCombat to Cutscene2
-        else if (sceneMan.GetComponent<SceneMan>().gameState == GameState.GameNoCombat)
+        // Cutscene2 to Game
+        else if (sceneMan.GetComponent<SceneMan>().gameState == GameState.Cutscene2)
         {
             if (Input.GetKeyDown(KeyCode.Space))
             {
@@ -52,7 +52,19 @@ public class InputManager : MonoBehaviour
                     cutscene2Text.SetActive(false);
                     ButtonPromptText.SetActive(false);
                     sceneMan.GetComponent<SceneMan>().gameState = GameState.Game;
-                    player.GetComponent<Player>().shouldMove = true;
+                }
+            }
+        }
+        // Cutscene3 to Game
+        else if (sceneMan.GetComponent<SceneMan>().gameState == GameState.Cutscene3)
+        {
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                if (cutscene3Text.activeSelf == true && ButtonPromptText.activeSelf == true)
+                {
+                    cutscene3Text.SetActive(false);
+                    ButtonPromptText.SetActive(false);
+                    sceneMan.GetComponent<SceneMan>().gameState = GameState.Game;
                 }
             }
         }

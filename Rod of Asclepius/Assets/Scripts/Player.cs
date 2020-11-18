@@ -17,57 +17,91 @@ public class Player : MonoBehaviour
     private float flashingTimer;
     public bool hasCollided;
 
-    // Trap/ability
+    // Trap
     public GameObject trapPrefab;
     private float trapDeployTimer;
     public float trapDeployTime;
     private float trapMoveSpeedMultiplier;
     private bool placedTrap;
 
+    // Ability
+    public GameObject flarePrefab;
+    public float projectileSpeed;
+    public float flareCooldown;
+    private float flareTimeTillCooldown;
+
     // Objectives
     public int objectiveItemsCollected;
     public GameObject pickupObjectiveItemText;
 
-    // Movement during UI prompts
-    public bool shouldMove; // Set false when trigger UI prompt, set true when press space on UI prompt
+    // Cutscene1 movement
+    private bool cutscene1ShouldMove;
+
+    // Enemies
+    public GameObject vampire;
+    public GameObject wizard;
 
     // Start is called before the first frame update
     void Start()
     {
+        // Own fields
         health = 2;
+        cutscene1ShouldMove = true;
         sceneMan = GameObject.Find("SceneManager");
         middleModel = gameObject.transform.position +
             new Vector3(0, gameObject.GetComponent<BoxCollider>().bounds.size.y / 2, 0);
         moveVector = Vector3.zero;
+
+        // Collision/damage
         hasCollided = false;
         immunityTimer = 0;
         flashingTimer = 0;
-        shouldMove = true;
+
+        // Traps
         trapDeployTimer = 0;
         trapMoveSpeedMultiplier = 1;
         placedTrap = false;
-        objectiveItemsCollected = 0;
-    }
 
-    // Update is called once per frame
-    void Update()
+        // Objectives
+        objectiveItemsCollected = 0;
+
+        // Abilities
+        flareTimeTillCooldown = 3;
+}
+
+// Update is called once per frame
+void Update()
     {
         // Game Movement
         if (sceneMan.GetComponent<SceneMan>().gameState == GameState.Game)
         {
             MovementKeyBoardInputs();
             MouseInputs();
-            TrapAbilityKeyboardInputs();
             CollisionCooldown();
+            PlaceTrap();
+            ThrowFlare();
         }
-        else if (sceneMan.GetComponent<SceneMan>().gameState == GameState.GameNoCombat && shouldMove)
+        else if (sceneMan.GetComponent<SceneMan>().gameState == GameState.GameNoCombat)
         {
             MovementKeyBoardInputs();
             MouseInputs();
         }
-        else if (sceneMan.GetComponent<SceneMan>().gameState == GameState.Cutscene1 && shouldMove == true)
+        else if (sceneMan.GetComponent<SceneMan>().gameState == GameState.Cutscene1 && cutscene1ShouldMove == true)
         {
             GetComponent<Rigidbody>().transform.Translate(new Vector3(0, 0, 1.0f) * moveSpeed / 2 * Time.deltaTime, Space.World);
+        }
+        if (Input.GetKeyDown(KeyCode.G))
+        {
+            if (vampire.GetComponent<MeshRenderer>().material.renderQueue == 3002)
+            {
+                vampire.GetComponent<MeshRenderer>().material.renderQueue = 3000;
+                vampire.GetComponent<Vampire>().spotLight.SetActive(true);
+            }
+            else
+            {
+                vampire.GetComponent<MeshRenderer>().material.renderQueue = 3002;
+                vampire.GetComponent<Vampire>().spotLight.SetActive(false);
+            }
         }
     }
 
@@ -115,7 +149,7 @@ public class Player : MonoBehaviour
     }
 
     // Traps/abilities
-    void TrapAbilityKeyboardInputs()
+    void PlaceTrap()
     {
         if (Input.GetKey(KeyCode.Space) && placedTrap == false)
         {
@@ -127,6 +161,7 @@ public class Player : MonoBehaviour
             {
                 trapDeployTimer = 0;
                 trapMoveSpeedMultiplier = 1;
+                placedTrap = true;
 
                 GameObject.Instantiate(trapPrefab,
                     new Vector3(transform.position.x,
@@ -139,6 +174,19 @@ public class Player : MonoBehaviour
         {
             trapDeployTimer = 0;
             trapMoveSpeedMultiplier = 1;
+        }
+    }
+
+    // Throw
+    void ThrowFlare()
+    {
+        flareTimeTillCooldown += Time.deltaTime;
+
+        if (flareTimeTillCooldown >= flareCooldown && Input.GetMouseButtonDown(0))
+        {
+            GameObject flare = Instantiate(flarePrefab, transform.position, Quaternion.identity);
+            flare.GetComponent<Rigidbody>().AddForce(transform.forward * projectileSpeed, ForceMode.Impulse);
+            flareTimeTillCooldown = 0;
         }
     }
 
@@ -198,6 +246,22 @@ public class Player : MonoBehaviour
                     pickupObjectiveItemText.SetActive(true);
                 }
             }
+
+            // Game to Cutscene3 (Trigger Mother's grave)
+            if (other.gameObject.tag == "TriggerMotherGrave" && objectiveItemsCollected == 6)
+            {
+                sceneMan.GetComponent<InputManager>().ButtonPromptText.SetActive(true);
+                sceneMan.GetComponent<InputManager>().cutscene3Text.SetActive(true);
+                sceneMan.GetComponent<SceneMan>().gameState = GameState.Cutscene3;
+                objectiveItemsCollected++;
+
+                // find the angle to rotate the player so that it points towards the mother's grave
+                GameObject coffin = GameObject.Find("StaticLevelAssets/OtherObjects/Coffin Closed Standing");
+                float angleOfRotation = Mathf.Atan2(coffin.transform.position.z - gameObject.transform.position.z,
+                    coffin.transform.position.x - gameObject.transform.position.x) * Mathf.Rad2Deg - 90.0f;
+
+                GetComponent<Rigidbody>().rotation = Quaternion.Euler(0, -angleOfRotation, 0);
+            }
         }
 
         // Cutscene1 to GameNoCombat trigger
@@ -212,7 +276,7 @@ public class Player : MonoBehaviour
                 GameObject.Find("gate_01").GetComponent<Animation>().Play("Gate Close");
                 sceneMan.GetComponent<InputManager>().ButtonPromptText.SetActive(true);
                 sceneMan.GetComponent<InputManager>().cutscene1Text.SetActive(true);
-                shouldMove = false;
+                cutscene1ShouldMove = false;
             }
         }
 
@@ -223,7 +287,7 @@ public class Player : MonoBehaviour
             {
                 sceneMan.GetComponent<InputManager>().ButtonPromptText.SetActive(true);
                 sceneMan.GetComponent<InputManager>().cutscene2Text.SetActive(true);
-                shouldMove = false;
+                sceneMan.GetComponent<SceneMan>().gameState = GameState.Cutscene2;
 
                 // find the angle to rotate the player so that it points towards the mother's grave
                 GameObject coffin = GameObject.Find("StaticLevelAssets/OtherObjects/Coffin Closed Standing");
