@@ -24433,6 +24433,10 @@ PrefabInstance:
       propertyPath: m_Center.z
       value: 0.00000070629693
       objectReference: {fileID: 0}
+    - target: {fileID: 9500000, guid: c42b8d643b928594d8e92b17b63dfe06, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 11400000, guid: c42b8d643b928594d8e92b17b63dfe06, type: 3}
     - {fileID: 8200000, guid: c42b8d643b928594d8e92b17b63dfe06, type: 3}
