@@ -24,6 +24,10 @@ public class Player : MonoBehaviour
     private float trapMoveSpeedMultiplier;
     private bool placedTrap;
 
+    // Objectives
+    public int objectiveItemsCollected;
+    public GameObject pickupObjectiveItemText;
+
     // Movement during UI prompts
     public bool shouldMove; // Set false when trigger UI prompt, set true when press space on UI prompt
 
@@ -42,6 +46,7 @@ public class Player : MonoBehaviour
         trapDeployTimer = 0;
         trapMoveSpeedMultiplier = 1;
         placedTrap = false;
+        objectiveItemsCollected = 0;
     }
 
     // Update is called once per frame
@@ -184,6 +189,15 @@ public class Player : MonoBehaviour
                     sceneMan.GetComponent<InputManager>().pickupTrapText.SetActive(true);
                 }
             }
+
+            // Objective item pickup prompt
+            else if (other.gameObject.tag == "ObjectiveItem")
+            {
+                if (pickupObjectiveItemText.activeSelf == false)
+                {
+                    pickupObjectiveItemText.SetActive(true);
+                }
+            }
         }
 
         // Cutscene1 to GameNoCombat trigger
@@ -226,6 +240,7 @@ public class Player : MonoBehaviour
         // Game state
         if (sceneMan.GetComponent<SceneMan>().gameState == GameState.Game)
         {
+            // Pickup trap
             if (other.gameObject.tag == "Trap")
             {
                 if (other.gameObject.GetComponent<Item>().enemyCurrentlyCaught == false && Input.GetKey(KeyCode.E))
@@ -237,6 +252,22 @@ public class Player : MonoBehaviour
 
                     Destroy(other.gameObject);
                     placedTrap = false;
+                }
+            }
+
+            //Pickup objective item
+            else if (other.gameObject.tag == "ObjectiveItem")
+            {
+                if (Input.GetKey(KeyCode.E))
+                {
+                    if (pickupObjectiveItemText.activeSelf == true)
+                    {
+                        pickupObjectiveItemText.SetActive(false);
+                    }
+                    
+                    Destroy(other.gameObject);
+                    objectiveItemsCollected++;
+                    sceneMan.GetComponent<ObjectiveManager>().UpdateOICollectedText();
                 }
             }
         }
@@ -253,6 +284,15 @@ public class Player : MonoBehaviour
                 if (sceneMan.GetComponent<InputManager>().pickupTrapText.activeSelf == true)
                 {
                     sceneMan.GetComponent<InputManager>().pickupTrapText.SetActive(false);
+                }
+            }
+
+            // Objective item pickup prompt
+            if (other.gameObject.tag == "ObjectiveItem")
+            {
+                if (pickupObjectiveItemText.activeSelf == true)
+                {
+                    pickupObjectiveItemText.SetActive(false);
                 }
             }
         }
