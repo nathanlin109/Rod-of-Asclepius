@@ -12019,7 +12019,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Press "E" to pick up trap.
+  m_Text: Press [E] to pick up trap.
 --- !u!222 &407782805
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -25316,7 +25316,8 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: I need to find my mother's grave quickly before anyone notices I'm here...
+  m_Text: 'D''Angelo: I need to find my mother''s grave quickly before anyone notices
+    I''m here...'
 --- !u!222 &964166322
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -54200,7 +54201,9 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Cutscene 2 text
+  m_Text: 'D''Angelo: Now that I have the Rod of Asclepius, I''ll just need a few
+    more items to complete the ritual. I need to find the Skull of a Human, the Feather
+    of a Sparrow, and a Flower of a Red Azalea...'
 --- !u!222 &1887671327
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -56923,7 +56926,9 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Cutscene 3 text
+  m_Text: 'D''Angelo: WIth the Rod of Asclepius and these three ritual items, I can
+    now begin the resurection ritual. I need to make this quick in order to escape
+    the cemetary with our lives...'
 --- !u!222 &1989952113
 CanvasRenderer:
   m_ObjectHideFlags: 0
