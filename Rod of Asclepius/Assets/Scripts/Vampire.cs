@@ -33,15 +33,14 @@ public class Vampire : Enemy
     }
 
     // Handles collisions w/ player
-    protected override void OnCollisionEnter(Collision collision)
+    private void OnCollisionStay(Collision collision)
     {
-        base.OnCollisionEnter(collision);
-
         // Handles collision w/ player
         if (collision.gameObject.tag == "Player" &&
             player.GetComponent<Player>().hasCollided == false &&
-            player.GetComponent<Player>().health > 0)
+            player.GetComponent<Player>().health > 0 && silenced == false)
         {
+            Debug.Log("Damaged Player");
             player.GetComponent<Player>().health--;
             player.GetComponent<Player>().hasCollided = true;
         }

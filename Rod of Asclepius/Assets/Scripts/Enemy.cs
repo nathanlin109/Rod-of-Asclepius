@@ -8,10 +8,15 @@ public class Enemy : MonoBehaviour
     // Fields
     private float speed;
     private float acceleration;
+
+    // Trap
     private bool trapped;
     private float trapTimer;
     public float trapTime;
     private GameObject triggeredTrap;
+
+    // Abilities
+    public bool silenced;
 
     // Start is called before the first frame update
     protected virtual void Start()
@@ -22,6 +27,7 @@ public class Enemy : MonoBehaviour
         acceleration = GetComponent<NavMeshAgent>().acceleration;
         trapped = false;
         trapTimer = 0;
+        silenced = false;
     }
 
     // Update is called once per frame
@@ -30,11 +36,6 @@ public class Enemy : MonoBehaviour
         unTrap();
     }
 
-    // Collisions (traps/abilities)
-    protected virtual void OnCollisionEnter(Collision collision)
-    {
-        
-    }
 
     // Triggers
     protected void OnTriggerEnter(Collider other)

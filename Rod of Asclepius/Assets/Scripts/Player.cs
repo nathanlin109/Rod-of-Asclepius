@@ -26,9 +26,15 @@ public class Player : MonoBehaviour
 
     // Ability
     public GameObject flarePrefab;
+    public GameObject silencePrefab;
+    public GameObject icePrefab;
     public float projectileSpeed;
     public float flareCooldown;
     private float flareTimeTillCooldown;
+    public float silenceCooldown;
+    private float silenceTimeTillCooldown;
+    public float iceCooldown;
+    private float iceTimeTillCooldown;
 
     // Objectives
     public int objectiveItemsCollected;
@@ -66,7 +72,9 @@ public class Player : MonoBehaviour
         objectiveItemsCollected = 0;
 
         // Abilities
-        flareTimeTillCooldown = 3;
+        flareTimeTillCooldown = flareCooldown;
+        silenceTimeTillCooldown = silenceCooldown;
+        iceTimeTillCooldown = iceCooldown;
 }
 
 // Update is called once per frame
@@ -79,7 +87,7 @@ void Update()
             MouseInputs();
             CollisionCooldown();
             PlaceTrap();
-            ThrowFlare();
+            ThrowAbility();
         }
         else if (sceneMan.GetComponent<SceneMan>().gameState == GameState.GameNoCombat)
         {
@@ -178,15 +186,35 @@ void Update()
     }
 
     // Throw
-    void ThrowFlare()
+    void ThrowAbility()
     {
+        // Increments timers
         flareTimeTillCooldown += Time.deltaTime;
+        silenceTimeTillCooldown += Time.deltaTime;
+        iceTimeTillCooldown += Time.deltaTime;
 
+        // Flare
         if (flareTimeTillCooldown >= flareCooldown && Input.GetMouseButtonDown(0))
         {
             GameObject flare = Instantiate(flarePrefab, transform.position, Quaternion.identity);
             flare.GetComponent<Rigidbody>().AddForce(transform.forward * projectileSpeed, ForceMode.Impulse);
             flareTimeTillCooldown = 0;
+        }
+
+        // Silence
+        if (silenceTimeTillCooldown >= silenceCooldown && Input.GetMouseButtonDown(1))
+        {
+            GameObject silence = Instantiate(silencePrefab, transform.position, Quaternion.identity);
+            silence.GetComponent<Rigidbody>().AddForce(transform.forward * projectileSpeed, ForceMode.Impulse);
+            silenceTimeTillCooldown = 0;
+        }
+
+        // Silence
+        if (iceTimeTillCooldown >= iceCooldown && Input.GetMouseButtonDown(2))
+        {
+            GameObject silence = Instantiate(icePrefab, transform.position, Quaternion.identity);
+            silence.GetComponent<Rigidbody>().AddForce(transform.forward * projectileSpeed, ForceMode.Impulse);
+            iceTimeTillCooldown = 0;
         }
     }
 
