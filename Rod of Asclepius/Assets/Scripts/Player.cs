@@ -202,7 +202,7 @@ void Update()
         if (flareTimeTillCooldown >= flareCooldown && Input.GetMouseButtonDown(1) && trapDeployTimer == 0)
         {
             GameObject flare = Instantiate(flarePrefab, transform.position, Quaternion.identity);
-            flare.GetComponent<Rigidbody>().AddForce(transform.forward * projectileSpeed + moveVector * moveSpeed, ForceMode.Impulse);
+            flare.GetComponent<Rigidbody>().AddForce(transform.forward * projectileSpeed + moveVector * moveSpeed / 4, ForceMode.Impulse);
             flareTimeTillCooldown = 0;
         }
 
@@ -210,7 +210,7 @@ void Update()
         if (silenceTimeTillCooldown >= silenceCooldown && Input.GetMouseButtonDown(2) && trapDeployTimer == 0)
         {
             GameObject silence = Instantiate(silencePrefab, transform.position, Quaternion.identity);
-            silence.GetComponent<Rigidbody>().AddForce(transform.forward * projectileSpeed + moveVector * moveSpeed, ForceMode.Impulse);
+            silence.GetComponent<Rigidbody>().AddForce(transform.forward * projectileSpeed + moveVector * moveSpeed / 4, ForceMode.Impulse);
             silenceTimeTillCooldown = 0;
         }
 
@@ -218,7 +218,7 @@ void Update()
         if (iceTimeTillCooldown >= iceCooldown && Input.GetMouseButtonDown(0) && trapDeployTimer == 0)
         {
             GameObject silence = Instantiate(icePrefab, transform.position, Quaternion.identity);
-            silence.GetComponent<Rigidbody>().AddForce(transform.forward * projectileSpeed + moveVector * moveSpeed, ForceMode.Impulse);
+            silence.GetComponent<Rigidbody>().AddForce(transform.forward * projectileSpeed + moveVector * moveSpeed / 4, ForceMode.Impulse);
             iceTimeTillCooldown = 0;
         }
     }
