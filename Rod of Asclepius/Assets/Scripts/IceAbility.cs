@@ -20,11 +20,19 @@ public class IceAbility : Ability
     }
 
     // Collision enter
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider other)
     {
-        if (collision.gameObject.tag != "Player")
+        Debug.Log(other.gameObject.tag);
+        if (other.gameObject.tag != "Player" && other.gameObject.tag != "IceParticles" &&
+            other.gameObject.tag != "TriggerMotherGrave" && other.gameObject.tag != "TriggerOpenGateBeginning" &&
+            other.gameObject.tag != "TriggerCloseGateBeginning" && other.gameObject.tag != "TriggerOpenGateEnd" &&
+            other.gameObject.tag != "TriggerCloseGateEnd")
         {
-            Instantiate(iceParticlesPrefab, transform.position.normalized, Quaternion.identity);
+            Debug.Log("SHOULD SPAWN PARTICLES");
+
+            Instantiate(iceParticlesPrefab,
+                new Vector3(transform.position.x, 3.7f, transform.position.z),
+                Quaternion.identity);
             Destroy(gameObject);
         }
     }

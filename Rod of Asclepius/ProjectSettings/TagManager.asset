@@ -12,9 +12,13 @@ TagManager:
   - Trap
   - Ability
   - lb_bird
-  - TriggerOpenGate
-  - TriggerCloseGate
   - TriggerMotherGrave
+  - IceParticles
+  - Mother
+  - TriggerOpenGateBeginning
+  - TriggerCloseGateBeginning
+  - TriggerOpenGateEnd
+  - TriggerCloseGateEnd
   layers:
   - Default
   - TransparentFX

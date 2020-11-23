@@ -6,7 +6,6 @@ using UnityEngine.AI;
 public class Wizard : Enemy
 {
     // Fields
-    private GameObject player;
     private GameObject sceneMan;
     public GameObject spotLight;
 

@@ -6,7 +6,6 @@ using UnityEngine.AI;
 public class Vampire : Enemy
 {
     // Fields
-    private GameObject player;
     private GameObject sceneMan;
     public GameObject spotLight;
 
@@ -14,7 +13,6 @@ public class Vampire : Enemy
     protected override void Start()
     {
         base.Start();
-        player = GameObject.Find("Player");
         sceneMan = GameObject.Find("SceneManager");
     }
 

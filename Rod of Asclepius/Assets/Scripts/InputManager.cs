@@ -7,10 +7,12 @@ public class InputManager : MonoBehaviour
     // Fields
     private GameObject sceneMan;
     private GameObject player;
+    public GameObject mother;
     public GameObject ButtonPromptText;
     public GameObject cutscene1Text;
     public GameObject cutscene2Text;
     public GameObject cutscene3Text;
+    public GameObject cutscene4Text;
     public GameObject pickupTrapText;
 
     // Start is called before the first frame update
@@ -65,7 +67,17 @@ public class InputManager : MonoBehaviour
                     cutscene3Text.SetActive(false);
                     ButtonPromptText.SetActive(false);
                     sceneMan.GetComponent<SceneMan>().gameState = GameState.Game;
+                    sceneMan.GetComponent<SceneMan>().resurrectedMom = true;
+                    mother.SetActive(true);
                 }
+            }
+        }
+        // Cutscene4 to End
+        else if (sceneMan.GetComponent<SceneMan>().gameState == GameState.Cutscene4)
+        {
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                
             }
         }
     }

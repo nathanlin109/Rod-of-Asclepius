@@ -42,7 +42,8 @@ public class Flare : Ability
             {
                 wizard = other.gameObject;
                 GetComponent<MeshRenderer>().enabled = false;
-                //wizard.GetComponent<Wizard>().spotLight.SetActive(true);
+                wizard.GetComponent<MeshRenderer>().material.renderQueue = 3000;
+                wizard.GetComponent<Wizard>().spotLight.SetActive(true);
                 hasHit = true;
             }
         }
@@ -65,8 +66,8 @@ public class Flare : Ability
                 }
                 if (wizard != null)
                 {
-                    //wizard.GetComponent<Wizard>().material.renderQueue = 3002;
-                    //wizard.GetComponent<Wizard>().spotLight.SetActive(true);
+                    wizard.GetComponent<MeshRenderer>().material.renderQueue = 3002;
+                    wizard.GetComponent<Wizard>().spotLight.SetActive(false);
                 }
 
                 Destroy(gameObject);

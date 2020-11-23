@@ -9,11 +9,13 @@ public class SceneMan : MonoBehaviour
 {
     // Fields
     public GameState gameState;
+    public bool resurrectedMom;
 
     // Start is called before the first frame update
     void Start()
     {
         gameState = GameState.Cutscene1;
+        resurrectedMom = false;
     }
 
     // Update is called once per frame

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class Player : MonoBehaviour
 {
@@ -98,6 +99,10 @@ void Update()
         {
             GetComponent<Rigidbody>().transform.Translate(new Vector3(0, 0, 1.0f) * moveSpeed / 2 * Time.deltaTime, Space.World);
         }
+        else if (sceneMan.GetComponent<SceneMan>().gameState == GameState.Cutscene4)
+        {
+            GetComponent<Rigidbody>().transform.Translate(new Vector3(0, 0, -1.0f) * moveSpeed / 2 * Time.deltaTime, Space.World);
+        }
         if (Input.GetKeyDown(KeyCode.G))
         {
             if (vampire.GetComponent<MeshRenderer>().material.renderQueue == 3002)
@@ -194,26 +199,26 @@ void Update()
         iceTimeTillCooldown += Time.deltaTime;
 
         // Flare
-        if (flareTimeTillCooldown >= flareCooldown && Input.GetMouseButtonDown(0))
+        if (flareTimeTillCooldown >= flareCooldown && Input.GetMouseButtonDown(1) && trapDeployTimer == 0)
         {
             GameObject flare = Instantiate(flarePrefab, transform.position, Quaternion.identity);
-            flare.GetComponent<Rigidbody>().AddForce(transform.forward * projectileSpeed, ForceMode.Impulse);
+            flare.GetComponent<Rigidbody>().AddForce(transform.forward * projectileSpeed + moveVector * moveSpeed, ForceMode.Impulse);
             flareTimeTillCooldown = 0;
         }
 
         // Silence
-        if (silenceTimeTillCooldown >= silenceCooldown && Input.GetMouseButtonDown(1))
+        if (silenceTimeTillCooldown >= silenceCooldown && Input.GetMouseButtonDown(2) && trapDeployTimer == 0)
         {
             GameObject silence = Instantiate(silencePrefab, transform.position, Quaternion.identity);
-            silence.GetComponent<Rigidbody>().AddForce(transform.forward * projectileSpeed, ForceMode.Impulse);
+            silence.GetComponent<Rigidbody>().AddForce(transform.forward * projectileSpeed + moveVector * moveSpeed, ForceMode.Impulse);
             silenceTimeTillCooldown = 0;
         }
 
-        // Silence
-        if (iceTimeTillCooldown >= iceCooldown && Input.GetMouseButtonDown(2))
+        // Ice
+        if (iceTimeTillCooldown >= iceCooldown && Input.GetMouseButtonDown(0) && trapDeployTimer == 0)
         {
             GameObject silence = Instantiate(icePrefab, transform.position, Quaternion.identity);
-            silence.GetComponent<Rigidbody>().AddForce(transform.forward * projectileSpeed, ForceMode.Impulse);
+            silence.GetComponent<Rigidbody>().AddForce(transform.forward * projectileSpeed + moveVector * moveSpeed, ForceMode.Impulse);
             iceTimeTillCooldown = 0;
         }
     }
@@ -290,16 +295,36 @@ void Update()
 
                 GetComponent<Rigidbody>().rotation = Quaternion.Euler(0, -angleOfRotation, 0);
             }
+
+            // Trigger gate open after resurrect mother
+            if (sceneMan.GetComponent<SceneMan>().resurrectedMom == true)
+            {
+                if (other.gameObject.tag == "TriggerOpenGateEnd")
+                {
+                    GameObject.Find("gate_01").GetComponent<Animation>().Play("Gate Open");
+                }
+                else if (other.gameObject.tag == "TriggerCloseGateEnd")
+                {
+                    GameObject.Find("gate_01").GetComponent<Animation>().Play("Gate Close");
+                    
+                }
+                else if(other.gameObject.tag == "TriggerOpenGateBeginning")
+                {
+                    sceneMan.GetComponent<InputManager>().ButtonPromptText.SetActive(true);
+                    sceneMan.GetComponent<InputManager>().cutscene4Text.SetActive(true);
+                    sceneMan.GetComponent<SceneMan>().gameState = GameState.Cutscene4;
+                }
+            }
         }
 
         // Cutscene1 to GameNoCombat trigger
         else if (sceneMan.GetComponent<SceneMan>().gameState == GameState.Cutscene1)
         {
-            if (other.gameObject.tag == "TriggerOpenGate")
+            if (other.gameObject.tag == "TriggerOpenGateBeginning")
             {
                 GameObject.Find("gate_01").GetComponent<Animation>().Play("Gate Open");
             }
-            else if (other.gameObject.tag == "TriggerCloseGate")
+            else if (other.gameObject.tag == "TriggerCloseGateBeginning")
             {
                 GameObject.Find("gate_01").GetComponent<Animation>().Play("Gate Close");
                 sceneMan.GetComponent<InputManager>().ButtonPromptText.SetActive(true);

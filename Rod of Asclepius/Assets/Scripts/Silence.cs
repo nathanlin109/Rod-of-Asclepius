@@ -41,7 +41,7 @@ public class Silence : Ability
             {
                 wizard = other.gameObject;
                 GetComponent<MeshRenderer>().enabled = false;
-                //wizard.GetComponent<wizard>().silenced = true;
+                wizard.GetComponent<Wizard>().silenced = true;
                 hasHit = true;
             }
         }
@@ -63,7 +63,7 @@ public class Silence : Ability
                 }
                 if (wizard != null)
                 {
-                    //wizard.GetComponent<wizard>().silenced = true;
+                    wizard.GetComponent<Wizard>().silenced = false;
                 }
 
                 Destroy(gameObject);

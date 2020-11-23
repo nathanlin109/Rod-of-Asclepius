@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   effectTime: 0
-  iceParticlesPrefab: {fileID: 0}
+  iceParticlesPrefab: {fileID: 5954973109613303064, guid: 57e6f1a9f2165bc4d8f90340570a9bd9, type: 3}
 --- !u!1001 &4965464999809717420
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -21,6 +21,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3225235318200320614, guid: e4691c7b45cdb954e9bc994e2385f09e, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3456411243823254343, guid: e4691c7b45cdb954e9bc994e2385f09e, type: 3}
       propertyPath: m_Name
       value: IceAbility Variant
