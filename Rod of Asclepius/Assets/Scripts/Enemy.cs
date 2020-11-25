@@ -9,6 +9,8 @@ public class Enemy : MonoBehaviour
     protected GameObject player;
     private float speed;
     private float acceleration;
+    protected GameObject sceneMan;
+    private bool buttonPromptDisabledCutscene2;
 
     // Trap
     private bool trapped;
@@ -27,6 +29,7 @@ public class Enemy : MonoBehaviour
     {
         // set render queue to properly mask
         player = GameObject.Find("Player");
+        sceneMan = GameObject.Find("SceneManager");
         GetComponent<MeshRenderer>().material.renderQueue = 3002;
         speed = GetComponent<NavMeshAgent>().speed;
         acceleration = GetComponent<NavMeshAgent>().acceleration;
@@ -35,6 +38,7 @@ public class Enemy : MonoBehaviour
         silenced = false;
         iceTimer = 0;
         slowed = false;
+        buttonPromptDisabledCutscene2 = false;
     }
 
     // Update is called once per frame
@@ -42,6 +46,7 @@ public class Enemy : MonoBehaviour
     {
         UnTrap();
         IceSlow();
+        SeekPlayer();
     }
 
 
@@ -77,6 +82,34 @@ public class Enemy : MonoBehaviour
         {
             GetComponent<NavMeshAgent>().speed = speed / 2;
             slowed = true;
+        }
+    }
+
+    // Seeks player
+    void SeekPlayer()
+    {
+        if (sceneMan.GetComponent<SceneMan>().gameState == GameState.Game)
+        {
+            GetComponent<NavMeshAgent>().destination = player.transform.position;
+        }
+        else if (sceneMan.GetComponent<SceneMan>().gameState == GameState.Cutscene2)
+        {
+            float distance = Mathf.Abs(Vector3.Distance(transform.position, player.transform.position));
+
+            if (distance > 7)
+            {
+                GetComponent<NavMeshAgent>().destination = player.transform.position;
+            }
+            else if (buttonPromptDisabledCutscene2 == false)
+            {
+                GetComponent<NavMeshAgent>().destination = transform.position;
+                sceneMan.GetComponent<InputManager>().ButtonPromptText.SetActive(true);
+                buttonPromptDisabledCutscene2 = true;
+            }
+        }
+        else
+        {
+            GetComponent<NavMeshAgent>().destination = transform.position;
         }
     }
 

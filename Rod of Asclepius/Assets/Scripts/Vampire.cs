@@ -6,28 +6,18 @@ using UnityEngine.AI;
 public class Vampire : Enemy
 {
     // Fields
-    private GameObject sceneMan;
     public GameObject spotLight;
 
     // Start is called before the first frame update
     protected override void Start()
     {
         base.Start();
-        sceneMan = GameObject.Find("SceneManager");
     }
 
     // Update is called once per frame
     protected override void Update()
     {
         base.Update();
-        if (sceneMan.GetComponent<SceneMan>().gameState == GameState.Game)
-        {
-            GetComponent<NavMeshAgent>().destination = player.transform.position;
-        }
-        else
-        {
-            GetComponent<NavMeshAgent>().destination = transform.position;
-        }
     }
 
     // Handles collisions w/ player

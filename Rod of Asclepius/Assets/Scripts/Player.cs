@@ -42,7 +42,11 @@ public class Player : MonoBehaviour
     public GameObject pickupObjectiveItemText;
 
     // Cutscene1 movement
-    private bool cutscene1ShouldMove;
+    public bool cutscene1ShouldMove;
+
+    // Cutscene2 movement
+    public bool cutscene2ShouldRotateCoffin;
+    public bool cutscene2ShouldRotateVampire;
 
     // Enemies
     public GameObject vampire;
@@ -53,7 +57,9 @@ public class Player : MonoBehaviour
     {
         // Own fields
         health = 2;
-        cutscene1ShouldMove = true;
+        cutscene1ShouldMove = false;
+        cutscene2ShouldRotateCoffin = false;
+        cutscene2ShouldRotateVampire = false;
         sceneMan = GameObject.Find("SceneManager");
         middleModel = gameObject.transform.position +
             new Vector3(0, gameObject.GetComponent<BoxCollider>().bounds.size.y / 2, 0);
@@ -99,22 +105,13 @@ void Update()
         {
             GetComponent<Rigidbody>().transform.Translate(new Vector3(0, 0, 1.0f) * moveSpeed / 2 * Time.deltaTime, Space.World);
         }
+        else if (sceneMan.GetComponent<SceneMan>().gameState == GameState.Cutscene2)
+        {
+            RotatePlayerCutscene2();
+        }
         else if (sceneMan.GetComponent<SceneMan>().gameState == GameState.Cutscene4)
         {
             GetComponent<Rigidbody>().transform.Translate(new Vector3(0, 0, -1.0f) * moveSpeed / 2 * Time.deltaTime, Space.World);
-        }
-        if (Input.GetKeyDown(KeyCode.G))
-        {
-            if (vampire.GetComponent<MeshRenderer>().material.renderQueue == 3002)
-            {
-                vampire.GetComponent<MeshRenderer>().material.renderQueue = 3000;
-                vampire.GetComponent<Vampire>().spotLight.SetActive(true);
-            }
-            else
-            {
-                vampire.GetComponent<MeshRenderer>().material.renderQueue = 3002;
-                vampire.GetComponent<Vampire>().spotLight.SetActive(false);
-            }
         }
     }
 
@@ -159,6 +156,74 @@ void Update()
             mouseWorldPos.x - gameObject.transform.position.x) * Mathf.Rad2Deg - 90.0f;
 
         GetComponent<Rigidbody>().rotation = Quaternion.Euler(0, -angleOfRotation, 0);
+    }
+
+    // Rotates player cutscene2
+    void RotatePlayerCutscene2()
+    {
+        if (cutscene2ShouldRotateCoffin == true)
+        {
+            // find the angle to rotate the player so that it points towards the mother's grave
+            GameObject coffin = GameObject.Find("StaticLevelAssets/OtherObjects/Coffin Closed Standing");
+            Vector3 targetForwardDirection = (coffin.transform.position - transform.position);
+            targetForwardDirection.y = 0;
+            targetForwardDirection.Normalize();
+
+            // Gets the angle between forward and target forward
+            float forwardAngle = Mathf.Atan2(transform.forward.z,
+                transform.forward.x) * Mathf.Rad2Deg;
+            float targetAngle = Mathf.Atan2(targetForwardDirection.z, targetForwardDirection.x) * Mathf.Rad2Deg;
+            float angleBetweenRotation = forwardAngle - targetAngle;
+
+            if (angleBetweenRotation < -180)
+            {
+                angleBetweenRotation = 180 + (angleBetweenRotation + 180);
+            }
+            else if (angleBetweenRotation > 180)
+            {
+                angleBetweenRotation = -180 + (angleBetweenRotation - 180);
+            }
+
+            Debug.Log(angleBetweenRotation);
+            // Rotates the player
+            if (angleBetweenRotation < 0)
+            {
+                transform.Rotate(-Vector3.up * Time.deltaTime * 400);
+            }
+            else
+            {
+                transform.Rotate(Vector3.up * Time.deltaTime * 400);
+            }
+
+            // Stops rotating player and shows cutscene2 text
+            if (Mathf.Abs(angleBetweenRotation) <= 4)
+            {
+                cutscene2ShouldRotateCoffin = false;
+                sceneMan.GetComponent<InputManager>().ButtonPromptText.SetActive(true);
+                sceneMan.GetComponent<InputManager>().cutscene2_1Text.SetActive(true);
+            }
+        }
+        else if (cutscene2ShouldRotateVampire == true)
+        {
+            // find the angle to rotate the player so that it points towards the tree
+            GameObject tree = GameObject.Find("StaticLevelAssets/Graves/TopLeft/GraveRow (2)/gravestone_04 (7)");
+            Vector3 targetForwardDirection = (tree.transform.position - transform.position);
+            targetForwardDirection.y = 0;
+            targetForwardDirection.Normalize();
+
+            // Rotates the player
+            transform.Rotate(-Vector3.up * Time.deltaTime * 400);
+
+            float angleBetweenRotation = Mathf.Atan2(transform.forward.normalized.z,
+                transform.forward.normalized.x) * Mathf.Rad2Deg - Mathf.Atan2(targetForwardDirection.z, targetForwardDirection.x) * Mathf.Rad2Deg;
+
+            // Stops rotating player and shows cutscene2 text
+            if (Mathf.Abs(angleBetweenRotation) <= 3)
+            {
+                cutscene2ShouldRotateVampire = false;
+                sceneMan.GetComponent<InputManager>().cutscene2_3Text.SetActive(true);
+            }
+        }
     }
 
     // Traps/abilities
@@ -328,7 +393,7 @@ void Update()
             {
                 GameObject.Find("gate_01").GetComponent<Animation>().Play("Gate Close");
                 sceneMan.GetComponent<InputManager>().ButtonPromptText.SetActive(true);
-                sceneMan.GetComponent<InputManager>().cutscene1Text.SetActive(true);
+                sceneMan.GetComponent<InputManager>().cutscene1_3Text.SetActive(true);
                 cutscene1ShouldMove = false;
             }
         }
@@ -338,16 +403,8 @@ void Update()
         {
             if (other.gameObject.tag == "TriggerMotherGrave")
             {
-                sceneMan.GetComponent<InputManager>().ButtonPromptText.SetActive(true);
-                sceneMan.GetComponent<InputManager>().cutscene2Text.SetActive(true);
                 sceneMan.GetComponent<SceneMan>().gameState = GameState.Cutscene2;
-
-                // find the angle to rotate the player so that it points towards the mother's grave
-                GameObject coffin = GameObject.Find("StaticLevelAssets/OtherObjects/Coffin Closed Standing");
-                float angleOfRotation = Mathf.Atan2(coffin.transform.position.z - gameObject.transform.position.z,
-                    coffin.transform.position.x - gameObject.transform.position.x) * Mathf.Rad2Deg - 90.0f;
-
-                GetComponent<Rigidbody>().rotation = Quaternion.Euler(0, -angleOfRotation, 0);
+                cutscene2ShouldRotateCoffin = true;
             }
         }
     }
