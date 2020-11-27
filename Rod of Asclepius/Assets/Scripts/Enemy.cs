@@ -103,7 +103,7 @@ public class Enemy : MonoBehaviour
             else if (buttonPromptDisabledCutscene2 == false)
             {
                 GetComponent<NavMeshAgent>().destination = transform.position;
-                sceneMan.GetComponent<InputManager>().ButtonPromptText.SetActive(true);
+                sceneMan.GetComponent<InputManager>().buttonPromptText.SetActive(true);
                 buttonPromptDisabledCutscene2 = true;
             }
         }

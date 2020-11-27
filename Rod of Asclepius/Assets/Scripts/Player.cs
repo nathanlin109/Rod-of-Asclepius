@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.UI;
 
 public class Player : MonoBehaviour
 {
@@ -39,14 +40,13 @@ public class Player : MonoBehaviour
 
     // Objectives
     public int objectiveItemsCollected;
-    public GameObject pickupObjectiveItemText;
 
-    // Cutscene1 movement
+    // Cutscene movement
     public bool cutscene1ShouldMove;
-
-    // Cutscene2 movement
     public bool cutscene2ShouldRotateCoffin;
     public bool cutscene2ShouldRotateVampire;
+    public bool cutscene4ShouldRotateCoffin;
+    public bool cutscene5ShouldRotate;
 
     // Enemies
     public GameObject vampire;
@@ -95,6 +95,11 @@ void Update()
             CollisionCooldown();
             PlaceTrap();
             ThrowAbility();
+            ShowBlood();
+        }
+        else if (sceneMan.GetComponent<SceneMan>().gameState == GameState.Death)
+        {
+            ShowBlood();
         }
         else if (sceneMan.GetComponent<SceneMan>().gameState == GameState.GameNoCombat)
         {
@@ -105,13 +110,16 @@ void Update()
         {
             GetComponent<Rigidbody>().transform.Translate(new Vector3(0, 0, 1.0f) * moveSpeed / 2 * Time.deltaTime, Space.World);
         }
-        else if (sceneMan.GetComponent<SceneMan>().gameState == GameState.Cutscene2)
+        else if (sceneMan.GetComponent<SceneMan>().gameState == GameState.Cutscene2 ||
+            sceneMan.GetComponent<SceneMan>().gameState == GameState.Cutscene4 ||
+            sceneMan.GetComponent<SceneMan>().gameState == GameState.Cutscene5)
         {
-            RotatePlayerCutscene2();
-        }
-        else if (sceneMan.GetComponent<SceneMan>().gameState == GameState.Cutscene4)
-        {
-            GetComponent<Rigidbody>().transform.Translate(new Vector3(0, 0, -1.0f) * moveSpeed / 2 * Time.deltaTime, Space.World);
+            RotatePlayerCutscenes();
+
+            if (sceneMan.GetComponent<SceneMan>().gameState == GameState.Cutscene5)
+            {
+                GetComponent<Rigidbody>().transform.Translate(new Vector3(0, 0, -1.0f) * moveSpeed / 2 * Time.deltaTime, Space.World);
+            }
         }
     }
 
@@ -159,13 +167,30 @@ void Update()
     }
 
     // Rotates player cutscene2
-    void RotatePlayerCutscene2()
+    void RotatePlayerCutscenes()
     {
-        if (cutscene2ShouldRotateCoffin == true)
+        if (cutscene2ShouldRotateCoffin == true || cutscene4ShouldRotateCoffin == true ||
+            cutscene2ShouldRotateVampire == true || cutscene5ShouldRotate)
         {
-            // find the angle to rotate the player so that it points towards the mother's grave
-            GameObject coffin = GameObject.Find("StaticLevelAssets/OtherObjects/Coffin Closed Standing");
-            Vector3 targetForwardDirection = (coffin.transform.position - transform.position);
+            GameObject targetObject = gameObject;
+            if (cutscene2ShouldRotateCoffin == true || cutscene4ShouldRotateCoffin == true)
+            {
+                // find the angle to rotate the player so that it points towards the mother's grave
+                targetObject = GameObject.Find("StaticLevelAssets/OtherObjects/Coffin Closed Standing");
+            }
+            else if (cutscene2ShouldRotateVampire == true)
+            {
+                // find the angle to rotate the player so that it points towards the tree
+                targetObject = GameObject.Find("StaticLevelAssets/Graves/TopLeft/GraveRow (2)/gravestone_04 (7)");
+            }
+            else if (cutscene5ShouldRotate == true)
+            {
+                // find the angle to rotate the player so that it points towards the bottom of map
+                targetObject = GameObject.Find("StaticLevelAssets/Trees/Tree 1 (13)/");
+            }
+
+            // Sets the target forward direction
+            Vector3 targetForwardDirection = targetObject.transform.position - transform.position;
             targetForwardDirection.y = 0;
             targetForwardDirection.Normalize();
 
@@ -184,7 +209,6 @@ void Update()
                 angleBetweenRotation = -180 + (angleBetweenRotation - 180);
             }
 
-            Debug.Log(angleBetweenRotation);
             // Rotates the player
             if (angleBetweenRotation < 0)
             {
@@ -195,34 +219,51 @@ void Update()
                 transform.Rotate(Vector3.up * Time.deltaTime * 400);
             }
 
-            // Stops rotating player and shows cutscene2 text
+            // Stops rotating player and shows correct cutscene text
             if (Mathf.Abs(angleBetweenRotation) <= 4)
             {
-                cutscene2ShouldRotateCoffin = false;
-                sceneMan.GetComponent<InputManager>().ButtonPromptText.SetActive(true);
-                sceneMan.GetComponent<InputManager>().cutscene2_1Text.SetActive(true);
+                sceneMan.GetComponent<InputManager>().buttonPromptText.SetActive(true);
+                sceneMan.GetComponent<InputManager>().dialogueBackground.SetActive(true);
+                if (cutscene2ShouldRotateCoffin == true)
+                {
+                    cutscene2ShouldRotateCoffin = false;
+                    sceneMan.GetComponent<InputManager>().cutscene2_1Text.SetActive(true);
+                }
+                else if (cutscene2ShouldRotateVampire)
+                {
+                    cutscene2ShouldRotateVampire = false;
+                    sceneMan.GetComponent<InputManager>().cutscene2_3Text.SetActive(true);
+                }
+                else if (cutscene4ShouldRotateCoffin == true)
+                {
+                    cutscene4ShouldRotateCoffin = false;
+                    sceneMan.GetComponent<InputManager>().cutscene4Text.SetActive(true);
+                }
+                else if (cutscene5ShouldRotate == true)
+                {
+                    cutscene5ShouldRotate = false;
+                    sceneMan.GetComponent<InputManager>().cutscene5Text.SetActive(true);
+                }
             }
         }
-        else if (cutscene2ShouldRotateVampire == true)
+    }
+
+    // Shows blood splatter
+    void ShowBlood()
+    {
+        if (health == 1 && sceneMan.GetComponent<InputManager>().blood.activeSelf == false)
         {
-            // find the angle to rotate the player so that it points towards the tree
-            GameObject tree = GameObject.Find("StaticLevelAssets/Graves/TopLeft/GraveRow (2)/gravestone_04 (7)");
-            Vector3 targetForwardDirection = (tree.transform.position - transform.position);
-            targetForwardDirection.y = 0;
-            targetForwardDirection.Normalize();
-
-            // Rotates the player
-            transform.Rotate(-Vector3.up * Time.deltaTime * 400);
-
-            float angleBetweenRotation = Mathf.Atan2(transform.forward.normalized.z,
-                transform.forward.normalized.x) * Mathf.Rad2Deg - Mathf.Atan2(targetForwardDirection.z, targetForwardDirection.x) * Mathf.Rad2Deg;
-
-            // Stops rotating player and shows cutscene2 text
-            if (Mathf.Abs(angleBetweenRotation) <= 3)
-            {
-                cutscene2ShouldRotateVampire = false;
-                sceneMan.GetComponent<InputManager>().cutscene2_3Text.SetActive(true);
-            }
+            sceneMan.GetComponent<InputManager>().blood.SetActive(true);
+        }
+        else if (health == 2 && sceneMan.GetComponent<InputManager>().blood.activeSelf == true)
+        {
+            sceneMan.GetComponent<InputManager>().blood.SetActive(false);
+        }
+        else if (health == 0 && sceneMan.GetComponent<InputManager>().blood.activeSelf == true)
+        {
+            Color bloodColor = sceneMan.GetComponent<InputManager>().blood.GetComponent<Image>().color;
+            bloodColor.a = 1;
+            sceneMan.GetComponent<InputManager>().blood.GetComponent<Image>().color = bloodColor;
         }
     }
 
@@ -339,26 +380,18 @@ void Update()
             // Objective item pickup prompt
             else if (other.gameObject.tag == "ObjectiveItem")
             {
-                if (pickupObjectiveItemText.activeSelf == false)
+                if (sceneMan.GetComponent<InputManager>().pickupObjectiveItemText.activeSelf == false)
                 {
-                    pickupObjectiveItemText.SetActive(true);
+                    sceneMan.GetComponent<InputManager>().pickupObjectiveItemText.SetActive(true);
                 }
             }
 
-            // Game to Cutscene3 (Trigger Mother's grave)
+            // Game to Cutscene4 (Trigger Mother's grave)
             if (other.gameObject.tag == "TriggerMotherGrave" && objectiveItemsCollected == 6)
             {
-                sceneMan.GetComponent<InputManager>().ButtonPromptText.SetActive(true);
-                sceneMan.GetComponent<InputManager>().cutscene3Text.SetActive(true);
-                sceneMan.GetComponent<SceneMan>().gameState = GameState.Cutscene3;
+                sceneMan.GetComponent<SceneMan>().gameState = GameState.Cutscene4;
                 objectiveItemsCollected++;
-
-                // find the angle to rotate the player so that it points towards the mother's grave
-                GameObject coffin = GameObject.Find("StaticLevelAssets/OtherObjects/Coffin Closed Standing");
-                float angleOfRotation = Mathf.Atan2(coffin.transform.position.z - gameObject.transform.position.z,
-                    coffin.transform.position.x - gameObject.transform.position.x) * Mathf.Rad2Deg - 90.0f;
-
-                GetComponent<Rigidbody>().rotation = Quaternion.Euler(0, -angleOfRotation, 0);
+                cutscene4ShouldRotateCoffin = true;
             }
 
             // Trigger gate open after resurrect mother
@@ -375,9 +408,8 @@ void Update()
                 }
                 else if(other.gameObject.tag == "TriggerOpenGateBeginning")
                 {
-                    sceneMan.GetComponent<InputManager>().ButtonPromptText.SetActive(true);
-                    sceneMan.GetComponent<InputManager>().cutscene4Text.SetActive(true);
-                    sceneMan.GetComponent<SceneMan>().gameState = GameState.Cutscene4;
+                    sceneMan.GetComponent<SceneMan>().gameState = GameState.Cutscene5;
+                    cutscene5ShouldRotate = true;
                 }
             }
         }
@@ -392,8 +424,9 @@ void Update()
             else if (other.gameObject.tag == "TriggerCloseGateBeginning")
             {
                 GameObject.Find("gate_01").GetComponent<Animation>().Play("Gate Close");
-                sceneMan.GetComponent<InputManager>().ButtonPromptText.SetActive(true);
+                sceneMan.GetComponent<InputManager>().buttonPromptText.SetActive(true);
                 sceneMan.GetComponent<InputManager>().cutscene1_3Text.SetActive(true);
+                sceneMan.GetComponent<InputManager>().dialogueBackground.SetActive(true);
                 cutscene1ShouldMove = false;
             }
         }
@@ -434,14 +467,22 @@ void Update()
             {
                 if (Input.GetKey(KeyCode.E))
                 {
-                    if (pickupObjectiveItemText.activeSelf == true)
+                    if (sceneMan.GetComponent<InputManager>().pickupObjectiveItemText.activeSelf == true)
                     {
-                        pickupObjectiveItemText.SetActive(false);
+                        sceneMan.GetComponent<InputManager>().pickupObjectiveItemText.SetActive(false);
                     }
                     
                     Destroy(other.gameObject);
                     objectiveItemsCollected++;
-                    sceneMan.GetComponent<ObjectiveManager>().UpdateOICollectedText();
+                    sceneMan.GetComponent<ObjectiveManager>().UpdateUICollectedText();
+
+                    if (objectiveItemsCollected == 6)
+                    {
+                        sceneMan.GetComponent<InputManager>().buttonPromptText.SetActive(true);
+                        sceneMan.GetComponent<InputManager>().cutscene3Text.SetActive(true);
+                        sceneMan.GetComponent<InputManager>().dialogueBackground.SetActive(true);
+                        sceneMan.GetComponent<SceneMan>().gameState = GameState.Cutscene3;
+                    }
                 }
             }
         }
@@ -464,9 +505,9 @@ void Update()
             // Objective item pickup prompt
             if (other.gameObject.tag == "ObjectiveItem")
             {
-                if (pickupObjectiveItemText.activeSelf == true)
+                if (sceneMan.GetComponent<InputManager>().pickupObjectiveItemText.activeSelf == true)
                 {
-                    pickupObjectiveItemText.SetActive(false);
+                    sceneMan.GetComponent<InputManager>().pickupObjectiveItemText.SetActive(false);
                 }
             }
         }

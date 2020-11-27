@@ -10,7 +10,9 @@ public class InputManager : MonoBehaviour
     public GameObject vampire;
     public GameObject wizard;
     public GameObject mother;
-    public GameObject ButtonPromptText;
+    public GameObject blood;
+    public GameObject buttonPromptText;
+    public GameObject dialogueBackground;
     public GameObject cutscene1_1Text;
     public GameObject cutscene1_2Text;
     public GameObject cutscene1_3Text;
@@ -19,9 +21,12 @@ public class InputManager : MonoBehaviour
     public GameObject cutscene2_2Text;
     public GameObject cutscene2_3Text;
     public GameObject cutscene2_4Text;
+    public GameObject cutscene2_5Text;
     public GameObject cutscene3Text;
     public GameObject cutscene4Text;
+    public GameObject cutscene5Text;
     public GameObject pickupTrapText;
+    public GameObject pickupObjectiveItemText;
 
     // Start is called before the first frame update
     void Start()
@@ -45,27 +50,29 @@ public class InputManager : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.Space))
             {
                 
-                if (cutscene1_1Text.activeSelf == true && ButtonPromptText.activeSelf == true)
+                if (cutscene1_1Text.activeSelf == true && buttonPromptText.activeSelf == true)
                 {
                     cutscene1_1Text.SetActive(false);
                     cutscene1_2Text.SetActive(true);
 
                 }
-                else if (cutscene1_2Text.activeSelf == true && ButtonPromptText.activeSelf == true)
+                else if (cutscene1_2Text.activeSelf == true && buttonPromptText.activeSelf == true)
                 {
                     cutscene1_2Text.SetActive(false);
-                    ButtonPromptText.SetActive(false);
+                    buttonPromptText.SetActive(false);
+                    dialogueBackground.SetActive(false);
                     player.GetComponent<Player>().cutscene1ShouldMove = true;
                 }
-                else if (cutscene1_3Text.activeSelf == true && ButtonPromptText.activeSelf == true)
+                else if (cutscene1_3Text.activeSelf == true && buttonPromptText.activeSelf == true)
                 {
                     cutscene1_3Text.SetActive(false);
                     cutscene1_4Text.SetActive(true);
                 }
-                else if (cutscene1_4Text.activeSelf == true && ButtonPromptText.activeSelf == true)
+                else if (cutscene1_4Text.activeSelf == true && buttonPromptText.activeSelf == true)
                 {
                     cutscene1_4Text.SetActive(false);
-                    ButtonPromptText.SetActive(false);
+                    buttonPromptText.SetActive(false);
+                    dialogueBackground.SetActive(false);
                     sceneMan.GetComponent<SceneMan>().gameState = GameState.GameNoCombat;
                 }
             }
@@ -75,54 +82,73 @@ public class InputManager : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.Space))
             {
-                if (cutscene2_1Text.activeSelf == true && ButtonPromptText.activeSelf == true)
+                if (cutscene2_1Text.activeSelf == true && buttonPromptText.activeSelf == true)
                 {
                     cutscene2_1Text.SetActive(false);
                     cutscene2_2Text.SetActive(true);
                 }
-                else if (cutscene2_2Text.activeSelf == true && ButtonPromptText.activeSelf == true)
+                else if (cutscene2_2Text.activeSelf == true && buttonPromptText.activeSelf == true)
                 {
                     cutscene2_2Text.SetActive(false);
-                    ButtonPromptText.SetActive(false);
+                    buttonPromptText.SetActive(false);
                     player.GetComponent<Player>().cutscene2ShouldRotateVampire = true;
+                    dialogueBackground.SetActive(false);
                     vampire.SetActive(true);
                 }
-                else if (cutscene2_3Text.activeSelf == true && ButtonPromptText.activeSelf == true)
+                else if (cutscene2_3Text.activeSelf == true && buttonPromptText.activeSelf == true)
                 {
                     cutscene2_3Text.SetActive(false);
                     cutscene2_4Text.SetActive(true);
-                    ButtonPromptText.SetActive(false);
                     wizard.SetActive(true);
                 }
-                else if (cutscene2_4Text.activeSelf == true && ButtonPromptText.activeSelf == true)
+                else if (cutscene2_4Text.activeSelf == true && buttonPromptText.activeSelf == true)
                 {
                     cutscene2_4Text.SetActive(false);
-                    ButtonPromptText.SetActive(false);
+                    cutscene2_5Text.SetActive(true);
+                    dialogueBackground.SetActive(false);
+                }
+                else if (cutscene2_5Text.activeSelf == true && buttonPromptText.activeSelf == true)
+                {
+                    cutscene2_5Text.SetActive(false);
+                    buttonPromptText.SetActive(false);
                     sceneMan.GetComponent<SceneMan>().gameState = GameState.Game;
                 }
             }
         }
-        // Cutscene3 to Game
+        // Cutscene3 to Game (Collected all items and need to bring to mother's grave
         else if (sceneMan.GetComponent<SceneMan>().gameState == GameState.Cutscene3)
         {
             if (Input.GetKeyDown(KeyCode.Space))
             {
-                if (cutscene3Text.activeSelf == true && ButtonPromptText.activeSelf == true)
+                cutscene3Text.SetActive(false);
+                buttonPromptText.SetActive(false);
+                dialogueBackground.SetActive(false);
+                sceneMan.GetComponent<SceneMan>().gameState = GameState.Game;
+            }
+        }
+        // Cutscene4 to Game
+        else if (sceneMan.GetComponent<SceneMan>().gameState == GameState.Cutscene4)
+        {
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+
+                if (cutscene4Text.activeSelf == true && buttonPromptText.activeSelf == true)
                 {
-                    cutscene3Text.SetActive(false);
-                    ButtonPromptText.SetActive(false);
+                    cutscene4Text.SetActive(false);
+                    buttonPromptText.SetActive(false);
+                    dialogueBackground.SetActive(false);
                     sceneMan.GetComponent<SceneMan>().gameState = GameState.Game;
                     sceneMan.GetComponent<SceneMan>().resurrectedMom = true;
                     mother.SetActive(true);
                 }
             }
         }
-        // Cutscene4 to End
+        // Cutscene5 to End
         else if (sceneMan.GetComponent<SceneMan>().gameState == GameState.Cutscene4)
         {
             if (Input.GetKeyDown(KeyCode.Space))
             {
-                
+
             }
         }
     }

@@ -21,7 +21,7 @@ public class Mother : MonoBehaviour
     void Update()
     {
         if (sceneMan.GetComponent<SceneMan>().gameState == GameState.Game ||
-            sceneMan.GetComponent<SceneMan>().gameState == GameState.Cutscene4 &&
+            sceneMan.GetComponent<SceneMan>().gameState == GameState.Cutscene5 &&
             sceneMan.GetComponent<SceneMan>().resurrectedMom == true)
         {
             Vector3 target= player.transform.position - (player.transform.position - transform.position).normalized * playerRadius;

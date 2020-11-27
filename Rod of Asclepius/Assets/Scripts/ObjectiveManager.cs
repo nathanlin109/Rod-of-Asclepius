@@ -27,7 +27,7 @@ public class ObjectiveManager : MonoBehaviour
     }
 
     // Update the objective items collected text
-    public void UpdateOICollectedText()
+    public void UpdateUICollectedText()
     {
         objectiveItemsCollectedText.GetComponent<Text>().text = "Ritual Items (" + player.GetComponent<Player>().objectiveItemsCollected / 2 + "/3)";
     }

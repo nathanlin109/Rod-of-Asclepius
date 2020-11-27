@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum GameState { Cutscene1, Cutscene2, Cutscene3, Cutscene4,
+public enum GameState { Cutscene1, Cutscene2, Cutscene3, Cutscene4, Cutscene5,
     Game, GameNoCombat, Pause, Death }
 
 public class SceneMan : MonoBehaviour
