@@ -31,6 +31,8 @@ public class Vampire : Enemy
             Debug.Log("Damaged Player");
             player.GetComponent<Player>().health--;
             player.GetComponent<Player>().hasCollided = true;
+            player.GetComponent<Player>().bloodParticles.GetComponent<ParticleSystem>().Clear();
+            player.GetComponent<Player>().bloodParticles.GetComponent<ParticleSystem>().Play();
         }
     }
 }

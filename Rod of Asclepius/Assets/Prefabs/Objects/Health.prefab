@@ -108,3 +108,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c69965d83f723094e865da6db3bb5d8e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  triggered: 0
+  enemyCurrentlyCaught: 0

@@ -8,6 +8,7 @@ public class Player : MonoBehaviour
 {
     // Player Fields
     public int health;
+    public GameObject healthPickupParticles;
     GameObject sceneMan;
     Vector3 middleModel;
     public float moveSpeed;
@@ -51,6 +52,8 @@ public class Player : MonoBehaviour
     // Enemies
     public GameObject vampire;
     public GameObject wizard;
+    public GameObject electricHitParticles;
+    public GameObject bloodParticles;
 
     // Start is called before the first frame update
     void Start()
@@ -366,6 +369,8 @@ void Update()
             {
                 health++;
                 Destroy(other.gameObject);
+                healthPickupParticles.GetComponent<ParticleSystem>().Clear();
+                healthPickupParticles.GetComponent<ParticleSystem>().Play();
             }
 
             // Trap pickup prompt

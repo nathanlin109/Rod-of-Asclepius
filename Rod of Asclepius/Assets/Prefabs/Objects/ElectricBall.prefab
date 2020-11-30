@@ -167,6 +167,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   wizard: {fileID: 5343634950264245755, guid: 8d66786cfa76c8d42848063e732b46c6, type: 3}
+  electricHitParticles: {fileID: 2461828236968605203, guid: 9c60d80914c41df4d9519e45f248bdb6, type: 3}
 --- !u!1001 &5720381056871252224
 PrefabInstance:
   m_ObjectHideFlags: 0

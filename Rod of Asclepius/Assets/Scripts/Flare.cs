@@ -32,10 +32,15 @@ public class Flare : Ability
         {
             if (other.gameObject.tag == "Vampire")
             {
+                // Visible
                 vampire = other.gameObject;
                 GetComponent<MeshRenderer>().enabled = false;
                 vampire.GetComponent<MeshRenderer>().material.renderQueue = 3000;
                 vampire.GetComponent<Vampire>().spotLight.SetActive(true);
+
+                // Particles
+                vampire.GetComponent<Vampire>().flareParticles.GetComponent<ParticleSystem>().Clear();
+                vampire.GetComponent<Vampire>().flareParticles.GetComponent<ParticleSystem>().Play();
                 hasHit = true;
             }
             else if (other.gameObject.tag == "Wizard")
@@ -44,6 +49,10 @@ public class Flare : Ability
                 GetComponent<MeshRenderer>().enabled = false;
                 wizard.GetComponent<MeshRenderer>().material.renderQueue = 3000;
                 wizard.GetComponent<Wizard>().spotLight.SetActive(true);
+
+                // Particles
+                wizard.GetComponent<Wizard>().flareParticles.GetComponent<ParticleSystem>().Clear();
+                wizard.GetComponent<Wizard>().flareParticles.GetComponent<ParticleSystem>().Play();
                 hasHit = true;
             }
         }

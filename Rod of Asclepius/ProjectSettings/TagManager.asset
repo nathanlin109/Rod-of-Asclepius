@@ -19,6 +19,8 @@ TagManager:
   - TriggerCloseGateBeginning
   - TriggerOpenGateEnd
   - TriggerCloseGateEnd
+  - FxTemporaire
+  - ElectricBallNoHit
   layers:
   - Default
   - TransparentFX

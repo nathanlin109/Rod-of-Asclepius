@@ -112,6 +112,7 @@ public class InputManager : MonoBehaviour
                     cutscene2_5Text.SetActive(false);
                     buttonPromptText.SetActive(false);
                     sceneMan.GetComponent<SceneMan>().gameState = GameState.Game;
+                    sceneMan.GetComponent<SceneMan>().EnableObjectiveItemParticles();
                 }
             }
         }

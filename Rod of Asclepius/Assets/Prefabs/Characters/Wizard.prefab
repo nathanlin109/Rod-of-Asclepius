@@ -15,6 +15,7 @@ MonoBehaviour:
   trapTime: 5
   silenced: 0
   iceEffectTime: 5
+  silenceParticles: {fileID: 0}
   spotLight: {fileID: 3399524822428209535}
   electricBallPrefab: {fileID: 6251076156835593003, guid: 1e806b2da13875d4d9e12483b974d2fb, type: 3}
   electricBallCooldown: 2
@@ -34,6 +35,14 @@ PrefabInstance:
     - target: {fileID: 1111512067, guid: e369babb47da9c64198129531344f102, type: 3}
       propertyPath: m_Speed
       value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 2690512335878517480, guid: e369babb47da9c64198129531344f102, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2690512335879007944, guid: e369babb47da9c64198129531344f102, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.95
       objectReference: {fileID: 0}
     - target: {fileID: 7279486590530435698, guid: e369babb47da9c64198129531344f102, type: 3}
       propertyPath: iceEffectTime

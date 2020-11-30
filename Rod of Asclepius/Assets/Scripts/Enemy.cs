@@ -23,6 +23,10 @@ public class Enemy : MonoBehaviour
     public float iceEffectTime;
     private bool slowed;
     private float iceTimer;
+    public GameObject silenceParticles;
+    public GameObject flareParticles;
+    public GameObject bloodParticles;
+    public GameObject trapParticles;
 
     // Start is called before the first frame update
     protected virtual void Start()
@@ -47,6 +51,7 @@ public class Enemy : MonoBehaviour
         UnTrap();
         IceSlow();
         SeekPlayer();
+        ShowSilenceParticles();
     }
 
 
@@ -64,6 +69,12 @@ public class Enemy : MonoBehaviour
             triggeredTrap = other.gameObject;
             triggeredTrap.GetComponent<Item>().triggered = true;
             triggeredTrap.GetComponent<Item>().enemyCurrentlyCaught = true;
+
+            // Plays trap/blood particles
+            trapParticles.GetComponent<ParticleSystem>().Clear();
+            trapParticles.GetComponent<ParticleSystem>().Play();
+            bloodParticles.GetComponent<ParticleSystem>().Clear();
+            bloodParticles.GetComponent<ParticleSystem>().Play();
         }
         else if (other.gameObject.tag == "IceParticles")
         {
@@ -144,6 +155,25 @@ public class Enemy : MonoBehaviour
                 iceTimer = 0;
                 slowed = false;
                 GetComponent<NavMeshAgent>().speed = speed;
+            }
+        }
+    }
+
+    // Shows silence particles
+    void ShowSilenceParticles()
+    {
+        if (silenced)
+        {
+            if (silenceParticles.activeSelf == false)
+            {
+                silenceParticles.SetActive(true);
+            }
+        }
+        else
+        {
+            if (silenceParticles.activeSelf == true)
+            {
+                silenceParticles.SetActive(false);
             }
         }
     }

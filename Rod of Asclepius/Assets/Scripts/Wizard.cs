@@ -39,7 +39,7 @@ public class Wizard : Enemy
             if (Mathf.Pow(player.transform.position.x - transform.position.x, 2) + Mathf.Pow(player.transform.position.z - transform.position.z, 2) <= Mathf.Pow(electricBallRange, 2))
             {
                 // create the electric ball and reset cooldown
-                if (electricBallTimeTillCooldown >= electricBallCooldown)
+                if (electricBallTimeTillCooldown >= electricBallCooldown && silenced == false)
                 {
                     GameObject electricBall = Instantiate(electricBallPrefab, transform.position, Quaternion.identity);
                     electricBall.GetComponent<Rigidbody>().AddForce(new Vector3(player.transform.position.x - transform.position.x, 0, player.transform.position.z - transform.position.z).normalized * projectileSpeed, ForceMode.Impulse);
