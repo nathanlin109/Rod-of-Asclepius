@@ -16,6 +16,10 @@ MonoBehaviour:
   silenced: 0
   iceEffectTime: 5
   spotLight: {fileID: 3399524822428209535}
+  electricBallPrefab: {fileID: 6251076156835593003, guid: 1e806b2da13875d4d9e12483b974d2fb, type: 3}
+  electricBallCooldown: 2
+  electricBallRange: 15
+  projectileSpeed: 5.5
 --- !u!1001 &3399524823336351628
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -26,6 +30,10 @@ PrefabInstance:
     - target: {fileID: 1111512067, guid: e369babb47da9c64198129531344f102, type: 3}
       propertyPath: m_AgentTypeID
       value: -1372625422
+      objectReference: {fileID: 0}
+    - target: {fileID: 1111512067, guid: e369babb47da9c64198129531344f102, type: 3}
+      propertyPath: m_Speed
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 7279486590530435698, guid: e369babb47da9c64198129531344f102, type: 3}
       propertyPath: iceEffectTime

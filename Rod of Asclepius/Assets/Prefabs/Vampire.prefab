@@ -191,6 +191,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   trapTime: 5
+  silenced: 0
+  iceEffectTime: 0
   spotLight: {fileID: 971056883}
 --- !u!65 &7279486590530435702
 BoxCollider:
@@ -231,7 +233,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 3
-  m_Speed: 6
+  m_Speed: 5.5
   m_Acceleration: 8
   avoidancePriority: 0
   m_AngularSpeed: 120
