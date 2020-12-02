@@ -8,6 +8,7 @@ public class ElectricBall : MonoBehaviour
     public GameObject wizard;
     private GameObject player;
     public GameObject electricHitParticles;
+    private GameObject sceneMan;
     private float destroySelfRange;
     private bool hasHit;
     private bool hitPlayer;
@@ -19,6 +20,7 @@ public class ElectricBall : MonoBehaviour
         hitPlayer = false;
         destroySelfRange = 80.0f;
         player = GameObject.Find("Player");
+        sceneMan = GameObject.Find("SceneManager");
     }
 
     // Update is called once per frame
@@ -41,6 +43,10 @@ public class ElectricBall : MonoBehaviour
             
             Destroy(gameObject);
         }
+        if (sceneMan.GetComponent<SceneMan>().gameState != GameState.Game)
+        {
+            Destroy(gameObject);
+        }
     }
 
     // Trigger enter
@@ -53,7 +59,8 @@ public class ElectricBall : MonoBehaviour
             if (other.gameObject.tag == "Player")
             {
                 if (player.GetComponent<Player>().health > 0 &&
-                    player.GetComponent<Player>().hasCollided == false)
+                    player.GetComponent<Player>().hasCollided == false &&
+                    sceneMan.GetComponent<SceneMan>().gameState == GameState.Game)
                 {
                     player.GetComponent<Player>().health--;
                     player.GetComponent<Player>().hasCollided = true;

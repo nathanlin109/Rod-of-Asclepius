@@ -19,12 +19,7 @@ public class Wizard : Enemy
     protected override void Start()
     {
         base.Start();
-
-        electricBallCooldown = 2.0f;
         electricBallTimeTillCooldown = 0.0f;
-        electricBallRange = 15f;
-
-        projectileSpeed = 4.0f;
     }
 
     // Update is called once per frame
@@ -67,18 +62,4 @@ public class Wizard : Enemy
             GetComponent<NavMeshAgent>().speed = 6.0f;
         }
     }
-
-    // Handles collisions w/ player
-    //private void OnCollisionStay(Collision collision)
-    //{
-    //    // Handles collision w/ player
-    //    if (collision.gameObject.tag == "Player" &&
-    //        player.GetComponent<Player>().hasCollided == false &&
-    //        player.GetComponent<Player>().health > 0 && silenced == false)
-    //    {
-    //        Debug.Log("Damaged Player");
-    //        player.GetComponent<Player>().health--;
-    //        player.GetComponent<Player>().hasCollided = true;
-    //    }
-    //}
 }

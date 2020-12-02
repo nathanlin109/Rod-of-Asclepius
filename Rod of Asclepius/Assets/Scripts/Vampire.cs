@@ -26,7 +26,8 @@ public class Vampire : Enemy
         // Handles collision w/ player
         if (collision.gameObject.tag == "Player" &&
             player.GetComponent<Player>().hasCollided == false &&
-            player.GetComponent<Player>().health > 0 && silenced == false)
+            player.GetComponent<Player>().health > 0 && silenced == false &&
+            sceneMan.GetComponent<SceneMan>().gameState == GameState.Game)
         {
             Debug.Log("Damaged Player");
             player.GetComponent<Player>().health--;

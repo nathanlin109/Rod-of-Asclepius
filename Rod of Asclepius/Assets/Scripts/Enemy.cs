@@ -91,7 +91,7 @@ public class Enemy : MonoBehaviour
         }
         else if (other.gameObject.tag == "IceParticles")
         {
-            GetComponent<NavMeshAgent>().speed = speed / 2;
+            GetComponent<NavMeshAgent>().speed = speed / 3;
             slowed = true;
         }
     }

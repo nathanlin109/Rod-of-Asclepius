@@ -16,12 +16,14 @@ public class SceneMan : MonoBehaviour
     public GameObject skullLight;
     public GameObject flowerParticles;
     public GameObject flowerLight;
+    public Texture2D cursorTexture;
 
     // Start is called before the first frame update
     void Start()
     {
         gameState = GameState.Cutscene1;
         resurrectedMom = false;
+        Cursor.SetCursor(cursorTexture, new Vector2(cursorTexture.width / 2, cursorTexture.height / 2), CursorMode.Auto);
     }
 
     // Update is called once per frame

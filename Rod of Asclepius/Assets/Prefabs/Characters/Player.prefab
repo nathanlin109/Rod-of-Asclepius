@@ -383,7 +383,7 @@ MonoBehaviour:
   playerImmuneTime: 2
   hasCollided: 0
   trapPrefab: {fileID: 2572591046226521473, guid: bf7cf1bf1d33b5043a9ac98a0ef358af, type: 3}
-  trapDeployTime: 3
+  trapDeployTime: 2
   flarePrefab: {fileID: 7151201555285445595, guid: 5fa38cad54373654487e60456ff22139, type: 3}
   silencePrefab: {fileID: 3456411243823254343, guid: e4691c7b45cdb954e9bc994e2385f09e, type: 3}
   icePrefab: {fileID: 7718962698046365675, guid: e60f315dcb7f92b4684808c7cd26a4f9, type: 3}

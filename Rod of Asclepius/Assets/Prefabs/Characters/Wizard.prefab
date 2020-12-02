@@ -16,11 +16,14 @@ MonoBehaviour:
   silenced: 0
   iceEffectTime: 5
   silenceParticles: {fileID: 0}
+  flareParticles: {fileID: 0}
+  bloodParticles: {fileID: 0}
+  trapParticles: {fileID: 0}
   spotLight: {fileID: 3399524822428209535}
   electricBallPrefab: {fileID: 6251076156835593003, guid: 1e806b2da13875d4d9e12483b974d2fb, type: 3}
   electricBallCooldown: 2
   electricBallRange: 15
-  projectileSpeed: 5.5
+  projectileSpeed: 3.5
 --- !u!1001 &3399524823336351628
 PrefabInstance:
   m_ObjectHideFlags: 0

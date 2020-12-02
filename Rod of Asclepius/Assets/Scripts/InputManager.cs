@@ -22,8 +22,13 @@ public class InputManager : MonoBehaviour
     public GameObject cutscene2_3Text;
     public GameObject cutscene2_4Text;
     public GameObject cutscene2_5Text;
+    public GameObject cutscene2_6Text;
     public GameObject cutscene3Text;
-    public GameObject cutscene4Text;
+    public GameObject cutscene4_1Text;
+    public GameObject cutscene4_2Text;
+    public GameObject cutscene4_3Text;
+    public GameObject cutscene4_4Text;
+    public GameObject cutscene4_5Text;
     public GameObject cutscene5Text;
     public GameObject pickupTrapText;
     public GameObject pickupObjectiveItemText;
@@ -54,7 +59,6 @@ public class InputManager : MonoBehaviour
                 {
                     cutscene1_1Text.SetActive(false);
                     cutscene1_2Text.SetActive(true);
-
                 }
                 else if (cutscene1_2Text.activeSelf == true && buttonPromptText.activeSelf == true)
                 {
@@ -105,11 +109,16 @@ public class InputManager : MonoBehaviour
                 {
                     cutscene2_4Text.SetActive(false);
                     cutscene2_5Text.SetActive(true);
-                    dialogueBackground.SetActive(false);
                 }
                 else if (cutscene2_5Text.activeSelf == true && buttonPromptText.activeSelf == true)
                 {
                     cutscene2_5Text.SetActive(false);
+                    cutscene2_6Text.SetActive(true);
+                    dialogueBackground.SetActive(false);
+                }
+                else if (cutscene2_6Text.activeSelf == true && buttonPromptText.activeSelf == true)
+                {
+                    cutscene2_6Text.SetActive(false);
                     buttonPromptText.SetActive(false);
                     sceneMan.GetComponent<SceneMan>().gameState = GameState.Game;
                     sceneMan.GetComponent<SceneMan>().EnableObjectiveItemParticles();
@@ -133,14 +142,62 @@ public class InputManager : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.Space))
             {
 
-                if (cutscene4Text.activeSelf == true && buttonPromptText.activeSelf == true)
+                if (cutscene4_1Text.activeSelf == true && buttonPromptText.activeSelf == true)
                 {
-                    cutscene4Text.SetActive(false);
+                    cutscene4_1Text.SetActive(false);
+                    cutscene4_2Text.SetActive(true);
+
+                    // Sets wizard/vampire position
+                    if (Vector3.Distance(player.transform.position, vampire.transform.position) >= 15f)
+                    {
+                        vampire.transform.position = new Vector3(142, 1.1f, 63);
+                    }
+                    if (Vector3.Distance(player.transform.position, wizard.transform.position) >= 15f)
+                    {
+                        wizard.transform.position = new Vector3(153, 1.1f, 80);
+                    }
+
+                    // Plays the particles
+                    GameObject.Find("MotherParticles/MotherAmbientParticles1").GetComponent<ParticleSystem>().Clear();
+                    GameObject.Find("MotherParticles/MotherAmbientParticles1").GetComponent<ParticleSystem>().Play();
+                    GameObject.Find("MotherParticles/MotherAmbientParticles2").GetComponent<ParticleSystem>().Clear();
+                    GameObject.Find("MotherParticles/MotherAmbientParticles2").GetComponent<ParticleSystem>().Play();
+                    GameObject.Find("MotherParticles/MotherParticlesRing").GetComponent<ParticleSystem>().Clear();
+                    GameObject.Find("MotherParticles/MotherParticlesRing").GetComponent<ParticleSystem>().Play();
+                }
+                else if (cutscene4_2Text.activeSelf == true && buttonPromptText.activeSelf == true)
+                {
+                    cutscene4_2Text.SetActive(false);
+                    cutscene4_3Text.SetActive(true);
+
+                    // Plays the particles
+                    GameObject.Find("MotherParticles/MotherRessurectionParticles").GetComponent<ParticleSystem>().Clear();
+                    GameObject.Find("MotherParticles/MotherRessurectionParticles").GetComponent<ParticleSystem>().Play();
+                    mother.SetActive(true);
+                }
+                else if (cutscene4_3Text.activeSelf == true && buttonPromptText.activeSelf == true)
+                {
+                    cutscene4_3Text.SetActive(false);
+                    cutscene4_4Text.SetActive(true);
+
+                    // Stops the particles
+                    GameObject.Find("MotherParticles/MotherAmbientParticles1").GetComponent<ParticleSystem>().Stop();
+                    GameObject.Find("MotherParticles/MotherAmbientParticles2").GetComponent<ParticleSystem>().Stop();
+                    GameObject.Find("MotherParticles/MotherParticlesRing").GetComponent<ParticleSystem>().Stop();
+                    GameObject.Find("MotherParticles/MotherRessurectionParticles").GetComponent<ParticleSystem>().Stop();
+                }
+                else if (cutscene4_4Text.activeSelf == true && buttonPromptText.activeSelf == true)
+                {
+                    cutscene4_4Text.SetActive(false);
+                    cutscene4_5Text.SetActive(true);
+                }
+                else if (cutscene4_5Text.activeSelf == true && buttonPromptText.activeSelf == true)
+                {
+                    cutscene4_5Text.SetActive(false);
                     buttonPromptText.SetActive(false);
                     dialogueBackground.SetActive(false);
                     sceneMan.GetComponent<SceneMan>().gameState = GameState.Game;
                     sceneMan.GetComponent<SceneMan>().resurrectedMom = true;
-                    mother.SetActive(true);
                 }
             }
         }

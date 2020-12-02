@@ -28,8 +28,6 @@ public class IceAbility : Ability
             other.gameObject.tag != "TriggerCloseGateBeginning" && other.gameObject.tag != "TriggerOpenGateEnd" &&
             other.gameObject.tag != "TriggerCloseGateEnd")
         {
-            Debug.Log("SHOULD SPAWN PARTICLES");
-
             Instantiate(iceParticlesPrefab,
                 new Vector3(transform.position.x, 3.7f, transform.position.z),
                 Quaternion.identity);

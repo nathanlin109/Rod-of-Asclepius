@@ -240,7 +240,7 @@ void Update()
                 else if (cutscene4ShouldRotateCoffin == true)
                 {
                     cutscene4ShouldRotateCoffin = false;
-                    sceneMan.GetComponent<InputManager>().cutscene4Text.SetActive(true);
+                    sceneMan.GetComponent<InputManager>().cutscene4_1Text.SetActive(true);
                 }
                 else if (cutscene5ShouldRotate == true)
                 {
