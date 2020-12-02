@@ -5,6 +5,8 @@ using UnityEngine;
 public class InputManager : MonoBehaviour
 {
     // Fields
+    public float inputDelayTime = 1f;
+    private float inputDelayTimer;
     private GameObject sceneMan;
     private GameObject player;
     public GameObject vampire;
@@ -29,7 +31,10 @@ public class InputManager : MonoBehaviour
     public GameObject cutscene4_3Text;
     public GameObject cutscene4_4Text;
     public GameObject cutscene4_5Text;
-    public GameObject cutscene5Text;
+    public GameObject cutscene5_1Text;
+    public GameObject cutscene5_2Text;
+    public GameObject cutscene5_3Text;
+    public GameObject cutscene5_4Text;
     public GameObject pickupTrapText;
     public GameObject pickupObjectiveItemText;
 
@@ -38,6 +43,7 @@ public class InputManager : MonoBehaviour
     {
         sceneMan = GameObject.Find("SceneManager");
         player = GameObject.Find("Player");
+        inputDelayTimer = 0;
     }
 
     // Update is called once per frame
@@ -52,9 +58,11 @@ public class InputManager : MonoBehaviour
         // Cutscene1 to GameNoCombat
         if (sceneMan.GetComponent<SceneMan>().gameState == GameState.Cutscene1)
         {
-            if (Input.GetKeyDown(KeyCode.Space))
+            inputDelayTimer += Time.deltaTime;
+
+            if (Input.GetKeyDown(KeyCode.Space) && inputDelayTimer >= inputDelayTime)
             {
-                
+                inputDelayTimer = 0;
                 if (cutscene1_1Text.activeSelf == true && buttonPromptText.activeSelf == true)
                 {
                     cutscene1_1Text.SetActive(false);
@@ -84,8 +92,11 @@ public class InputManager : MonoBehaviour
         // Cutscene2 to Game
         else if (sceneMan.GetComponent<SceneMan>().gameState == GameState.Cutscene2)
         {
-            if (Input.GetKeyDown(KeyCode.Space))
+            inputDelayTimer += Time.deltaTime;
+
+            if (Input.GetKeyDown(KeyCode.Space) && inputDelayTimer >= inputDelayTime)
             {
+                inputDelayTimer = 0;
                 if (cutscene2_1Text.activeSelf == true && buttonPromptText.activeSelf == true)
                 {
                     cutscene2_1Text.SetActive(false);
@@ -128,8 +139,11 @@ public class InputManager : MonoBehaviour
         // Cutscene3 to Game (Collected all items and need to bring to mother's grave
         else if (sceneMan.GetComponent<SceneMan>().gameState == GameState.Cutscene3)
         {
-            if (Input.GetKeyDown(KeyCode.Space))
+            inputDelayTimer += Time.deltaTime;
+
+            if (Input.GetKeyDown(KeyCode.Space) && inputDelayTimer >= inputDelayTime)
             {
+                inputDelayTimer = 0;
                 cutscene3Text.SetActive(false);
                 buttonPromptText.SetActive(false);
                 dialogueBackground.SetActive(false);
@@ -139,9 +153,11 @@ public class InputManager : MonoBehaviour
         // Cutscene4 to Game
         else if (sceneMan.GetComponent<SceneMan>().gameState == GameState.Cutscene4)
         {
-            if (Input.GetKeyDown(KeyCode.Space))
-            {
+            inputDelayTimer += Time.deltaTime;
 
+            if (Input.GetKeyDown(KeyCode.Space) && inputDelayTimer >= inputDelayTime)
+            {
+                inputDelayTimer = 0;
                 if (cutscene4_1Text.activeSelf == true && buttonPromptText.activeSelf == true)
                 {
                     cutscene4_1Text.SetActive(false);
@@ -202,11 +218,36 @@ public class InputManager : MonoBehaviour
             }
         }
         // Cutscene5 to End
-        else if (sceneMan.GetComponent<SceneMan>().gameState == GameState.Cutscene4)
+        else if (sceneMan.GetComponent<SceneMan>().gameState == GameState.Cutscene5)
         {
-            if (Input.GetKeyDown(KeyCode.Space))
-            {
+            inputDelayTimer += Time.deltaTime;
 
+            if (Input.GetKeyDown(KeyCode.Space) && inputDelayTimer >= inputDelayTime)
+            {
+                inputDelayTimer = 0;
+                if (cutscene5_1Text.activeSelf == true && buttonPromptText.activeSelf == true)
+                {
+                    cutscene5_1Text.SetActive(false);
+                    cutscene5_2Text.SetActive(true);
+                }
+                else if (cutscene5_2Text.activeSelf == true && buttonPromptText.activeSelf == true)
+                {
+                    cutscene5_2Text.SetActive(false);
+                    cutscene5_3Text.SetActive(true);
+                }
+                else if (cutscene5_3Text.activeSelf == true && buttonPromptText.activeSelf == true)
+                {
+                    cutscene5_3Text.SetActive(false);
+                    cutscene5_4Text.SetActive(true);
+                }
+                else if (cutscene5_4Text.activeSelf == true && buttonPromptText.activeSelf == true)
+                {
+                    cutscene5_4Text.SetActive(false);
+                    buttonPromptText.SetActive(false);
+                    dialogueBackground.SetActive(false);
+                    player.GetComponent<Player>().cutscene5ShouldMove = true;
+                    sceneMan.GetComponent<SceneMan>().wonGame = true;
+                }
             }
         }
     }

@@ -48,6 +48,9 @@ public class Player : MonoBehaviour
     public bool cutscene2ShouldRotateVampire;
     public bool cutscene4ShouldRotateCoffin;
     public bool cutscene5ShouldRotate;
+    public bool cutscene5ShouldMove;
+    private bool cutscene5ShouldCloseGate;
+    private bool cutscene5ClosedGate;
 
     // Enemies
     public GameObject vampire;
@@ -60,13 +63,18 @@ public class Player : MonoBehaviour
     {
         // Own fields
         health = 2;
-        cutscene1ShouldMove = false;
-        cutscene2ShouldRotateCoffin = false;
-        cutscene2ShouldRotateVampire = false;
         sceneMan = GameObject.Find("SceneManager");
         middleModel = gameObject.transform.position +
             new Vector3(0, gameObject.GetComponent<BoxCollider>().bounds.size.y / 2, 0);
         moveVector = Vector3.zero;
+
+        // Cutscene movement
+        cutscene1ShouldMove = false;
+        cutscene2ShouldRotateCoffin = false;
+        cutscene2ShouldRotateVampire = false;
+        cutscene5ShouldRotate = false;
+        cutscene5ShouldCloseGate = false;
+        cutscene5ClosedGate = false;
 
         // Collision/damage
         hasCollided = false;
@@ -102,26 +110,37 @@ void Update()
         }
         else if (sceneMan.GetComponent<SceneMan>().gameState == GameState.Death)
         {
+            // Shows blood texture on death
             ShowBlood();
         }
         else if (sceneMan.GetComponent<SceneMan>().gameState == GameState.GameNoCombat)
         {
+            // Movement/mouse
             MovementKeyBoardInputs();
             MouseInputs();
         }
         else if (sceneMan.GetComponent<SceneMan>().gameState == GameState.Cutscene1 && cutscene1ShouldMove == true)
         {
+            // Moves player up in cutscene1
             GetComponent<Rigidbody>().transform.Translate(new Vector3(0, 0, 1.0f) * moveSpeed / 2 * Time.deltaTime, Space.World);
         }
         else if (sceneMan.GetComponent<SceneMan>().gameState == GameState.Cutscene2 ||
             sceneMan.GetComponent<SceneMan>().gameState == GameState.Cutscene4 ||
             sceneMan.GetComponent<SceneMan>().gameState == GameState.Cutscene5)
         {
+            // Rotates the player during cutscenes
             RotatePlayerCutscenes();
 
             if (sceneMan.GetComponent<SceneMan>().gameState == GameState.Cutscene5)
             {
-                GetComponent<Rigidbody>().transform.Translate(new Vector3(0, 0, -1.0f) * moveSpeed / 2 * Time.deltaTime, Space.World);
+                // Moves player down in cutscene 5
+                if (cutscene5ShouldMove)
+                {
+                    GetComponent<Rigidbody>().transform.Translate(new Vector3(0, 0, -1.0f) * moveSpeed / 2 * Time.deltaTime, Space.World);
+                }
+
+                // Closes gate in cutscene5
+                CloseGateCutscene5();
             }
         }
     }
@@ -245,7 +264,7 @@ void Update()
                 else if (cutscene5ShouldRotate == true)
                 {
                     cutscene5ShouldRotate = false;
-                    sceneMan.GetComponent<InputManager>().cutscene5Text.SetActive(true);
+                    sceneMan.GetComponent<InputManager>().cutscene5_1Text.SetActive(true);
                 }
             }
         }
@@ -408,13 +427,9 @@ void Update()
                 }
                 else if (other.gameObject.tag == "TriggerCloseGateEnd")
                 {
-                    GameObject.Find("gate_01").GetComponent<Animation>().Play("Gate Close");
-                    
-                }
-                else if(other.gameObject.tag == "TriggerOpenGateBeginning")
-                {
                     sceneMan.GetComponent<SceneMan>().gameState = GameState.Cutscene5;
                     cutscene5ShouldRotate = true;
+                    cutscene5ShouldCloseGate = true;
                 }
             }
         }
@@ -444,6 +459,18 @@ void Update()
                 sceneMan.GetComponent<SceneMan>().gameState = GameState.Cutscene2;
                 cutscene2ShouldRotateCoffin = true;
             }
+        }
+    }
+
+    // Closes the gate when the mother is outside the graveyard
+    void CloseGateCutscene5()
+    {
+        if (cutscene5ShouldCloseGate == true &&
+            sceneMan.GetComponent<InputManager>().mother.transform.position.z <= 49 &&
+            cutscene5ClosedGate == false)
+        {
+            GameObject.Find("gate_01").GetComponent<Animation>().Play("Gate Close");
+            cutscene5ClosedGate = true;
         }
     }
 

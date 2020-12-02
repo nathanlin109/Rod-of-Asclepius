@@ -99,7 +99,7 @@ public class Enemy : MonoBehaviour
     // Seeks player
     void SeekPlayer()
     {
-        if (sceneMan.GetComponent<SceneMan>().gameState == GameState.Game)
+        if (sceneMan.GetComponent<SceneMan>().gameState == GameState.Game && trapped == false)
         {
             GetComponent<NavMeshAgent>().destination = player.transform.position;
         }
