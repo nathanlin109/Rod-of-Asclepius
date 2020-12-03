@@ -34,7 +34,16 @@ public class Flare : Ability
             {
                 // Visible
                 vampire = other.gameObject;
-                GetComponent<MeshRenderer>().enabled = false;
+
+                // Makes this ability invisible
+                GetComponentInChildren<MeshRenderer>().enabled = false;
+                ParticleSystem[] particles = GetComponentsInChildren<ParticleSystem>();
+                foreach (ParticleSystem particle in particles)
+                {
+                    particle.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
+                }
+
+                // Makes vampire visible
                 vampire.GetComponent<MeshRenderer>().material.renderQueue = 3000;
                 vampire.GetComponent<Vampire>().spotLight.SetActive(true);
 
@@ -49,7 +58,16 @@ public class Flare : Ability
             else if (other.gameObject.tag == "Wizard")
             {
                 wizard = other.gameObject;
-                GetComponent<MeshRenderer>().enabled = false;
+
+                // Makes this ability invisible
+                GetComponentInChildren<MeshRenderer>().enabled = false;
+                ParticleSystem[] particles = GetComponentsInChildren<ParticleSystem>();
+                foreach (ParticleSystem particle in particles)
+                {
+                    particle.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
+                }
+
+                // Makes wizard visible
                 wizard.GetComponent<MeshRenderer>().material.renderQueue = 3000;
                 wizard.GetComponent<Wizard>().spotLight.SetActive(true);
 

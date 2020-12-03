@@ -78,6 +78,9 @@ public class Enemy : MonoBehaviour
 
             // Plays trap triggered sound
             GameObject.Find("AudioManager").GetComponent<AudioMan>().Play("trap-triggered-sound");
+
+            // Plays trap animation
+            triggeredTrap.GetComponent<Animation>().Play("Anim_TrapNeedle_Show");
         }
         else if (other.gameObject.tag == "IceParticles")
         {
@@ -142,6 +145,17 @@ public class Enemy : MonoBehaviour
                 GetComponent<NavMeshAgent>().acceleration = acceleration;
                 GetComponent<NavMeshAgent>().destination = player.transform.position;
                 trapped = false;
+
+                // Plays trap untrap sound
+                GameObject.Find("AudioManager").GetComponent<AudioMan>().Play("trap-untrap-sound");
+
+                if (triggeredTrap != null &&
+                triggeredTrap.GetComponent<Item>().playedUntrapAnim == false)
+                {
+                    // Plays trap animation
+                    triggeredTrap.GetComponent<Animation>().Play("Anim_TrapNeedle_Hide");
+                    triggeredTrap.GetComponent<Item>().playedUntrapAnim = true;
+                }
             }
         }
     }

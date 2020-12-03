@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class InputManager : MonoBehaviour
 {
@@ -109,12 +110,19 @@ public class InputManager : MonoBehaviour
                     player.GetComponent<Player>().cutscene2ShouldRotateVampire = true;
                     dialogueBackground.SetActive(false);
                     vampire.SetActive(true);
+
+                    // Plays sound
+                    GameObject.Find("AudioManager").GetComponent<AudioMan>().Play("vampire-intro-sound");
                 }
                 else if (cutscene2_3Text.activeSelf == true && buttonPromptText.activeSelf == true)
                 {
                     cutscene2_3Text.SetActive(false);
                     cutscene2_4Text.SetActive(true);
                     wizard.SetActive(true);
+
+
+                    // Plays sound
+                    GameObject.Find("AudioManager").GetComponent<AudioMan>().Play("wizard-intro-sound");
                 }
                 else if (cutscene2_4Text.activeSelf == true && buttonPromptText.activeSelf == true)
                 {
@@ -180,6 +188,9 @@ public class InputManager : MonoBehaviour
                     GameObject.Find("MotherParticles/MotherAmbientParticles2").GetComponent<ParticleSystem>().Play();
                     GameObject.Find("MotherParticles/MotherParticlesRing").GetComponent<ParticleSystem>().Clear();
                     GameObject.Find("MotherParticles/MotherParticlesRing").GetComponent<ParticleSystem>().Play();
+
+                    // Plays sound
+                    GameObject.Find("AudioManager").GetComponent<AudioMan>().Play("resurrection-aura-sound");
                 }
                 else if (cutscene4_2Text.activeSelf == true && buttonPromptText.activeSelf == true)
                 {
@@ -190,6 +201,9 @@ public class InputManager : MonoBehaviour
                     GameObject.Find("MotherParticles/MotherRessurectionParticles").GetComponent<ParticleSystem>().Clear();
                     GameObject.Find("MotherParticles/MotherRessurectionParticles").GetComponent<ParticleSystem>().Play();
                     mother.SetActive(true);
+
+                    // Plays sound
+                    GameObject.Find("AudioManager").GetComponent<AudioMan>().Play("resurrection-complete-sound");
                 }
                 else if (cutscene4_3Text.activeSelf == true && buttonPromptText.activeSelf == true)
                 {
@@ -201,6 +215,13 @@ public class InputManager : MonoBehaviour
                     GameObject.Find("MotherParticles/MotherAmbientParticles2").GetComponent<ParticleSystem>().Stop();
                     GameObject.Find("MotherParticles/MotherParticlesRing").GetComponent<ParticleSystem>().Stop();
                     GameObject.Find("MotherParticles/MotherRessurectionParticles").GetComponent<ParticleSystem>().Stop();
+
+                    // Stops ambient sound
+                    Sound resurrectAmbientSound = Array.Find(GameObject.Find("AudioManager").GetComponent<AudioMan>().sounds, sound => sound.name == "resurrection-aura-sound");
+                    if (resurrectAmbientSound != null && resurrectAmbientSound.source.isPlaying == true)
+                    {
+                        resurrectAmbientSound.source.Stop();
+                    }
                 }
                 else if (cutscene4_4Text.activeSelf == true && buttonPromptText.activeSelf == true)
                 {

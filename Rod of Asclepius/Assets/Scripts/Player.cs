@@ -14,6 +14,7 @@ public class Player : MonoBehaviour
     Vector3 middleModel;
     public float moveSpeed;
     private Vector3 moveVector;
+    private bool playedDeathSound;
 
     // Collisions
     public float playerImmuneTime;
@@ -68,6 +69,7 @@ public class Player : MonoBehaviour
         middleModel = gameObject.transform.position +
             new Vector3(0, gameObject.GetComponent<BoxCollider>().bounds.size.y / 2, 0);
         moveVector = Vector3.zero;
+        playedDeathSound = false;
 
         // Cutscene movement
         cutscene1ShouldMove = false;
@@ -292,10 +294,14 @@ void Update()
             sceneMan.GetComponent<InputManager>().blood.GetComponent<Image>().color = bloodColor;
 
             // Plays death sound
-            Sound deathSound = Array.Find(GameObject.Find("AudioManager").GetComponent<AudioMan>().sounds, sound => sound.name == "death-sound");
-            if (deathSound != null && deathSound.source.isPlaying == false)
+            if (playedDeathSound == false)
             {
-                deathSound.source.Play();
+                Sound deathSound = Array.Find(GameObject.Find("AudioManager").GetComponent<AudioMan>().sounds, sound => sound.name == "death-sound");
+                if (deathSound != null && deathSound.source.isPlaying == false)
+                {
+                    deathSound.source.Play();
+                    playedDeathSound = true;
+                }
             }
         }
     }
@@ -331,7 +337,7 @@ void Update()
 
                 GameObject.Instantiate(trapPrefab,
                     new Vector3(transform.position.x,
-                    .25f,
+                    0,
                     transform.position.z),
                     Quaternion.identity);
             }
@@ -518,15 +524,34 @@ void Update()
             // Pickup trap
             if (other.gameObject.tag == "Trap")
             {
-                if (other.gameObject.GetComponent<Item>().enemyCurrentlyCaught == false && Input.GetKey(KeyCode.E))
+                if (other.gameObject.GetComponent<Item>().enemyCurrentlyCaught == false)
+                {
+                    // Shows trap text when enemy not caught in it
+                    if (sceneMan.GetComponent<InputManager>().pickupTrapText.activeSelf == false)
+                    {
+                        sceneMan.GetComponent<InputManager>().pickupTrapText.SetActive(true);
+                    }
+
+                    // Picks up the trap
+                    if (Input.GetKey(KeyCode.E))
+                    {
+                        if (sceneMan.GetComponent<InputManager>().pickupTrapText.activeSelf == true)
+                        {
+                            sceneMan.GetComponent<InputManager>().pickupTrapText.SetActive(false);
+                        }
+
+                        Destroy(other.gameObject);
+                        placedTrap = false;
+                        GameObject.Find("AudioManager").GetComponent<AudioMan>().Play("trap-pickup-sound");
+                    }
+                }
+                // Disables trap text when enemy caught in it
+                else
                 {
                     if (sceneMan.GetComponent<InputManager>().pickupTrapText.activeSelf == true)
                     {
                         sceneMan.GetComponent<InputManager>().pickupTrapText.SetActive(false);
                     }
-
-                    Destroy(other.gameObject);
-                    placedTrap = false;
                 }
             }
 

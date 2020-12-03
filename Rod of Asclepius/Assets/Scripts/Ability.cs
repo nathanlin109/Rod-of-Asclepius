@@ -14,7 +14,7 @@ public class Ability : MonoBehaviour
     {
         timeActive = 0;
         hasHit = false;
-        GetComponent<MeshRenderer>().material.renderQueue = 3002;
+        GetComponentInChildren<MeshRenderer>().material.renderQueue = 3002;
     }
 
     // Update is called once per frame

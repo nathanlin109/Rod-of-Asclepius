@@ -33,7 +33,16 @@ public class Silence : Ability
             if (other.gameObject.tag == "Vampire")
             {
                 vampire = other.gameObject;
-                GetComponent<MeshRenderer>().enabled = false;
+
+                // Makes this ability invisible
+                GetComponentInChildren<MeshRenderer>().enabled = false;
+                ParticleSystem[] particles = GetComponentsInChildren<ParticleSystem>();
+                foreach (ParticleSystem particle in particles)
+                {
+                    particle.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
+                }
+
+                // Silences vampire
                 vampire.GetComponent<Vampire>().silenced = true;
                 hasHit = true;
                 GameObject.Find("AudioManager").GetComponent<AudioMan>().Play("silence-sound");
@@ -41,7 +50,16 @@ public class Silence : Ability
             else if (other.gameObject.tag == "Wizard")
             {
                 wizard = other.gameObject;
-                GetComponent<MeshRenderer>().enabled = false;
+
+                // Makes this ability invisible
+                GetComponentInChildren<MeshRenderer>().enabled = false;
+                ParticleSystem[] particles = GetComponentsInChildren<ParticleSystem>();
+                foreach (ParticleSystem particle in particles)
+                {
+                    particle.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
+                }
+
+                // Silences wizard
                 wizard.GetComponent<Wizard>().silenced = true;
                 hasHit = true;
                 GameObject.Find("AudioManager").GetComponent<AudioMan>().Play("silence-sound");
