@@ -16186,12 +16186,12 @@ MonoBehaviour:
     source: {fileID: 0}
   - name: death-sound
     clip: {fileID: 8300000, guid: d5fc81089538e41a7937fe4ec6841b58, type: 3}
-    volume: 0.2
+    volume: 0.6
     loop: 0
     source: {fileID: 0}
   - name: flare-sound
     clip: {fileID: 8300000, guid: 1e9aca57c54fc4e52ac473e1415639a6, type: 3}
-    volume: 0.4
+    volume: 0.6
     loop: 0
     source: {fileID: 0}
   - name: freeze-sound
@@ -16211,7 +16211,7 @@ MonoBehaviour:
     source: {fileID: 0}
   - name: silence-sound
     clip: {fileID: 8300000, guid: 27eff921ca8cc4cafbb858fcb6214206, type: 3}
-    volume: 0.2
+    volume: 0.4
     loop: 0
     source: {fileID: 0}
   - name: throw-ability-sound
@@ -16221,7 +16221,7 @@ MonoBehaviour:
     source: {fileID: 0}
   - name: trap-set-sound
     clip: {fileID: 8300000, guid: 95b136818939641e0b3906034584aad4, type: 3}
-    volume: 0.4
+    volume: 0.6
     loop: 0
     source: {fileID: 0}
   - name: trap-triggered-sound
@@ -16241,12 +16241,12 @@ MonoBehaviour:
     source: {fileID: 0}
   - name: wizard-attack-landed-sound
     clip: {fileID: 8300000, guid: ec57642aa26124cf3a044daaac25794c, type: 3}
-    volume: 0.1
+    volume: 0.05
     loop: 0
     source: {fileID: 0}
   - name: wizard-attack-sound
     clip: {fileID: 8300000, guid: 9c3addfdee2c441d4816753226e3ca24, type: 3}
-    volume: 0.15
+    volume: 0.1
     loop: 0
     source: {fileID: 0}
 --- !u!4 &516595489

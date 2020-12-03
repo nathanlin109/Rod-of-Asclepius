@@ -334,6 +334,13 @@ void Update()
         {
             trapDeployTimer = 0;
             trapMoveSpeedMultiplier = 1;
+
+            // Stops trap setting sound
+            Sound trapSoundStop = Array.Find(GameObject.Find("AudioManager").GetComponent<AudioMan>().sounds, sound => sound.name == "trap-set-sound");
+            if (trapSoundStop != null && trapSoundStop.source.isPlaying == true)
+            {
+                trapSoundStop.source.Stop();
+            }
         }
     }
 

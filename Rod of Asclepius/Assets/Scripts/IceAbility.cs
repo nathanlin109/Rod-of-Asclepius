@@ -22,7 +22,6 @@ public class IceAbility : Ability
     // Collision enter
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log(other.gameObject.tag);
         if (other.gameObject.tag != "Player" && other.gameObject.tag != "IceParticles" &&
             other.gameObject.tag != "TriggerMotherGrave" && other.gameObject.tag != "TriggerOpenGateBeginning" &&
             other.gameObject.tag != "TriggerCloseGateBeginning" && other.gameObject.tag != "TriggerOpenGateEnd" &&

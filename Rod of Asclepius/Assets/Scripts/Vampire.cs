@@ -29,7 +29,6 @@ public class Vampire : Enemy
             player.GetComponent<Player>().health > 0 && silenced == false &&
             sceneMan.GetComponent<SceneMan>().gameState == GameState.Game)
         {
-            Debug.Log("Damaged Player");
             player.GetComponent<Player>().health--;
             player.GetComponent<Player>().hasCollided = true;
             player.GetComponent<Player>().bloodParticles.GetComponent<ParticleSystem>().Clear();
