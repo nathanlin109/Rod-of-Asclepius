@@ -36,6 +36,7 @@ public class Silence : Ability
                 GetComponent<MeshRenderer>().enabled = false;
                 vampire.GetComponent<Vampire>().silenced = true;
                 hasHit = true;
+                GameObject.Find("AudioManager").GetComponent<AudioMan>().Play("silence-sound");
             }
             else if (other.gameObject.tag == "Wizard")
             {
@@ -43,6 +44,7 @@ public class Silence : Ability
                 GetComponent<MeshRenderer>().enabled = false;
                 wizard.GetComponent<Wizard>().silenced = true;
                 hasHit = true;
+                GameObject.Find("AudioManager").GetComponent<AudioMan>().Play("silence-sound");
             }
         }
     }

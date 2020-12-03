@@ -34,6 +34,7 @@ public class Vampire : Enemy
             player.GetComponent<Player>().hasCollided = true;
             player.GetComponent<Player>().bloodParticles.GetComponent<ParticleSystem>().Clear();
             player.GetComponent<Player>().bloodParticles.GetComponent<ParticleSystem>().Play();
+            GameObject.Find("AudioManager").GetComponent<AudioMan>().Play("vampire-bite-sound");
         }
     }
 }

@@ -39,6 +39,7 @@ public class Wizard : Enemy
                     GameObject electricBall = Instantiate(electricBallPrefab, transform.position, Quaternion.identity);
                     electricBall.GetComponent<Rigidbody>().AddForce(new Vector3(player.transform.position.x - transform.position.x, 0, player.transform.position.z - transform.position.z).normalized * projectileSpeed, ForceMode.Impulse);
                     electricBallTimeTillCooldown = 0;
+                    GameObject.Find("AudioManager").GetComponent<AudioMan>().Play("wizard-attack-sound");
                 }
             }
 

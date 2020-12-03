@@ -40,7 +40,8 @@ public class ElectricBall : MonoBehaviour
             {  
                 Instantiate(electricHitParticles, transform.position, Quaternion.identity);
             }
-            
+
+            GameObject.Find("AudioManager").GetComponent<AudioMan>().Play("wizard-attack-landed-sound");
             Destroy(gameObject);
         }
         if (sceneMan.GetComponent<SceneMan>().gameState != GameState.Game)

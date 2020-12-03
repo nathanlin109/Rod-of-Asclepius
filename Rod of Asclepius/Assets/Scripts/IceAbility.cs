@@ -31,6 +31,7 @@ public class IceAbility : Ability
             Instantiate(iceParticlesPrefab,
                 new Vector3(transform.position.x, 3.7f, transform.position.z),
                 Quaternion.identity);
+            GameObject.Find("AudioManager").GetComponent<AudioMan>().Play("freeze-sound");
             Destroy(gameObject);
         }
     }

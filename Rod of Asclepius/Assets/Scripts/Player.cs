@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.UI;
+using System;
 
 public class Player : MonoBehaviour
 {
@@ -273,19 +274,23 @@ void Update()
     // Shows blood splatter
     void ShowBlood()
     {
-        if (health == 1 && sceneMan.GetComponent<InputManager>().blood.activeSelf == false)
-        {
-            sceneMan.GetComponent<InputManager>().blood.SetActive(true);
-        }
-        else if (health == 2 && sceneMan.GetComponent<InputManager>().blood.activeSelf == true)
+        // 2 HP
+        if (health == 2 && sceneMan.GetComponent<InputManager>().blood.activeSelf == true)
         {
             sceneMan.GetComponent<InputManager>().blood.SetActive(false);
         }
+        // 1 HP
+        else if (health == 1 && sceneMan.GetComponent<InputManager>().blood.activeSelf == false)
+        {
+            sceneMan.GetComponent<InputManager>().blood.SetActive(true);
+        }
+        // 0 HP
         else if (health == 0 && sceneMan.GetComponent<InputManager>().blood.activeSelf == true)
         {
             Color bloodColor = sceneMan.GetComponent<InputManager>().blood.GetComponent<Image>().color;
             bloodColor.a = 1;
             sceneMan.GetComponent<InputManager>().blood.GetComponent<Image>().color = bloodColor;
+            GameObject.Find("AudioManager").GetComponent<AudioMan>().Play("death-sound");
         }
     }
 
@@ -297,12 +302,26 @@ void Update()
             trapDeployTimer += Time.deltaTime;
             trapMoveSpeedMultiplier = .3f;
 
+            // Plays trap setting sound
+            Sound trapSoundPlay = Array.Find(GameObject.Find("AudioManager").GetComponent<AudioMan>().sounds, sound => sound.name == "trap-set-sound");
+            if (trapSoundPlay != null && trapSoundPlay.source.isPlaying == false)
+            {
+                trapSoundPlay.source.Play();
+            }
+
             // Deploys trap
             if (trapDeployTimer >= trapDeployTime)
             {
                 trapDeployTimer = 0;
                 trapMoveSpeedMultiplier = 1;
                 placedTrap = true;
+
+                // Stops trap setting sound
+                Sound trapSoundStop = Array.Find(GameObject.Find("AudioManager").GetComponent<AudioMan>().sounds, sound => sound.name == "trap-set-sound");
+                if (trapSoundStop != null && trapSoundStop.source.isPlaying == true)
+                {
+                    trapSoundStop.source.Stop();
+                }
 
                 GameObject.Instantiate(trapPrefab,
                     new Vector3(transform.position.x,
@@ -332,6 +351,7 @@ void Update()
             GameObject flare = Instantiate(flarePrefab, transform.position, Quaternion.identity);
             flare.GetComponent<Rigidbody>().AddForce(transform.forward * projectileSpeed + moveVector * moveSpeed / 4, ForceMode.Impulse);
             flareTimeTillCooldown = 0;
+            GameObject.Find("AudioManager").GetComponent<AudioMan>().Play("throw-ability-sound");
         }
 
         // Silence
@@ -340,6 +360,7 @@ void Update()
             GameObject silence = Instantiate(silencePrefab, transform.position, Quaternion.identity);
             silence.GetComponent<Rigidbody>().AddForce(transform.forward * projectileSpeed + moveVector * moveSpeed / 4, ForceMode.Impulse);
             silenceTimeTillCooldown = 0;
+            GameObject.Find("AudioManager").GetComponent<AudioMan>().Play("throw-ability-sound");
         }
 
         // Ice
@@ -348,6 +369,7 @@ void Update()
             GameObject silence = Instantiate(icePrefab, transform.position, Quaternion.identity);
             silence.GetComponent<Rigidbody>().AddForce(transform.forward * projectileSpeed + moveVector * moveSpeed / 4, ForceMode.Impulse);
             iceTimeTillCooldown = 0;
+            GameObject.Find("AudioManager").GetComponent<AudioMan>().Play("throw-ability-sound");
         }
     }
 
@@ -390,6 +412,7 @@ void Update()
                 Destroy(other.gameObject);
                 healthPickupParticles.GetComponent<ParticleSystem>().Clear();
                 healthPickupParticles.GetComponent<ParticleSystem>().Play();
+                GameObject.Find("AudioManager").GetComponent<AudioMan>().Play("heal-sound");
             }
 
             // Trap pickup prompt
@@ -507,6 +530,7 @@ void Update()
                     Destroy(other.gameObject);
                     objectiveItemsCollected++;
                     sceneMan.GetComponent<ObjectiveManager>().UpdateUICollectedText();
+                    GameObject.Find("AudioManager").GetComponent<AudioMan>().Play("item-pickup-sound");
 
                     if (objectiveItemsCollected == 6)
                     {

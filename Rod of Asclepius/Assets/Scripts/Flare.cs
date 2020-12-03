@@ -42,6 +42,9 @@ public class Flare : Ability
                 vampire.GetComponent<Vampire>().flareParticles.GetComponent<ParticleSystem>().Clear();
                 vampire.GetComponent<Vampire>().flareParticles.GetComponent<ParticleSystem>().Play();
                 hasHit = true;
+
+                // Sound
+                GameObject.Find("AudioManager").GetComponent<AudioMan>().Play("flare-sound");
             }
             else if (other.gameObject.tag == "Wizard")
             {
@@ -54,6 +57,9 @@ public class Flare : Ability
                 wizard.GetComponent<Wizard>().flareParticles.GetComponent<ParticleSystem>().Clear();
                 wizard.GetComponent<Wizard>().flareParticles.GetComponent<ParticleSystem>().Play();
                 hasHit = true;
+
+                // Sound
+                GameObject.Find("AudioManager").GetComponent<AudioMan>().Play("flare-sound");
             }
         }
     }

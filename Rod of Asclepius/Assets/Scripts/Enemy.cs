@@ -75,6 +75,9 @@ public class Enemy : MonoBehaviour
             trapParticles.GetComponent<ParticleSystem>().Play();
             bloodParticles.GetComponent<ParticleSystem>().Clear();
             bloodParticles.GetComponent<ParticleSystem>().Play();
+
+            // Plays trap triggered sound
+            GameObject.Find("AudioManager").GetComponent<AudioMan>().Play("trap-triggered-sound");
         }
         else if (other.gameObject.tag == "IceParticles")
         {

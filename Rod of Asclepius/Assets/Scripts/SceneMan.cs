@@ -35,6 +35,7 @@ public class SceneMan : MonoBehaviour
         resurrectedMom = false;
         Cursor.SetCursor(cursorTexture, new Vector2(cursorTexture.width / 2, cursorTexture.height / 2), CursorMode.Auto);
         wonGame = false;
+        GameObject.Find("AudioManager").GetComponent<AudioMan>().Play("background-sounds");
     }
 
     // Update is called once per frame
