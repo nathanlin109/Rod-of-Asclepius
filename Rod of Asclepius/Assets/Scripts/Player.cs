@@ -290,7 +290,13 @@ void Update()
             Color bloodColor = sceneMan.GetComponent<InputManager>().blood.GetComponent<Image>().color;
             bloodColor.a = 1;
             sceneMan.GetComponent<InputManager>().blood.GetComponent<Image>().color = bloodColor;
-            GameObject.Find("AudioManager").GetComponent<AudioMan>().Play("death-sound");
+
+            // Plays death sound
+            Sound deathSound = Array.Find(GameObject.Find("AudioManager").GetComponent<AudioMan>().sounds, sound => sound.name == "death-sound");
+            if (deathSound != null && deathSound.source.isPlaying == false)
+            {
+                deathSound.source.Play();
+            }
         }
     }
 
