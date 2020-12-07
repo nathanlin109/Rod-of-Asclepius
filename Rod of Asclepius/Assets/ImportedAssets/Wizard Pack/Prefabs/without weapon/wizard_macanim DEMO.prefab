@@ -392,7 +392,7 @@ ParticleSystem:
         m_RotationOrder: 4
     startSizeY:
       serializedVersion: 2
-      minMaxState: 0
+      minMaxState: 3
       scalar: 1
       minScalar: 1
       maxCurve:
@@ -445,7 +445,7 @@ ParticleSystem:
         m_RotationOrder: 4
     startSizeZ:
       serializedVersion: 2
-      minMaxState: 0
+      minMaxState: 3
       scalar: 1
       minScalar: 1
       maxCurve:
@@ -15782,7 +15782,7 @@ ParticleSystem:
         m_RotationOrder: 4
     startSizeY:
       serializedVersion: 2
-      minMaxState: 0
+      minMaxState: 3
       scalar: 1
       minScalar: 1
       maxCurve:
@@ -15835,7 +15835,7 @@ ParticleSystem:
         m_RotationOrder: 4
     startSizeZ:
       serializedVersion: 2
-      minMaxState: 0
+      minMaxState: 3
       scalar: 1
       minScalar: 1
       maxCurve:
@@ -20409,6 +20409,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4000010723399292}
   - component: {fileID: 95000012767169196}
+  - component: {fileID: 6637771104040865848}
   m_Layer: 0
   m_Name: wizard_macanim DEMO
   m_TagString: Untagged
@@ -20454,6 +20455,30 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &6637771104040865848
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1000012226140144}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 372d1ffa0ff9df84a93cebae284d9f3f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  trapTime: 5
+  silenced: 0
+  iceEffectTime: 5
+  silenceParticles: {fileID: 0}
+  flareParticles: {fileID: 0}
+  bloodParticles: {fileID: 0}
+  trapParticles: {fileID: 0}
+  spotLight: {fileID: 3399524822428209535, guid: 8d66786cfa76c8d42848063e732b46c6, type: 3}
+  electricBallPrefab: {fileID: 6251076156835593003, guid: 1e806b2da13875d4d9e12483b974d2fb, type: 3}
+  electricBallCooldown: 2
+  electricBallRange: 15
+  projectileSpeed: 3.5
 --- !u!1 &1000012230336702
 GameObject:
   m_ObjectHideFlags: 0
@@ -26390,7 +26415,7 @@ ParticleSystem:
         m_RotationOrder: 4
     startSizeY:
       serializedVersion: 2
-      minMaxState: 0
+      minMaxState: 3
       scalar: 1
       minScalar: 1
       maxCurve:
@@ -26443,7 +26468,7 @@ ParticleSystem:
         m_RotationOrder: 4
     startSizeZ:
       serializedVersion: 2
-      minMaxState: 0
+      minMaxState: 3
       scalar: 1
       minScalar: 1
       maxCurve:

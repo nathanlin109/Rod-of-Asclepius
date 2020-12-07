@@ -1,15 +1,14 @@
 ﻿using UnityEngine.Audio;
 using System;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class AudioMan : MonoBehaviour
 {
     // Fields
-    public Sound[] sounds;
-
     public static AudioMan instance;
-    private Sound mainTheme;
-    private int mainThemeIndex;
+    public Sound mainTheme;
+    public Sound[] sounds;
 
     // Start is called before the first frame update
     void Awake()
@@ -35,32 +34,22 @@ public class AudioMan : MonoBehaviour
             sound.source.volume = sound.volume;
             sound.source.loop = sound.loop;
         }
+
+        mainTheme = sounds[sounds.Length - 1];
     }
 
     // Starts playing main theme
     private void Start()
     {
-        /*mainThemeIndex = 3 + UnityEngine.Random.Range(0, 3);
-        mainTheme = sounds[mainThemeIndex];
-        mainTheme.source.Play();*/
+        if (SceneManager.GetActiveScene().name == "MainMenu")
+        {
+            mainTheme.source.Play();
+        }
     }
 
     void Update()
     {
-        // Chooses the next theme to play
-        /*if (!mainTheme.source.isPlaying)
-        {
-            // Ensures that a new theme plays
-            int nextIndex = 3 + UnityEngine.Random.Range(0, 3);
-            while (nextIndex == mainThemeIndex)
-            {
-                nextIndex = 3 + UnityEngine.Random.Range(0, 3);
-            }
-            mainThemeIndex = nextIndex;
-
-            mainTheme = sounds[mainThemeIndex];
-            mainTheme.source.Play();
-        }*/
+        
     }
 
     // Plays any audio clip

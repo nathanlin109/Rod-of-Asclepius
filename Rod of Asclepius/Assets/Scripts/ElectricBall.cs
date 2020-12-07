@@ -21,6 +21,7 @@ public class ElectricBall : MonoBehaviour
         destroySelfRange = 80.0f;
         player = GameObject.Find("Player");
         sceneMan = GameObject.Find("SceneManager");
+        wizard = GameObject.Find("wizard_weapon_macanim DEMO");
     }
 
     // Update is called once per frame

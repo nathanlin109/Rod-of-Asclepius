@@ -1,0 +1,162 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &6604394865475043611
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6604394865475043621}
+  - component: {fileID: 6604394865475043620}
+  m_Layer: 0
+  m_Name: AudioManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6604394865475043621
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6604394865475043611}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 148.2838, y: 13.095707, z: 51.276825}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6604394865475043620
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6604394865475043611}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a98b5f76d4e9364492af5c3e775bee7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mainTheme:
+    name: menu-music-sound
+    clip: {fileID: 8300000, guid: 1f591dc007ce549dfb838f6f67369166, type: 3}
+    volume: 0.4
+    loop: 1
+    source: {fileID: 0}
+  sounds:
+  - name: background-sounds
+    clip: {fileID: 8300000, guid: 13e4bd17a9e6b441dbdbe85492edf350, type: 3}
+    volume: 0.2
+    loop: 0
+    source: {fileID: 0}
+  - name: death-sound
+    clip: {fileID: 8300000, guid: d5fc81089538e41a7937fe4ec6841b58, type: 3}
+    volume: 0.6
+    loop: 0
+    source: {fileID: 0}
+  - name: flare-sound
+    clip: {fileID: 8300000, guid: 1e9aca57c54fc4e52ac473e1415639a6, type: 3}
+    volume: 0.6
+    loop: 0
+    source: {fileID: 0}
+  - name: freeze-sound
+    clip: {fileID: 8300000, guid: 81e98592714674c96b4cdeae07715b73, type: 3}
+    volume: 0.4
+    loop: 0
+    source: {fileID: 0}
+  - name: heal-sound
+    clip: {fileID: 8300000, guid: 5aedb233694a24c548b5ab9d54ffc1bd, type: 3}
+    volume: 0.2
+    loop: 0
+    source: {fileID: 0}
+  - name: item-pickup-sound
+    clip: {fileID: 8300000, guid: 5e0ed52d1cf5f4236b6d16df9b43d032, type: 3}
+    volume: 0.2
+    loop: 0
+    source: {fileID: 0}
+  - name: silence-sound
+    clip: {fileID: 8300000, guid: 27eff921ca8cc4cafbb858fcb6214206, type: 3}
+    volume: 0.4
+    loop: 0
+    source: {fileID: 0}
+  - name: throw-ability-sound
+    clip: {fileID: 8300000, guid: bdfc7e1a5c16c42498be856a9ccb5b06, type: 3}
+    volume: 0.6
+    loop: 0
+    source: {fileID: 0}
+  - name: trap-set-sound
+    clip: {fileID: 8300000, guid: 95b136818939641e0b3906034584aad4, type: 3}
+    volume: 0.6
+    loop: 0
+    source: {fileID: 0}
+  - name: trap-triggered-sound
+    clip: {fileID: 8300000, guid: bfad50910fccc4776a9c1de15f2d2c9f, type: 3}
+    volume: 0.4
+    loop: 0
+    source: {fileID: 0}
+  - name: vampire-bite-sound
+    clip: {fileID: 8300000, guid: 229531c775bf040fdbb8fd4a04e57495, type: 3}
+    volume: 0.2
+    loop: 0
+    source: {fileID: 0}
+  - name: win-sound
+    clip: {fileID: 8300000, guid: ca691eb308b7d49619ea1e9f1c748b17, type: 3}
+    volume: 0.2
+    loop: 0
+    source: {fileID: 0}
+  - name: wizard-attack-landed-sound
+    clip: {fileID: 8300000, guid: ec57642aa26124cf3a044daaac25794c, type: 3}
+    volume: 0.05
+    loop: 0
+    source: {fileID: 0}
+  - name: wizard-attack-sound
+    clip: {fileID: 8300000, guid: 9c3addfdee2c441d4816753226e3ca24, type: 3}
+    volume: 0.1
+    loop: 0
+    source: {fileID: 0}
+  - name: resurrection-aura-sound
+    clip: {fileID: 8300000, guid: 116b44f120c944fd38712acbbc3cf407, type: 3}
+    volume: 0.4
+    loop: 0
+    source: {fileID: 0}
+  - name: resurrection-complete-sound
+    clip: {fileID: 8300000, guid: d8c72385654874ce8adc0057c3343ee8, type: 3}
+    volume: 0.4
+    loop: 0
+    source: {fileID: 0}
+  - name: trap-pickup-sound
+    clip: {fileID: 8300000, guid: a9745c45364ce4ddeb31a6f87a7b4c59, type: 3}
+    volume: 0.4
+    loop: 0
+    source: {fileID: 0}
+  - name: vampire-intro-sound
+    clip: {fileID: 8300000, guid: e58fbf0ebe4fe4483a473bee6528ceb2, type: 3}
+    volume: 0.2
+    loop: 0
+    source: {fileID: 0}
+  - name: wizard-intro-sound
+    clip: {fileID: 8300000, guid: 2891235a7b6e34bb98197647f30336ef, type: 3}
+    volume: 0.4
+    loop: 0
+    source: {fileID: 0}
+  - name: trap-untrap-sound
+    clip: {fileID: 8300000, guid: 9651cb33366a11a4ab9a1dec519a23ea, type: 3}
+    volume: 0.2
+    loop: 0
+    source: {fileID: 0}
+  - name: button-sound
+    clip: {fileID: 8300000, guid: ddcb812f08e844a1bb2f7e9eaaed66af, type: 3}
+    volume: 0.4
+    loop: 0
+    source: {fileID: 0}
+  - name: menu-music-theme
+    clip: {fileID: 8300000, guid: 1f591dc007ce549dfb838f6f67369166, type: 3}
+    volume: 0.4
+    loop: 1
+    source: {fileID: 0}

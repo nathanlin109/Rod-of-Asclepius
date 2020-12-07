@@ -46,12 +46,18 @@ public class Wizard : Enemy
             // slow down when within a certain distance of the player
             if (Mathf.Pow(player.transform.position.x - transform.position.x, 2) + Mathf.Pow(player.transform.position.z - transform.position.z, 2) <= Mathf.Pow(12, 2))
             {
-                GetComponent<NavMeshAgent>().speed = 4.5f;
+                if (slowed == false)
+                {
+                    GetComponent<NavMeshAgent>().speed = 4.5f;
+                }
             }
             // speed up when player is farther away and do not attack
             else
             {
-                GetComponent<NavMeshAgent>().speed = 7.0f;
+                if (slowed == false)
+                {
+                    GetComponent<NavMeshAgent>().speed = 7.0f;
+                }
             }
 
             // update cooldown

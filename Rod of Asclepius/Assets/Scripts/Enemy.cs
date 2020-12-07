@@ -10,7 +10,8 @@ public class Enemy : MonoBehaviour
     private float speed;
     private float acceleration;
     protected GameObject sceneMan;
-    private bool buttonPromptDisabledCutscene2;
+    public GameObject[] childObjectMeshRenderers;
+    public GameObject[] childObjectParticles;
 
     // Trap
     private bool trapped;
@@ -21,7 +22,7 @@ public class Enemy : MonoBehaviour
     // Abilities
     public bool silenced;
     public float iceEffectTime;
-    private bool slowed;
+    protected bool slowed;
     private float iceTimer;
     public GameObject silenceParticles;
     public GameObject flareParticles;
@@ -34,7 +35,14 @@ public class Enemy : MonoBehaviour
         // set render queue to properly mask
         player = GameObject.Find("Player");
         sceneMan = GameObject.Find("SceneManager");
-        GetComponent<MeshRenderer>().material.renderQueue = 3002;
+        foreach (GameObject gameObject in childObjectMeshRenderers)
+        {
+            gameObject.GetComponent<Renderer>().material.renderQueue = 3002;
+        }
+        foreach (GameObject gameObject in childObjectParticles)
+        {
+            gameObject.GetComponent<Renderer>().material.renderQueue = 3002;
+        }
         speed = GetComponent<NavMeshAgent>().speed;
         acceleration = GetComponent<NavMeshAgent>().acceleration;
         trapped = false;
@@ -42,7 +50,6 @@ public class Enemy : MonoBehaviour
         silenced = false;
         iceTimer = 0;
         slowed = false;
-        buttonPromptDisabledCutscene2 = false;
     }
 
     // Update is called once per frame
@@ -117,11 +124,9 @@ public class Enemy : MonoBehaviour
             {
                 GetComponent<NavMeshAgent>().destination = player.transform.position;
             }
-            else if (buttonPromptDisabledCutscene2 == false)
+            else
             {
                 GetComponent<NavMeshAgent>().destination = transform.position;
-                sceneMan.GetComponent<InputManager>().buttonPromptText.SetActive(true);
-                buttonPromptDisabledCutscene2 = true;
             }
         }
         else

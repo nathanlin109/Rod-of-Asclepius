@@ -44,7 +44,14 @@ public class Flare : Ability
                 }
 
                 // Makes vampire visible
-                vampire.GetComponent<MeshRenderer>().material.renderQueue = 3000;
+                foreach (GameObject gameObject in vampire.GetComponent<Vampire>().childObjectMeshRenderers)
+                {
+                    gameObject.GetComponent<Renderer>().material.renderQueue = 3000;
+                }
+                foreach (GameObject gameObject in vampire.GetComponent<Vampire>().childObjectParticles)
+                {
+                    gameObject.GetComponent<Renderer>().material.renderQueue = 3000;
+                }
                 vampire.GetComponent<Vampire>().spotLight.SetActive(true);
 
                 // Particles
@@ -68,7 +75,14 @@ public class Flare : Ability
                 }
 
                 // Makes wizard visible
-                wizard.GetComponent<MeshRenderer>().material.renderQueue = 3000;
+                foreach (GameObject gameObject in wizard.GetComponent<Wizard>().childObjectMeshRenderers)
+                {
+                    gameObject.GetComponent<Renderer>().material.renderQueue = 3000;
+                }
+                foreach (GameObject gameObject in wizard.GetComponent<Wizard>().childObjectParticles)
+                {
+                    gameObject.GetComponent<Renderer>().material.renderQueue = 3000;
+                }
                 wizard.GetComponent<Wizard>().spotLight.SetActive(true);
 
                 // Particles
@@ -94,12 +108,27 @@ public class Flare : Ability
                 // Checks which one got hit
                 if (vampire != null)
                 {
-                    vampire.GetComponent<MeshRenderer>().material.renderQueue = 3002;
+                    foreach (GameObject gameObject in vampire.GetComponent<Vampire>().childObjectMeshRenderers)
+                    {
+                        gameObject.GetComponent<Renderer>().material.renderQueue = 3002;
+                    }
+                    foreach (GameObject gameObject in vampire.GetComponent<Vampire>().childObjectParticles)
+                    {
+                        gameObject.GetComponent<Renderer>().material.renderQueue = 3000;
+                    }
                     vampire.GetComponent<Vampire>().spotLight.SetActive(false);
                 }
                 if (wizard != null)
                 {
-                    wizard.GetComponent<MeshRenderer>().material.renderQueue = 3002;
+                    // Makes wizard visible
+                    foreach (GameObject gameObject in wizard.GetComponent<Wizard>().childObjectMeshRenderers)
+                    {
+                        gameObject.GetComponent<Renderer>().material.renderQueue = 3002;
+                    }
+                    foreach (GameObject gameObject in wizard.GetComponent<Wizard>().childObjectParticles)
+                    {
+                        gameObject.GetComponent<Renderer>().material.renderQueue = 3002;
+                    }
                     wizard.GetComponent<Wizard>().spotLight.SetActive(false);
                 }
 

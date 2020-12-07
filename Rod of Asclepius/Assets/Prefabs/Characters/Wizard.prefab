@@ -12,6 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 372d1ffa0ff9df84a93cebae284d9f3f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  childObjectMeshRenderers: []
+  childObjectParticles: []
   trapTime: 5
   silenced: 0
   iceEffectTime: 5
@@ -31,6 +33,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 971056883, guid: e369babb47da9c64198129531344f102, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1111512067, guid: e369babb47da9c64198129531344f102, type: 3}
       propertyPath: m_AgentTypeID
       value: -1372625422

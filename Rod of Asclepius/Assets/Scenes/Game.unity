@@ -16167,150 +16167,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3d30d76bf390fc742b8fdd356d040839, type: 3}
---- !u!1 &516595487
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 516595489}
-  - component: {fileID: 516595488}
-  m_Layer: 0
-  m_Name: AudioManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &516595488
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 516595487}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2a98b5f76d4e9364492af5c3e775bee7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  sounds:
-  - name: background-sounds
-    clip: {fileID: 8300000, guid: 13e4bd17a9e6b441dbdbe85492edf350, type: 3}
-    volume: 0.2
-    loop: 0
-    source: {fileID: 0}
-  - name: death-sound
-    clip: {fileID: 8300000, guid: d5fc81089538e41a7937fe4ec6841b58, type: 3}
-    volume: 0.6
-    loop: 0
-    source: {fileID: 0}
-  - name: flare-sound
-    clip: {fileID: 8300000, guid: 1e9aca57c54fc4e52ac473e1415639a6, type: 3}
-    volume: 0.6
-    loop: 0
-    source: {fileID: 0}
-  - name: freeze-sound
-    clip: {fileID: 8300000, guid: 81e98592714674c96b4cdeae07715b73, type: 3}
-    volume: 0.4
-    loop: 0
-    source: {fileID: 0}
-  - name: heal-sound
-    clip: {fileID: 8300000, guid: 5aedb233694a24c548b5ab9d54ffc1bd, type: 3}
-    volume: 0.2
-    loop: 0
-    source: {fileID: 0}
-  - name: item-pickup-sound
-    clip: {fileID: 8300000, guid: 5e0ed52d1cf5f4236b6d16df9b43d032, type: 3}
-    volume: 0.2
-    loop: 0
-    source: {fileID: 0}
-  - name: silence-sound
-    clip: {fileID: 8300000, guid: 27eff921ca8cc4cafbb858fcb6214206, type: 3}
-    volume: 0.4
-    loop: 0
-    source: {fileID: 0}
-  - name: throw-ability-sound
-    clip: {fileID: 8300000, guid: bdfc7e1a5c16c42498be856a9ccb5b06, type: 3}
-    volume: 0.6
-    loop: 0
-    source: {fileID: 0}
-  - name: trap-set-sound
-    clip: {fileID: 8300000, guid: 95b136818939641e0b3906034584aad4, type: 3}
-    volume: 0.6
-    loop: 0
-    source: {fileID: 0}
-  - name: trap-triggered-sound
-    clip: {fileID: 8300000, guid: bfad50910fccc4776a9c1de15f2d2c9f, type: 3}
-    volume: 0.4
-    loop: 0
-    source: {fileID: 0}
-  - name: vampire-bite-sound
-    clip: {fileID: 8300000, guid: 229531c775bf040fdbb8fd4a04e57495, type: 3}
-    volume: 0.2
-    loop: 0
-    source: {fileID: 0}
-  - name: win-sound
-    clip: {fileID: 8300000, guid: ca691eb308b7d49619ea1e9f1c748b17, type: 3}
-    volume: 0.2
-    loop: 0
-    source: {fileID: 0}
-  - name: wizard-attack-landed-sound
-    clip: {fileID: 8300000, guid: ec57642aa26124cf3a044daaac25794c, type: 3}
-    volume: 0.05
-    loop: 0
-    source: {fileID: 0}
-  - name: wizard-attack-sound
-    clip: {fileID: 8300000, guid: 9c3addfdee2c441d4816753226e3ca24, type: 3}
-    volume: 0.1
-    loop: 0
-    source: {fileID: 0}
-  - name: resurrection-aura-sound
-    clip: {fileID: 8300000, guid: 116b44f120c944fd38712acbbc3cf407, type: 3}
-    volume: 0.4
-    loop: 0
-    source: {fileID: 0}
-  - name: resurrection-complete-sound
-    clip: {fileID: 8300000, guid: d8c72385654874ce8adc0057c3343ee8, type: 3}
-    volume: 0.4
-    loop: 0
-    source: {fileID: 0}
-  - name: trap-pickup-sound
-    clip: {fileID: 8300000, guid: a9745c45364ce4ddeb31a6f87a7b4c59, type: 3}
-    volume: 0.4
-    loop: 0
-    source: {fileID: 0}
-  - name: vampire-intro-sound
-    clip: {fileID: 8300000, guid: e58fbf0ebe4fe4483a473bee6528ceb2, type: 3}
-    volume: 0.2
-    loop: 0
-    source: {fileID: 0}
-  - name: wizard-intro-sound
-    clip: {fileID: 8300000, guid: 2891235a7b6e34bb98197647f30336ef, type: 3}
-    volume: 0.4
-    loop: 0
-    source: {fileID: 0}
-  - name: trap-untrap-sound
-    clip: {fileID: 8300000, guid: 9651cb33366a11a4ab9a1dec519a23ea, type: 3}
-    volume: 0.2
-    loop: 0
-    source: {fileID: 0}
---- !u!4 &516595489
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 516595487}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 148.2838, y: 13.095707, z: 51.276825}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 3
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &517917171 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 400000, guid: 3d30d76bf390fc742b8fdd356d040839, type: 3}
@@ -17156,6 +17012,11 @@ PrefabInstance:
 Transform:
   m_CorrespondingSourceObject: {fileID: 400004, guid: ef275eb8eb9669949ad0f4a31466e4f2, type: 3}
   m_PrefabInstance: {fileID: 554514219}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &558516492 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1000013586557078, guid: 3c9c8a8bf50e6b5439ab9db67bc82586, type: 3}
+  m_PrefabInstance: {fileID: 842386602}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &563159309
 PrefabInstance:
@@ -25199,6 +25060,75 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 400000, guid: 0c6a1b709e81ef54297ce22bcaca285d, type: 3}
   m_PrefabInstance: {fileID: 1526081596}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &842386602
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1000010649453898, guid: 3c9c8a8bf50e6b5439ab9db67bc82586, type: 3}
+      propertyPath: m_TagString
+      value: Wizard
+      objectReference: {fileID: 0}
+    - target: {fileID: 1000013586557078, guid: 3c9c8a8bf50e6b5439ab9db67bc82586, type: 3}
+      propertyPath: m_Name
+      value: wizard_weapon_macanim DEMO
+      objectReference: {fileID: 0}
+    - target: {fileID: 1000013586557078, guid: 3c9c8a8bf50e6b5439ab9db67bc82586, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4000011578242470, guid: 3c9c8a8bf50e6b5439ab9db67bc82586, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 131.81
+      objectReference: {fileID: 0}
+    - target: {fileID: 4000011578242470, guid: 3c9c8a8bf50e6b5439ab9db67bc82586, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4000011578242470, guid: 3c9c8a8bf50e6b5439ab9db67bc82586, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 83.9
+      objectReference: {fileID: 0}
+    - target: {fileID: 4000011578242470, guid: 3c9c8a8bf50e6b5439ab9db67bc82586, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4000011578242470, guid: 3c9c8a8bf50e6b5439ab9db67bc82586, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.2792416
+      objectReference: {fileID: 0}
+    - target: {fileID: 4000011578242470, guid: 3c9c8a8bf50e6b5439ab9db67bc82586, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4000011578242470, guid: 3c9c8a8bf50e6b5439ab9db67bc82586, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.9602209
+      objectReference: {fileID: 0}
+    - target: {fileID: 4000011578242470, guid: 3c9c8a8bf50e6b5439ab9db67bc82586, type: 3}
+      propertyPath: m_RootOrder
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 4000011578242470, guid: 3c9c8a8bf50e6b5439ab9db67bc82586, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4000011578242470, guid: 3c9c8a8bf50e6b5439ab9db67bc82586, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 32.43
+      objectReference: {fileID: 0}
+    - target: {fileID: 4000011578242470, guid: 3c9c8a8bf50e6b5439ab9db67bc82586, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8617407802013892829, guid: 3c9c8a8bf50e6b5439ab9db67bc82586, type: 3}
+      propertyPath: spotLight
+      value: 
+      objectReference: {fileID: 878894671}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 3c9c8a8bf50e6b5439ab9db67bc82586, type: 3}
 --- !u!1001 &847349974
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -26465,7 +26395,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5787098976114755534, guid: 82a76256a42024049964a0c8b9bb380f, type: 3}
       propertyPath: m_RootOrder
-      value: 14
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 5787098976114755534, guid: 82a76256a42024049964a0c8b9bb380f, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -26497,6 +26427,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 82a76256a42024049964a0c8b9bb380f, type: 3}
+--- !u!1 &878894671 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5228911055799538361, guid: 3c9c8a8bf50e6b5439ab9db67bc82586, type: 3}
+  m_PrefabInstance: {fileID: 842386602}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &881056759
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -32498,7 +32433,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   inputDelayTime: 1
   vampire: {fileID: 1198045389}
-  wizard: {fileID: 1857396497}
+  wizard: {fileID: 558516492}
   mother: {fileID: 162740142}
   blood: {fileID: 1643053196}
   buttonPromptText: {fileID: 1614900322}
@@ -38999,7 +38934,7 @@ Transform:
   - {fileID: 1493800313}
   - {fileID: 1975297201}
   m_Father: {fileID: 0}
-  m_RootOrder: 18
+  m_RootOrder: 19
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &1298299544 stripped
 Transform:
@@ -41522,7 +41457,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 17
+  m_RootOrder: 18
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &1383028521
 BoxCollider:
@@ -42882,7 +42817,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5787098976114755534, guid: 82a76256a42024049964a0c8b9bb380f, type: 3}
       propertyPath: m_RootOrder
-      value: 13
+      value: 14
       objectReference: {fileID: 0}
     - target: {fileID: 5787098976114755534, guid: 82a76256a42024049964a0c8b9bb380f, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -45078,7 +45013,7 @@ Transform:
   - {fileID: 1230785208}
   - {fileID: 917836143}
   m_Father: {fileID: 0}
-  m_RootOrder: 15
+  m_RootOrder: 16
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &1510602241 stripped
 Transform:
@@ -48559,7 +48494,7 @@ Transform:
   - {fileID: 301303397}
   - {fileID: 1291096789}
   m_Father: {fileID: 0}
-  m_RootOrder: 16
+  m_RootOrder: 17
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &1637385308 stripped
 Transform:
@@ -53747,7 +53682,7 @@ Transform:
   - {fileID: 721370300}
   - {fileID: 2062301778}
   m_Father: {fileID: 0}
-  m_RootOrder: 12
+  m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1788754677
 PrefabInstance:
@@ -55296,11 +55231,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3d30d76bf390fc742b8fdd356d040839, type: 3}
---- !u!1 &1857396497 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5343634950264245755, guid: 8d66786cfa76c8d42848063e732b46c6, type: 3}
-  m_PrefabInstance: {fileID: 1756582179}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1858393873
 GameObject:
   m_ObjectHideFlags: 0
@@ -55371,8 +55301,8 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Vampire: Hold it right there, boy! No one but the Red Court Vampires deserve
-    power of immortality. Give it to me now, and I''ll make your death quick!'
+  m_Text: 'Vampire: Hold it right there, boy! No one but the Black Court Vampires
+    deserve power of immortality. Give it to me now, and I''ll make your death quick!'
 --- !u!222 &1858393876
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -64193,7 +64123,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1046101647419847017, guid: 19be69ba748b7d544b4454ef4bf86ac5, type: 3}
       propertyPath: m_RootOrder
-      value: 11
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 1046101647419847017, guid: 19be69ba748b7d544b4454ef4bf86ac5, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -64221,6 +64151,63 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 19be69ba748b7d544b4454ef4bf86ac5, type: 3}
+--- !u!1001 &6604394865185218052
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 6604394865475043611, guid: 6335e96ab0a422143b02f8ff9da6cafb, type: 3}
+      propertyPath: m_Name
+      value: AudioManager
+      objectReference: {fileID: 0}
+    - target: {fileID: 6604394865475043621, guid: 6335e96ab0a422143b02f8ff9da6cafb, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 148.2838
+      objectReference: {fileID: 0}
+    - target: {fileID: 6604394865475043621, guid: 6335e96ab0a422143b02f8ff9da6cafb, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 13.095707
+      objectReference: {fileID: 0}
+    - target: {fileID: 6604394865475043621, guid: 6335e96ab0a422143b02f8ff9da6cafb, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 51.276825
+      objectReference: {fileID: 0}
+    - target: {fileID: 6604394865475043621, guid: 6335e96ab0a422143b02f8ff9da6cafb, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6604394865475043621, guid: 6335e96ab0a422143b02f8ff9da6cafb, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6604394865475043621, guid: 6335e96ab0a422143b02f8ff9da6cafb, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6604394865475043621, guid: 6335e96ab0a422143b02f8ff9da6cafb, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6604394865475043621, guid: 6335e96ab0a422143b02f8ff9da6cafb, type: 3}
+      propertyPath: m_RootOrder
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6604394865475043621, guid: 6335e96ab0a422143b02f8ff9da6cafb, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6604394865475043621, guid: 6335e96ab0a422143b02f8ff9da6cafb, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6604394865475043621, guid: 6335e96ab0a422143b02f8ff9da6cafb, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 6335e96ab0a422143b02f8ff9da6cafb, type: 3}
 --- !u!1001 &6932550088627230157
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -64298,6 +64285,10 @@ PrefabInstance:
       value: 5.5
       objectReference: {fileID: 0}
     - target: {fileID: 7279486590530435698, guid: e369babb47da9c64198129531344f102, type: 3}
+      propertyPath: childObjectMeshRenderers.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7279486590530435698, guid: e369babb47da9c64198129531344f102, type: 3}
       propertyPath: iceEffectTime
       value: 5
       objectReference: {fileID: 0}
@@ -64317,6 +64308,10 @@ PrefabInstance:
       propertyPath: trapParticles
       value: 
       objectReference: {fileID: 765549704}
+    - target: {fileID: 7279486590530435698, guid: e369babb47da9c64198129531344f102, type: 3}
+      propertyPath: childObjectMeshRenderers.Array.data[0]
+      value: 
+      objectReference: {fileID: 1198045389}
     - target: {fileID: 7279486590530435699, guid: e369babb47da9c64198129531344f102, type: 3}
       propertyPath: m_LocalPosition.x
       value: 125.9
@@ -64434,7 +64429,7 @@ PrefabInstance:
     - target: {fileID: 8974443773138148243, guid: 6b1fca01f000d984cbed6d61352d1184, type: 3}
       propertyPath: wizard
       value: 
-      objectReference: {fileID: 1857396497}
+      objectReference: {fileID: 558516492}
     - target: {fileID: 8974443773138148243, guid: 6b1fca01f000d984cbed6d61352d1184, type: 3}
       propertyPath: flareCooldown
       value: 20

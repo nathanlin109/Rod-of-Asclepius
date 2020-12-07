@@ -109,7 +109,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6251076156835593003}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 90, y: 0.5, z: 40}
+  m_LocalPosition: {x: 0, y: 0.5, z: 0}
   m_LocalScale: {x: 1.25, y: 1.25, z: 1.25}
   m_Children:
   - {fileID: 5720381056870865792}
@@ -166,7 +166,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ebebe9ea4ba565044a86652fe691fa9c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  wizard: {fileID: 5343634950264245755, guid: 8d66786cfa76c8d42848063e732b46c6, type: 3}
+  wizard: {fileID: 1000013586557078, guid: 3c9c8a8bf50e6b5439ab9db67bc82586, type: 3}
   electricHitParticles: {fileID: 2461828236968605203, guid: 9c60d80914c41df4d9519e45f248bdb6, type: 3}
 --- !u!1001 &5720381056871252224
 PrefabInstance:
