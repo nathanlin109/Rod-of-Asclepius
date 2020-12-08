@@ -23,6 +23,8 @@ public class SceneMan : MonoBehaviour
     public GameObject skullLight;
     public GameObject flowerParticles;
     public GameObject flowerLight;
+    public GameObject healLight1;
+    public GameObject healLight2;
 
     // Cursor
     public Texture2D cursorTexture;
@@ -57,6 +59,8 @@ public class SceneMan : MonoBehaviour
         skullLight.SetActive(true);
         flowerParticles.SetActive(true);
         flowerLight.SetActive(true);
+        healLight1.SetActive(true);
+        healLight2.SetActive(true);
     }
 
     // Fades to black when finished with game

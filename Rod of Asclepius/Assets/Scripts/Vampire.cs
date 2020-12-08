@@ -15,7 +15,7 @@ public class Vampire : Enemy
     protected override void Start()
     {
         base.Start();
-        animationBiteDelay = 1;
+        animationBiteDelay = .25f;
         animationBiteDelayTimer = 0;
         biting = false;
     }

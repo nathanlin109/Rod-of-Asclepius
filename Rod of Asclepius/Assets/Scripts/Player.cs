@@ -118,7 +118,7 @@ public class Player : MonoBehaviour
         silenceTimeTillCooldown = silenceCooldown;
         iceTimeTillCooldown = iceCooldown;
         throwing = false;
-        animationThrowDelay = 1f;
+        animationThrowDelay = .2f;
         animationThrowDelayTimer = 0;
         throwingAbility = ThrowingAbility.Flare;
 }
