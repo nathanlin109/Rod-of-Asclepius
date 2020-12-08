@@ -37286,6 +37286,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0c6a1b709e81ef54297ce22bcaca285d, type: 3}
+<<<<<<< HEAD
+=======
+--- !u!1 &1195506172 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1393986648879388003, guid: 8d66786cfa76c8d42848063e732b46c6, type: 3}
+  m_PrefabInstance: {fileID: 1756582179}
+  m_PrefabAsset: {fileID: 0}
+>>>>>>> parent of 4e2417b... Added and updated UI in the game state.
 --- !u!1001 &1196132429
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -66172,3 +66180,201 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a1bf87d39eba5ce49957f25708981d90, type: 3}
+<<<<<<< HEAD
+=======
+--- !u!1001 &7279486590316754743
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1111512067, guid: e369babb47da9c64198129531344f102, type: 3}
+      propertyPath: m_Radius
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1111512067, guid: e369babb47da9c64198129531344f102, type: 3}
+      propertyPath: m_Speed
+      value: 5.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7279486590530435698, guid: e369babb47da9c64198129531344f102, type: 3}
+      propertyPath: childObjectMeshRenderers.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7279486590530435698, guid: e369babb47da9c64198129531344f102, type: 3}
+      propertyPath: iceEffectTime
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7279486590530435698, guid: e369babb47da9c64198129531344f102, type: 3}
+      propertyPath: silenceParticles
+      value: 
+      objectReference: {fileID: 7279486590316754744}
+    - target: {fileID: 7279486590530435698, guid: e369babb47da9c64198129531344f102, type: 3}
+      propertyPath: flareParticles
+      value: 
+      objectReference: {fileID: 1630710408}
+    - target: {fileID: 7279486590530435698, guid: e369babb47da9c64198129531344f102, type: 3}
+      propertyPath: bloodParticles
+      value: 
+      objectReference: {fileID: 1311982340}
+    - target: {fileID: 7279486590530435698, guid: e369babb47da9c64198129531344f102, type: 3}
+      propertyPath: trapParticles
+      value: 
+      objectReference: {fileID: 765549704}
+    - target: {fileID: 7279486590530435698, guid: e369babb47da9c64198129531344f102, type: 3}
+      propertyPath: childObjectMeshRenderers.Array.data[0]
+      value: 
+      objectReference: {fileID: 1198045389}
+    - target: {fileID: 7279486590530435699, guid: e369babb47da9c64198129531344f102, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 125.9
+      objectReference: {fileID: 0}
+    - target: {fileID: 7279486590530435699, guid: e369babb47da9c64198129531344f102, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7279486590530435699, guid: e369babb47da9c64198129531344f102, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 91.56
+      objectReference: {fileID: 0}
+    - target: {fileID: 7279486590530435699, guid: e369babb47da9c64198129531344f102, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7279486590530435699, guid: e369babb47da9c64198129531344f102, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.6437386
+      objectReference: {fileID: 0}
+    - target: {fileID: 7279486590530435699, guid: e369babb47da9c64198129531344f102, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7279486590530435699, guid: e369babb47da9c64198129531344f102, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.76524544
+      objectReference: {fileID: 0}
+    - target: {fileID: 7279486590530435699, guid: e369babb47da9c64198129531344f102, type: 3}
+      propertyPath: m_RootOrder
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 7279486590530435699, guid: e369babb47da9c64198129531344f102, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7279486590530435699, guid: e369babb47da9c64198129531344f102, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 80.142
+      objectReference: {fileID: 0}
+    - target: {fileID: 7279486590530435699, guid: e369babb47da9c64198129531344f102, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7279486590530435703, guid: e369babb47da9c64198129531344f102, type: 3}
+      propertyPath: m_Name
+      value: Vampire
+      objectReference: {fileID: 0}
+    - target: {fileID: 7279486590530435703, guid: e369babb47da9c64198129531344f102, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: e369babb47da9c64198129531344f102, type: 3}
+--- !u!1 &7279486590316754744 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2690512335878517480, guid: e369babb47da9c64198129531344f102, type: 3}
+  m_PrefabInstance: {fileID: 7279486590316754743}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &8974443773541821094
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 6300468871500070071, guid: 6b1fca01f000d984cbed6d61352d1184, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 150
+      objectReference: {fileID: 0}
+    - target: {fileID: 6300468871500070071, guid: 6b1fca01f000d984cbed6d61352d1184, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.05
+      objectReference: {fileID: 0}
+    - target: {fileID: 6300468871500070071, guid: 6b1fca01f000d984cbed6d61352d1184, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 36.01
+      objectReference: {fileID: 0}
+    - target: {fileID: 6300468871500070071, guid: 6b1fca01f000d984cbed6d61352d1184, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6300468871500070071, guid: 6b1fca01f000d984cbed6d61352d1184, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6300468871500070071, guid: 6b1fca01f000d984cbed6d61352d1184, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6300468871500070071, guid: 6b1fca01f000d984cbed6d61352d1184, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6300468871500070071, guid: 6b1fca01f000d984cbed6d61352d1184, type: 3}
+      propertyPath: m_RootOrder
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 6300468871500070071, guid: 6b1fca01f000d984cbed6d61352d1184, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6300468871500070071, guid: 6b1fca01f000d984cbed6d61352d1184, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6300468871500070071, guid: 6b1fca01f000d984cbed6d61352d1184, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8974443773138148243, guid: 6b1fca01f000d984cbed6d61352d1184, type: 3}
+      propertyPath: vampire
+      value: 
+      objectReference: {fileID: 1198045389}
+    - target: {fileID: 8974443773138148243, guid: 6b1fca01f000d984cbed6d61352d1184, type: 3}
+      propertyPath: wizard
+      value: 
+      objectReference: {fileID: 558516492}
+    - target: {fileID: 8974443773138148243, guid: 6b1fca01f000d984cbed6d61352d1184, type: 3}
+      propertyPath: flareCooldown
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 8974443773138148243, guid: 6b1fca01f000d984cbed6d61352d1184, type: 3}
+      propertyPath: silenceCooldown
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 8974443773138148243, guid: 6b1fca01f000d984cbed6d61352d1184, type: 3}
+      propertyPath: iceCooldown
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 8974443773138148243, guid: 6b1fca01f000d984cbed6d61352d1184, type: 3}
+      propertyPath: flarePrefab
+      value: 
+      objectReference: {fileID: 1000012970591572, guid: 7cafb89b5a0f61f479d0a748962abbbc, type: 3}
+    - target: {fileID: 8974443773138148243, guid: 6b1fca01f000d984cbed6d61352d1184, type: 3}
+      propertyPath: icePrefab
+      value: 
+      objectReference: {fileID: 1000013317980782, guid: 2cf6690298568294cb6b655c0a3aeb87, type: 3}
+    - target: {fileID: 8974443773138148243, guid: 6b1fca01f000d984cbed6d61352d1184, type: 3}
+      propertyPath: silencePrefab
+      value: 
+      objectReference: {fileID: 1000013846074356, guid: 11e31a2ebb4e6e246bcf8c0ba034a031, type: 3}
+    - target: {fileID: 8974443773138148243, guid: 6b1fca01f000d984cbed6d61352d1184, type: 3}
+      propertyPath: trapPrefab
+      value: 
+      objectReference: {fileID: 115016, guid: afd19ab1d4bb70b499bb2f62171a522d, type: 3}
+    - target: {fileID: 8974443773138148244, guid: 6b1fca01f000d984cbed6d61352d1184, type: 3}
+      propertyPath: m_Name
+      value: Player
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 6b1fca01f000d984cbed6d61352d1184, type: 3}
+>>>>>>> parent of 4e2417b... Added and updated UI in the game state.

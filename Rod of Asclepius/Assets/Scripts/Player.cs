@@ -41,11 +41,14 @@ public class Player : MonoBehaviour
     private float silenceTimeTillCooldown;
     public float iceCooldown;
     private float iceTimeTillCooldown;
+<<<<<<< HEAD
     private float animationThrowDelay;
     private float animationThrowDelayTimer;
     private bool throwing;
     enum ThrowingAbility { Flare, Ice, Silence}
     private ThrowingAbility throwingAbility;
+=======
+>>>>>>> parent of 4e2417b... Added and updated UI in the game state.
 
     // Objectives
     public int objectiveItemsCollected;
@@ -113,7 +116,10 @@ public class Player : MonoBehaviour
 // Update is called once per frame
 void Update()
     {
+<<<<<<< HEAD
         SetAnimatorVariables();
+=======
+>>>>>>> parent of 4e2417b... Added and updated UI in the game state.
         // Game Movement
         if (sceneMan.GetComponent<SceneMan>().gameState == GameState.Game)
         {
@@ -426,12 +432,22 @@ void Update()
         silenceTimeTillCooldown += Time.deltaTime;
         iceTimeTillCooldown += Time.deltaTime;
 
+<<<<<<< HEAD
         // Flare (Anim)
         if (flareTimeTillCooldown >= flareCooldown && Input.GetMouseButtonDown(1) && trapDeployTimer == 0 && throwing == false)
         {          
             animator.SetTrigger("Throw");
             throwing = true;
             throwingAbility = ThrowingAbility.Flare;
+=======
+        // Flare
+        if (flareTimeTillCooldown >= flareCooldown && Input.GetMouseButtonDown(1) && trapDeployTimer == 0)
+        {
+            GameObject flare = Instantiate(flarePrefab, transform.position, Quaternion.identity);
+            flare.GetComponent<Rigidbody>().AddForce(transform.forward * projectileSpeed + moveVector * moveSpeed / 4, ForceMode.Impulse);
+            flareTimeTillCooldown = 0;
+            GameObject.Find("AudioManager").GetComponent<AudioMan>().Play("throw-ability-sound");
+>>>>>>> parent of 4e2417b... Added and updated UI in the game state.
         }
 
         // Silence (Anim)
@@ -450,6 +466,7 @@ void Update()
             throwingAbility = ThrowingAbility.Ice;
         }
 
+<<<<<<< HEAD
         // Delay between animation and throwing
         if (throwing == true)
         {
@@ -492,6 +509,8 @@ void Update()
         }
     }
 
+=======
+>>>>>>> parent of 4e2417b... Added and updated UI in the game state.
     // Prevents player from colliding too much
     void CollisionCooldown()
     {
