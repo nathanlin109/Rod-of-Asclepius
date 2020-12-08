@@ -24,25 +24,9 @@ public class Vampire : Enemy
     protected override void Update()
     {
         base.Update();
-        DamagePlayer();
-    }
-
-    private void DamagePlayer()
-    {
         if (biting == true)
         {
             animationBiteDelayTimer += Time.deltaTime;
-
-            if (animationBiteDelayTimer >= animationBiteDelay)
-            {
-                biting = false;
-                animationBiteDelayTimer = 0;
-                player.GetComponent<Player>().health--;
-                player.GetComponent<Player>().hasCollided = true;
-                player.GetComponent<Player>().bloodParticles.GetComponent<ParticleSystem>().Clear();
-                player.GetComponent<Player>().bloodParticles.GetComponent<ParticleSystem>().Play();
-                GameObject.Find("AudioManager").GetComponent<AudioMan>().Play("vampire-bite-sound");
-            }
         }
     }
 
@@ -53,11 +37,23 @@ public class Vampire : Enemy
         if (collision.gameObject.tag == "Player" &&
             player.GetComponent<Player>().hasCollided == false &&
             player.GetComponent<Player>().health > 0 && silenced == false &&
-            sceneMan.GetComponent<SceneMan>().gameState == GameState.Game && biting == false)
+            sceneMan.GetComponent<SceneMan>().gameState == GameState.Game)
         {
-            animator.SetTrigger("Attacking");
-            biting = true;
-
+            if (biting == false)
+            {
+                animator.SetTrigger("Attacking");
+                biting = true;
+            }
+            else if (biting == true && animationBiteDelayTimer >= animationBiteDelay)
+            {
+                biting = false;
+                animationBiteDelayTimer = 0;
+                player.GetComponent<Player>().health--;
+                player.GetComponent<Player>().hasCollided = true;
+                player.GetComponent<Player>().bloodParticles.GetComponent<ParticleSystem>().Clear();
+                player.GetComponent<Player>().bloodParticles.GetComponent<ParticleSystem>().Play();
+                GameObject.Find("AudioManager").GetComponent<AudioMan>().Play("vampire-bite-sound");
+            }
         }
     }
 }
