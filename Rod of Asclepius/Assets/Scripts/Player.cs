@@ -29,6 +29,11 @@ public class Player : MonoBehaviour
     private float trapMoveSpeedMultiplier;
     private bool placedTrap;
 
+    // Trap UI
+    public GameObject trapIcon;
+    public GameObject trapProgressBackground;
+    public GameObject trapProgressBar;
+
     // Ability
     public GameObject flarePrefab;
     public GameObject silencePrefab;
@@ -40,6 +45,15 @@ public class Player : MonoBehaviour
     private float silenceTimeTillCooldown;
     public float iceCooldown;
     private float iceTimeTillCooldown;
+
+    // Ability UI
+    public GameObject abilityUI;
+    public GameObject iceIcon;
+    public GameObject iceCooldownText;
+    public GameObject silenceIcon;
+    public GameObject silenceCooldownText;
+    public GameObject flareIcon;
+    public GameObject flareCooldownText;
 
     // Objectives
     public int objectiveItemsCollected;
@@ -101,6 +115,8 @@ public class Player : MonoBehaviour
 // Update is called once per frame
 void Update()
     {
+        AbilityUI();
+
         // Game Movement
         if (sceneMan.GetComponent<SceneMan>().gameState == GameState.Game)
         {
@@ -314,6 +330,11 @@ void Update()
             trapDeployTimer += Time.deltaTime;
             trapMoveSpeedMultiplier = .3f;
 
+            // enable trap progress UI
+            trapProgressBackground.SetActive(true);
+            trapProgressBar.SetActive(true);
+            trapProgressBar.GetComponent<RectTransform>().sizeDelta = new Vector2(5, (trapDeployTimer / trapDeployTime) * 100);
+
             // Plays trap setting sound
             Sound trapSoundPlay = Array.Find(GameObject.Find("AudioManager").GetComponent<AudioMan>().sounds, sound => sound.name == "trap-set-sound");
             if (trapSoundPlay != null && trapSoundPlay.source.isPlaying == false)
@@ -327,6 +348,11 @@ void Update()
                 trapDeployTimer = 0;
                 trapMoveSpeedMultiplier = 1;
                 placedTrap = true;
+
+                // reset and disable trap progress UI
+                trapProgressBar.GetComponent<RectTransform>().sizeDelta = new Vector2(5, 0);
+                trapProgressBackground.SetActive(false);
+                trapProgressBar.SetActive(false);
 
                 // Stops trap setting sound
                 Sound trapSoundStop = Array.Find(GameObject.Find("AudioManager").GetComponent<AudioMan>().sounds, sound => sound.name == "trap-set-sound");
@@ -347,6 +373,11 @@ void Update()
             trapDeployTimer = 0;
             trapMoveSpeedMultiplier = 1;
 
+            // reset and disable trap progress UI
+            trapProgressBar.GetComponent<RectTransform>().sizeDelta = new Vector2(5, 0);
+            trapProgressBackground.SetActive(false);
+            trapProgressBar.SetActive(false);
+
             // Stops trap setting sound
             Sound trapSoundStop = Array.Find(GameObject.Find("AudioManager").GetComponent<AudioMan>().sounds, sound => sound.name == "trap-set-sound");
             if (trapSoundStop != null && trapSoundStop.source.isPlaying == true)
@@ -363,7 +394,7 @@ void Update()
         flareTimeTillCooldown += Time.deltaTime;
         silenceTimeTillCooldown += Time.deltaTime;
         iceTimeTillCooldown += Time.deltaTime;
-
+        
         // Flare
         if (flareTimeTillCooldown >= flareCooldown && Input.GetMouseButtonDown(1) && trapDeployTimer == 0)
         {
@@ -389,6 +420,76 @@ void Update()
             silence.GetComponent<Rigidbody>().AddForce(transform.forward * projectileSpeed + moveVector * moveSpeed / 4, ForceMode.Impulse);
             iceTimeTillCooldown = 0;
             GameObject.Find("AudioManager").GetComponent<AudioMan>().Play("throw-ability-sound");
+        }
+    }
+
+    // Ability UI and Cooldowns
+    void AbilityUI()
+    {
+        // Game state
+        if (sceneMan.GetComponent<SceneMan>().gameState == GameState.Game)
+        {
+            // enable ability UI
+            abilityUI.SetActive(true);
+
+            // trap unavailable
+            if (placedTrap)
+            {
+                trapIcon.GetComponent<Image>().color = new Color32(128, 128, 128, 255);
+            }
+            // trap available
+            else
+            {
+                trapIcon.GetComponent<Image>().color = new Color32(255, 255, 255, 255);
+            }
+
+            // ice available
+            if (iceTimeTillCooldown >= iceCooldown)
+            {
+                iceIcon.GetComponent<Image>().color = new Color32(255, 255, 255, 255);
+                iceCooldownText.SetActive(false);
+            }
+            // ice unavailable
+            else
+            {
+                iceIcon.GetComponent<Image>().color = new Color32(128, 128, 128, 255);
+                iceCooldownText.SetActive(true);
+                iceCooldownText.GetComponent<Text>().text = (iceCooldown - iceTimeTillCooldown).ToString("0");
+            }
+
+            // silence available
+            if (silenceTimeTillCooldown >= silenceCooldown)
+            {
+                silenceIcon.GetComponent<Image>().color = new Color32(255, 255, 255, 255);
+                silenceCooldownText.SetActive(false);
+            }
+            // silence unavailable
+            else
+            {
+                silenceIcon.GetComponent<Image>().color = new Color32(128, 128, 128, 255);
+                silenceCooldownText.SetActive(true);
+                silenceCooldownText.GetComponent<Text>().text = (silenceCooldown - silenceTimeTillCooldown).ToString("0");
+            }
+
+            // flare available
+            if (flareTimeTillCooldown >= flareCooldown)
+            {
+                flareIcon.GetComponent<Image>().color = new Color32(255, 255, 255, 255);
+                flareCooldownText.SetActive(false);
+            }
+            // flare unavailable
+            else
+            {
+                flareIcon.GetComponent<Image>().color = new Color32(128, 128, 128, 255);
+                flareCooldownText.SetActive(true);
+                flareCooldownText.GetComponent<Text>().text = (flareCooldown - flareTimeTillCooldown).ToString("0");
+            }
+        }
+        // Other states
+        else
+        {
+            // disable ability UI
+            abilityUI.SetActive(false);
         }
     }
 
