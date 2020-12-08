@@ -32,6 +32,7 @@ public class Silence : Ability
         {
             if (other.gameObject.tag == "Vampire")
             {
+                Debug.Log("HIT VAMPIRE");
                 vampire = other.gameObject;
 
                 // Makes this ability invisible
@@ -49,6 +50,7 @@ public class Silence : Ability
             }
             else if (other.gameObject.tag == "Wizard")
             {
+                Debug.Log("HIT WIZARD");
                 wizard = other.gameObject;
 
                 // Makes this ability invisible

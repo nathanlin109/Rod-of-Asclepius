@@ -8,13 +8,14 @@ using System;
 public class Player : MonoBehaviour
 {
     // Player Fields
+    public GameObject[] childObjectMeshRenderers;
     public int health;
-    public GameObject healthPickupParticles;
     GameObject sceneMan;
-    Vector3 middleModel;
     public float moveSpeed;
     private Vector3 moveVector;
     private bool playedDeathSound;
+    public Animator animator;
+    private bool isDead;
 
     // Collisions
     public float playerImmuneTime;
@@ -40,6 +41,11 @@ public class Player : MonoBehaviour
     private float silenceTimeTillCooldown;
     public float iceCooldown;
     private float iceTimeTillCooldown;
+    private float animationThrowDelay;
+    private float animationThrowDelayTimer;
+    private bool throwing;
+    enum ThrowingAbility { Flare, Ice, Silence}
+    private ThrowingAbility throwingAbility;
 
     // Objectives
     public int objectiveItemsCollected;
@@ -57,6 +63,9 @@ public class Player : MonoBehaviour
     // Enemies
     public GameObject vampire;
     public GameObject wizard;
+
+    // Particles
+    public GameObject healthPickupParticles;
     public GameObject electricHitParticles;
     public GameObject bloodParticles;
 
@@ -66,10 +75,9 @@ public class Player : MonoBehaviour
         // Own fields
         health = 2;
         sceneMan = GameObject.Find("SceneManager");
-        middleModel = gameObject.transform.position +
-            new Vector3(0, gameObject.GetComponent<BoxCollider>().bounds.size.y / 2, 0);
         moveVector = Vector3.zero;
         playedDeathSound = false;
+        isDead = false;
 
         // Cutscene movement
         cutscene1ShouldMove = false;
@@ -96,11 +104,16 @@ public class Player : MonoBehaviour
         flareTimeTillCooldown = flareCooldown;
         silenceTimeTillCooldown = silenceCooldown;
         iceTimeTillCooldown = iceCooldown;
+        throwing = false;
+        animationThrowDelay = 1f;
+        animationThrowDelayTimer = 0;
+        throwingAbility = ThrowingAbility.Flare;
 }
 
 // Update is called once per frame
 void Update()
     {
+        SetAnimatorVariables();
         // Game Movement
         if (sceneMan.GetComponent<SceneMan>().gameState == GameState.Game)
         {
@@ -115,6 +128,7 @@ void Update()
         {
             // Shows blood texture on death
             ShowBlood();
+            moveVector = Vector3.zero;
         }
         else if (sceneMan.GetComponent<SceneMan>().gameState == GameState.GameNoCombat)
         {
@@ -122,10 +136,18 @@ void Update()
             MovementKeyBoardInputs();
             MouseInputs();
         }
-        else if (sceneMan.GetComponent<SceneMan>().gameState == GameState.Cutscene1 && cutscene1ShouldMove == true)
+        else if (sceneMan.GetComponent<SceneMan>().gameState == GameState.Cutscene1)
         {
-            // Moves player up in cutscene1
-            GetComponent<Rigidbody>().transform.Translate(new Vector3(0, 0, 1.0f) * moveSpeed / 2 * Time.deltaTime, Space.World);
+            if (cutscene1ShouldMove == true)
+            {
+                // Moves player up in cutscene1
+                moveVector = new Vector3(0, 0, 1.0f);
+                GetComponent<Rigidbody>().transform.Translate(moveVector * moveSpeed / 2 * Time.deltaTime, Space.World);
+            }
+            else
+            {
+                moveVector = Vector3.zero;
+            }
         }
         else if (sceneMan.GetComponent<SceneMan>().gameState == GameState.Cutscene2 ||
             sceneMan.GetComponent<SceneMan>().gameState == GameState.Cutscene4 ||
@@ -139,13 +161,52 @@ void Update()
                 // Moves player down in cutscene 5
                 if (cutscene5ShouldMove)
                 {
-                    GetComponent<Rigidbody>().transform.Translate(new Vector3(0, 0, -1.0f) * moveSpeed / 2 * Time.deltaTime, Space.World);
+                    moveVector = new Vector3(0, 0, -1.0f);
+                    GetComponent<Rigidbody>().transform.Translate(moveVector * moveSpeed / 2 * Time.deltaTime, Space.World);
                 }
 
                 // Closes gate in cutscene5
                 CloseGateCutscene5();
             }
+            else
+            {
+                moveVector = Vector3.zero;
+            }
         }
+    }
+
+    // Sets animator variables
+    private void SetAnimatorVariables()
+    {
+        animator.SetFloat("Speed", moveVector.magnitude);
+        animator.SetBool("IsDead", isDead);
+        animator.SetBool("IsThrowing", throwing);
+
+        if (trapDeployTimer > 0)
+        {
+            animator.SetBool("IsCrouching", true);
+        }
+        else
+        {
+            animator.SetBool("IsCrouching", false);
+        }
+
+        // Gets the angle to determine which direction to move
+        // Gets the angle between forward and target forward
+        float forwardAngle = Mathf.Atan2(transform.forward.z,
+            transform.forward.x) * Mathf.Rad2Deg;
+        float moveAngle = Mathf.Atan2(moveVector.z, moveVector.x) * Mathf.Rad2Deg;
+        float angleBetweenRotation = forwardAngle - moveAngle;
+
+        if (angleBetweenRotation < -180)
+        {
+            angleBetweenRotation = 180 + (angleBetweenRotation + 180);
+        }
+        else if (angleBetweenRotation > 180)
+        {
+            angleBetweenRotation = -180 + (angleBetweenRotation - 180);
+        }
+        animator.SetFloat("Angle", angleBetweenRotation);
     }
 
     // Process keyboard inputs
@@ -292,6 +353,7 @@ void Update()
             Color bloodColor = sceneMan.GetComponent<InputManager>().blood.GetComponent<Image>().color;
             bloodColor.a = 1;
             sceneMan.GetComponent<InputManager>().blood.GetComponent<Image>().color = bloodColor;
+            isDead = true;
 
             // Plays death sound
             if (playedDeathSound == false)
@@ -364,31 +426,69 @@ void Update()
         silenceTimeTillCooldown += Time.deltaTime;
         iceTimeTillCooldown += Time.deltaTime;
 
-        // Flare
-        if (flareTimeTillCooldown >= flareCooldown && Input.GetMouseButtonDown(1) && trapDeployTimer == 0)
-        {
-            GameObject flare = Instantiate(flarePrefab, transform.position, Quaternion.identity);
-            flare.GetComponent<Rigidbody>().AddForce(transform.forward * projectileSpeed + moveVector * moveSpeed / 4, ForceMode.Impulse);
-            flareTimeTillCooldown = 0;
-            GameObject.Find("AudioManager").GetComponent<AudioMan>().Play("throw-ability-sound");
+        // Flare (Anim)
+        if (flareTimeTillCooldown >= flareCooldown && Input.GetMouseButtonDown(1) && trapDeployTimer == 0 && throwing == false)
+        {          
+            animator.SetTrigger("Throw");
+            throwing = true;
+            throwingAbility = ThrowingAbility.Flare;
         }
 
-        // Silence
-        if (silenceTimeTillCooldown >= silenceCooldown && Input.GetMouseButtonDown(2) && trapDeployTimer == 0)
+        // Silence (Anim)
+        if (silenceTimeTillCooldown >= silenceCooldown && Input.GetMouseButtonDown(2) && trapDeployTimer == 0 && throwing == false)
         {
-            GameObject silence = Instantiate(silencePrefab, transform.position, Quaternion.identity);
-            silence.GetComponent<Rigidbody>().AddForce(transform.forward * projectileSpeed + moveVector * moveSpeed / 4, ForceMode.Impulse);
-            silenceTimeTillCooldown = 0;
-            GameObject.Find("AudioManager").GetComponent<AudioMan>().Play("throw-ability-sound");
+            animator.SetTrigger("Throw");
+            throwing = true;
+            throwingAbility = ThrowingAbility.Silence;
         }
 
-        // Ice
-        if (iceTimeTillCooldown >= iceCooldown && Input.GetMouseButtonDown(0) && trapDeployTimer == 0)
+        // Ice (Anim)
+        if (iceTimeTillCooldown >= iceCooldown && Input.GetMouseButtonDown(0) && trapDeployTimer == 0 && throwing == false)
         {
-            GameObject silence = Instantiate(icePrefab, transform.position, Quaternion.identity);
-            silence.GetComponent<Rigidbody>().AddForce(transform.forward * projectileSpeed + moveVector * moveSpeed / 4, ForceMode.Impulse);
-            iceTimeTillCooldown = 0;
-            GameObject.Find("AudioManager").GetComponent<AudioMan>().Play("throw-ability-sound");
+            animator.SetTrigger("Throw");
+            throwing = true;
+            throwingAbility = ThrowingAbility.Ice;
+        }
+
+        // Delay between animation and throwing
+        if (throwing == true)
+        {
+            animationThrowDelayTimer += Time.deltaTime;
+
+            if (animationThrowDelayTimer >= animationThrowDelay)
+            {
+                throwing = false;
+                animationThrowDelayTimer = 0;
+                GameObject.Find("AudioManager").GetComponent<AudioMan>().Play("throw-ability-sound");
+
+                // Throws correct ability
+                switch (throwingAbility)
+                {
+                    case ThrowingAbility.Flare:
+                        GameObject flare = Instantiate(flarePrefab,
+                            transform.position + new Vector3(0, gameObject.GetComponent<BoxCollider>().bounds.size.y / 2, 0),
+                            Quaternion.identity);
+                        flare.GetComponent<Rigidbody>().AddForce(transform.forward * projectileSpeed + moveVector * moveSpeed / 4, ForceMode.Impulse);
+                        flareTimeTillCooldown = 0;
+                        break;
+                    case ThrowingAbility.Silence:
+                        GameObject silence = Instantiate(silencePrefab,
+                            transform.position + new Vector3(0, gameObject.GetComponent<BoxCollider>().bounds.size.y / 2, 0),
+                            Quaternion.identity);
+                        silence.GetComponent<Rigidbody>().AddForce(transform.forward * projectileSpeed + moveVector * moveSpeed / 4, ForceMode.Impulse);
+                        silenceTimeTillCooldown = 0;
+                        break;
+                    case ThrowingAbility.Ice:
+                        GameObject ice = Instantiate(icePrefab,
+                            transform.position + new Vector3(0, gameObject.GetComponent<BoxCollider>().bounds.size.y / 2, 0),
+                            Quaternion.identity);
+                        ice.GetComponent<Rigidbody>().AddForce(transform.forward * projectileSpeed + moveVector * moveSpeed / 4, ForceMode.Impulse);
+                        iceTimeTillCooldown = 0;
+                        break;
+                    default:
+                        break;
+                }
+            }
         }
     }
 
@@ -406,13 +506,19 @@ void Update()
                 immunityTimer = 0;
                 hasCollided = false;
                 flashingTimer = 0;
-                GetComponent<MeshRenderer>().enabled = true;
+                foreach (GameObject gameObject in childObjectMeshRenderers)
+                {
+                    gameObject.GetComponent<Renderer>().enabled = true;
+                }
             }
 
             // Flashes player
             if (flashingTimer >= .25f)
             {
-                GetComponent<MeshRenderer>().enabled = !GetComponent<MeshRenderer>().enabled;
+                foreach (GameObject gameObject in childObjectMeshRenderers)
+                {
+                    gameObject.GetComponent<Renderer>().enabled = !gameObject.GetComponent<Renderer>().enabled;
+                }
                 flashingTimer = 0;
             }
         }

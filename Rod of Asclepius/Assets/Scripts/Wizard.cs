@@ -14,12 +14,18 @@ public class Wizard : Enemy
     private float electricBallTimeTillCooldown;
     public float electricBallRange;
     public float projectileSpeed;
+    private float animationShootDelay;
+    private float animationShootDelayTimer;
+    private bool shooting;
 
     // Start is called before the first frame update
     protected override void Start()
     {
         base.Start();
         electricBallTimeTillCooldown = 0.0f;
+        animationShootDelay = .45f;
+        animationShootDelayTimer = 0;
+        shooting = false;
     }
 
     // Update is called once per frame
@@ -33,13 +39,34 @@ public class Wizard : Enemy
             // shoot electric balls when within a certain distance of the player
             if (Mathf.Pow(player.transform.position.x - transform.position.x, 2) + Mathf.Pow(player.transform.position.z - transform.position.z, 2) <= Mathf.Pow(electricBallRange, 2))
             {
-                // create the electric ball and reset cooldown
-                if (electricBallTimeTillCooldown >= electricBallCooldown && silenced == false)
+                // Plays animation only once
+                if (electricBallTimeTillCooldown >= electricBallCooldown && silenced == false && shooting == false)
                 {
-                    GameObject electricBall = Instantiate(electricBallPrefab, transform.position, Quaternion.identity);
-                    electricBall.GetComponent<Rigidbody>().AddForce(new Vector3(player.transform.position.x - transform.position.x, 0, player.transform.position.z - transform.position.z).normalized * projectileSpeed, ForceMode.Impulse);
+                    animator.SetTrigger("Attacking");
+                    shooting = true;
+                }
+                else if (silenced == true)
+                {
+                    animationShootDelayTimer = 0;
                     electricBallTimeTillCooldown = 0;
-                    GameObject.Find("AudioManager").GetComponent<AudioMan>().Play("wizard-attack-sound");
+                    shooting = false;
+                }
+
+                // Delay between animation and shooting
+                if (shooting == true)
+                {
+                    animationShootDelayTimer += Time.deltaTime;
+
+                    // create the electric ball and reset cooldown
+                    if (animationShootDelayTimer >= animationShootDelay)
+                    {
+                        GameObject electricBall = Instantiate(electricBallPrefab, transform.position, Quaternion.identity);
+                        electricBall.GetComponent<Rigidbody>().AddForce(new Vector3(player.transform.position.x - transform.position.x, 0, player.transform.position.z - transform.position.z).normalized * projectileSpeed, ForceMode.Impulse);
+                        electricBallTimeTillCooldown = 0;
+                        GameObject.Find("AudioManager").GetComponent<AudioMan>().Play("wizard-attack-sound");
+                        animationShootDelayTimer = 0;
+                        shooting = false;
+                    }
                 }
             }
 

@@ -8,10 +8,10 @@ public class Enemy : MonoBehaviour
     // Fields
     protected GameObject player;
     private float speed;
-    private float acceleration;
     protected GameObject sceneMan;
     public GameObject[] childObjectMeshRenderers;
     public GameObject[] childObjectParticles;
+    public Animator animator;
 
     // Trap
     private bool trapped;
@@ -41,10 +41,12 @@ public class Enemy : MonoBehaviour
         }
         foreach (GameObject gameObject in childObjectParticles)
         {
-            gameObject.GetComponent<Renderer>().material.renderQueue = 3002;
+            foreach (Material material in gameObject.GetComponent<Renderer>().materials)
+            {
+                material.renderQueue = 3002;
+            }
         }
         speed = GetComponent<NavMeshAgent>().speed;
-        acceleration = GetComponent<NavMeshAgent>().acceleration;
         trapped = false;
         trapTimer = 0;
         silenced = false;
@@ -59,8 +61,14 @@ public class Enemy : MonoBehaviour
         IceSlow();
         SeekPlayer();
         ShowSilenceParticles();
+        SetAnimatorVariables();
     }
 
+    // Sets animator variables
+    private void SetAnimatorVariables()
+    {
+        animator.SetFloat("Speed", GetComponent<NavMeshAgent>().velocity.magnitude);
+    }
 
     // Triggers
     protected void OnTriggerEnter(Collider other)
@@ -69,9 +77,8 @@ public class Enemy : MonoBehaviour
             other.gameObject.GetComponent<Item>().triggered == false &&
             other.gameObject.GetComponent<Item>().enemyCurrentlyCaught == false)
         {
-            GetComponent<NavMeshAgent>().speed = 0;
-            GetComponent<NavMeshAgent>().acceleration *= 1000;
-            GetComponent<NavMeshAgent>().destination = transform.position;
+            GetComponent<NavMeshAgent>().isStopped = true;
+            GetComponent<NavMeshAgent>().velocity = Vector3.zero;
             trapped = true;
             triggeredTrap = other.gameObject;
             triggeredTrap.GetComponent<Item>().triggered = true;
@@ -114,6 +121,7 @@ public class Enemy : MonoBehaviour
     {
         if (sceneMan.GetComponent<SceneMan>().gameState == GameState.Game && trapped == false)
         {
+            GetComponent<NavMeshAgent>().isStopped = false;
             GetComponent<NavMeshAgent>().destination = player.transform.position;
         }
         else if (sceneMan.GetComponent<SceneMan>().gameState == GameState.Cutscene2)
@@ -122,16 +130,19 @@ public class Enemy : MonoBehaviour
 
             if (distance > 7)
             {
+                GetComponent<NavMeshAgent>().isStopped = false;
                 GetComponent<NavMeshAgent>().destination = player.transform.position;
             }
             else
             {
-                GetComponent<NavMeshAgent>().destination = transform.position;
+                GetComponent<NavMeshAgent>().isStopped = true;
+                GetComponent<NavMeshAgent>().velocity = Vector3.zero;
             }
         }
         else
         {
-            GetComponent<NavMeshAgent>().destination = transform.position;
+            GetComponent<NavMeshAgent>().isStopped = true;
+            GetComponent<NavMeshAgent>().velocity = Vector3.zero;
         }
     }
 
@@ -146,9 +157,8 @@ public class Enemy : MonoBehaviour
             {
                 trapTimer = 0;
                 triggeredTrap.GetComponent<Item>().enemyCurrentlyCaught = false;
-                GetComponent<NavMeshAgent>().speed = speed;
-                GetComponent<NavMeshAgent>().acceleration = acceleration;
                 GetComponent<NavMeshAgent>().destination = player.transform.position;
+                GetComponent<NavMeshAgent>().isStopped = false;
                 trapped = false;
 
                 // Plays trap untrap sound

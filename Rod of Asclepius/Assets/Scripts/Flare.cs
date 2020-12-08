@@ -50,7 +50,10 @@ public class Flare : Ability
                 }
                 foreach (GameObject gameObject in vampire.GetComponent<Vampire>().childObjectParticles)
                 {
-                    gameObject.GetComponent<Renderer>().material.renderQueue = 3000;
+                    foreach (Material material in gameObject.GetComponent<Renderer>().materials)
+                    {
+                        material.renderQueue = 3000;
+                    }
                 }
                 vampire.GetComponent<Vampire>().spotLight.SetActive(true);
 
@@ -81,7 +84,10 @@ public class Flare : Ability
                 }
                 foreach (GameObject gameObject in wizard.GetComponent<Wizard>().childObjectParticles)
                 {
-                    gameObject.GetComponent<Renderer>().material.renderQueue = 3000;
+                    foreach (Material material in gameObject.GetComponent<Renderer>().materials)
+                    {
+                        material.renderQueue = 3000;
+                    }
                 }
                 wizard.GetComponent<Wizard>().spotLight.SetActive(true);
 
@@ -114,7 +120,10 @@ public class Flare : Ability
                     }
                     foreach (GameObject gameObject in vampire.GetComponent<Vampire>().childObjectParticles)
                     {
-                        gameObject.GetComponent<Renderer>().material.renderQueue = 3000;
+                        foreach (Material material in gameObject.GetComponent<Renderer>().materials)
+                        {
+                            material.renderQueue = 3002;
+                        }
                     }
                     vampire.GetComponent<Vampire>().spotLight.SetActive(false);
                 }
@@ -127,7 +136,10 @@ public class Flare : Ability
                     }
                     foreach (GameObject gameObject in wizard.GetComponent<Wizard>().childObjectParticles)
                     {
-                        gameObject.GetComponent<Renderer>().material.renderQueue = 3002;
+                        foreach (Material material in gameObject.GetComponent<Renderer>().materials)
+                        {
+                            material.renderQueue = 3002;
+                        }
                     }
                     wizard.GetComponent<Wizard>().spotLight.SetActive(false);
                 }

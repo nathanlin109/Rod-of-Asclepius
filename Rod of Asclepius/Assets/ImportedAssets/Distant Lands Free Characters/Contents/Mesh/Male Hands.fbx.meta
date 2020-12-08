@@ -1,161 +1,461 @@
 fileFormatVersion: 2
 guid: 6ff98783d10689e4199627949324d20f
 ModelImporter:
-  serializedVersion: 23
-  fileIDToRecycleName:
-    100000: Head 1 Male Bald
-    100002: Head 1 Male Hair 1
-    100004: Head 1 Male Hair 2
-    100006: Head 1 Male Hair 3
-    100008: LowManHead
-    100010: LowManHead_end
-    100012: LowManHips
-    100014: LowManLeftArm
-    100016: LowManLeftFoot
-    100018: LowManLeftForeArm
-    100020: LowManLeftHand
-    100022: LowManLeftHandIndex1
-    100024: LowManLeftHandIndex2
-    100026: LowManLeftHandIndex2_end
-    100028: LowManLeftHandMiddle1
-    100030: LowManLeftHandMiddle2
-    100032: LowManLeftHandMiddle2_end
-    100034: LowManLeftHandPinky1
-    100036: LowManLeftHandPinky2
-    100038: LowManLeftHandPinky2_end
-    100040: LowManLeftHandRing1
-    100042: LowManLeftHandRing2
-    100044: LowManLeftHandRing2_end
-    100046: LowManLeftHandThumb1
-    100048: LowManLeftHandThumb1_end
-    100050: LowManLeftLeg
-    100052: LowManLeftShoulder
-    100054: LowManLeftToeBase
-    100056: LowManLeftToeBase_end
-    100058: LowManLeftUpLeg
-    100060: LowManNeck
-    100062: LowManRightArm
-    100064: LowManRightFoot
-    100066: LowManRightForeArm
-    100068: LowManRightHand
-    100070: LowManRightHandIndex1
-    100072: LowManRightHandIndex2
-    100074: LowManRightHandIndex2_end
-    100076: LowManRightHandMiddle1
-    100078: LowManRightHandMiddle2
-    100080: LowManRightHandMiddle2_end
-    100082: LowManRightHandPinky1
-    100084: LowManRightHandPinky2
-    100086: LowManRightHandPinky2_end
-    100088: LowManRightHandRing1
-    100090: LowManRightHandRing2
-    100092: LowManRightHandRing2_end
-    100094: LowManRightHandThumb1
-    100096: LowManRightHandThumb1_end
-    100098: LowManRightLeg
-    100100: LowManRightShoulder
-    100102: LowManRightToeBase
-    100104: LowManRightToeBase_end
-    100106: LowManRightUpLeg
-    100108: LowManSpine
-    100110: LowManSpine1
-    100112: LowManSpine2
-    100114: Male
-    100116: //RootNode
-    100118: Pants Male
-    100120: Shorts Male
-    100122: Torso Male Long Sleeves
-    100124: Torso Male Short Sleeves
-    400000: Head 1 Male Bald
-    400002: Head 1 Male Hair 1
-    400004: Head 1 Male Hair 2
-    400006: Head 1 Male Hair 3
-    400008: LowManHead
-    400010: LowManHead_end
-    400012: LowManHips
-    400014: LowManLeftArm
-    400016: LowManLeftFoot
-    400018: LowManLeftForeArm
-    400020: LowManLeftHand
-    400022: LowManLeftHandIndex1
-    400024: LowManLeftHandIndex2
-    400026: LowManLeftHandIndex2_end
-    400028: LowManLeftHandMiddle1
-    400030: LowManLeftHandMiddle2
-    400032: LowManLeftHandMiddle2_end
-    400034: LowManLeftHandPinky1
-    400036: LowManLeftHandPinky2
-    400038: LowManLeftHandPinky2_end
-    400040: LowManLeftHandRing1
-    400042: LowManLeftHandRing2
-    400044: LowManLeftHandRing2_end
-    400046: LowManLeftHandThumb1
-    400048: LowManLeftHandThumb1_end
-    400050: LowManLeftLeg
-    400052: LowManLeftShoulder
-    400054: LowManLeftToeBase
-    400056: LowManLeftToeBase_end
-    400058: LowManLeftUpLeg
-    400060: LowManNeck
-    400062: LowManRightArm
-    400064: LowManRightFoot
-    400066: LowManRightForeArm
-    400068: LowManRightHand
-    400070: LowManRightHandIndex1
-    400072: LowManRightHandIndex2
-    400074: LowManRightHandIndex2_end
-    400076: LowManRightHandMiddle1
-    400078: LowManRightHandMiddle2
-    400080: LowManRightHandMiddle2_end
-    400082: LowManRightHandPinky1
-    400084: LowManRightHandPinky2
-    400086: LowManRightHandPinky2_end
-    400088: LowManRightHandRing1
-    400090: LowManRightHandRing2
-    400092: LowManRightHandRing2_end
-    400094: LowManRightHandThumb1
-    400096: LowManRightHandThumb1_end
-    400098: LowManRightLeg
-    400100: LowManRightShoulder
-    400102: LowManRightToeBase
-    400104: LowManRightToeBase_end
-    400106: LowManRightUpLeg
-    400108: LowManSpine
-    400110: LowManSpine1
-    400112: LowManSpine2
-    400114: Male
-    400116: //RootNode
-    400118: Pants Male
-    400120: Shorts Male
-    400122: Torso Male Long Sleeves
-    400124: Torso Male Short Sleeves
-    2100000: Skin 3
-    2100002: Fabric 1
-    2100004: Boots
-    2100006: Hair 1
-    2100008: Skin 1
-    2100010: Skin 1.003
-    2100012: Shirt 2.002
-    4300000: Head 1 Male Bald
-    4300002: Pants Male
-    4300004: Head 1 Male Hair 1
-    4300006: Shorts Male
-    4300008: Head 1 Male Hair 2
-    4300010: Head 1 Male Hair 3
-    4300012: Torso Male Long Sleeves
-    4300014: Torso Male Short Sleeves
-    9500000: //RootNode
-    13700000: Head 1 Male Bald
-    13700002: Head 1 Male Hair 1
-    13700004: Head 1 Male Hair 2
-    13700006: Head 1 Male Hair 3
-    13700008: Pants Male
-    13700010: Shorts Male
-    13700012: Torso Male Long Sleeves
-    13700014: Torso Male Short Sleeves
+  serializedVersion: 20101
+  internalIDToNameTable:
+  - first:
+      1: 100000
+    second: Head 1 Male Bald
+  - first:
+      1: 100002
+    second: Head 1 Male Hair 1
+  - first:
+      1: 100004
+    second: Head 1 Male Hair 2
+  - first:
+      1: 100006
+    second: Head 1 Male Hair 3
+  - first:
+      1: 100008
+    second: LowManHead
+  - first:
+      1: 100010
+    second: LowManHead_end
+  - first:
+      1: 100012
+    second: LowManHips
+  - first:
+      1: 100014
+    second: LowManLeftArm
+  - first:
+      1: 100016
+    second: LowManLeftFoot
+  - first:
+      1: 100018
+    second: LowManLeftForeArm
+  - first:
+      1: 100020
+    second: LowManLeftHand
+  - first:
+      1: 100022
+    second: LowManLeftHandIndex1
+  - first:
+      1: 100024
+    second: LowManLeftHandIndex2
+  - first:
+      1: 100026
+    second: LowManLeftHandIndex2_end
+  - first:
+      1: 100028
+    second: LowManLeftHandMiddle1
+  - first:
+      1: 100030
+    second: LowManLeftHandMiddle2
+  - first:
+      1: 100032
+    second: LowManLeftHandMiddle2_end
+  - first:
+      1: 100034
+    second: LowManLeftHandPinky1
+  - first:
+      1: 100036
+    second: LowManLeftHandPinky2
+  - first:
+      1: 100038
+    second: LowManLeftHandPinky2_end
+  - first:
+      1: 100040
+    second: LowManLeftHandRing1
+  - first:
+      1: 100042
+    second: LowManLeftHandRing2
+  - first:
+      1: 100044
+    second: LowManLeftHandRing2_end
+  - first:
+      1: 100046
+    second: LowManLeftHandThumb1
+  - first:
+      1: 100048
+    second: LowManLeftHandThumb1_end
+  - first:
+      1: 100050
+    second: LowManLeftLeg
+  - first:
+      1: 100052
+    second: LowManLeftShoulder
+  - first:
+      1: 100054
+    second: LowManLeftToeBase
+  - first:
+      1: 100056
+    second: LowManLeftToeBase_end
+  - first:
+      1: 100058
+    second: LowManLeftUpLeg
+  - first:
+      1: 100060
+    second: LowManNeck
+  - first:
+      1: 100062
+    second: LowManRightArm
+  - first:
+      1: 100064
+    second: LowManRightFoot
+  - first:
+      1: 100066
+    second: LowManRightForeArm
+  - first:
+      1: 100068
+    second: LowManRightHand
+  - first:
+      1: 100070
+    second: LowManRightHandIndex1
+  - first:
+      1: 100072
+    second: LowManRightHandIndex2
+  - first:
+      1: 100074
+    second: LowManRightHandIndex2_end
+  - first:
+      1: 100076
+    second: LowManRightHandMiddle1
+  - first:
+      1: 100078
+    second: LowManRightHandMiddle2
+  - first:
+      1: 100080
+    second: LowManRightHandMiddle2_end
+  - first:
+      1: 100082
+    second: LowManRightHandPinky1
+  - first:
+      1: 100084
+    second: LowManRightHandPinky2
+  - first:
+      1: 100086
+    second: LowManRightHandPinky2_end
+  - first:
+      1: 100088
+    second: LowManRightHandRing1
+  - first:
+      1: 100090
+    second: LowManRightHandRing2
+  - first:
+      1: 100092
+    second: LowManRightHandRing2_end
+  - first:
+      1: 100094
+    second: LowManRightHandThumb1
+  - first:
+      1: 100096
+    second: LowManRightHandThumb1_end
+  - first:
+      1: 100098
+    second: LowManRightLeg
+  - first:
+      1: 100100
+    second: LowManRightShoulder
+  - first:
+      1: 100102
+    second: LowManRightToeBase
+  - first:
+      1: 100104
+    second: LowManRightToeBase_end
+  - first:
+      1: 100106
+    second: LowManRightUpLeg
+  - first:
+      1: 100108
+    second: LowManSpine
+  - first:
+      1: 100110
+    second: LowManSpine1
+  - first:
+      1: 100112
+    second: LowManSpine2
+  - first:
+      1: 100114
+    second: Male
+  - first:
+      1: 100116
+    second: //RootNode
+  - first:
+      1: 100118
+    second: Pants Male
+  - first:
+      1: 100120
+    second: Shorts Male
+  - first:
+      1: 100122
+    second: Torso Male Long Sleeves
+  - first:
+      1: 100124
+    second: Torso Male Short Sleeves
+  - first:
+      4: 400000
+    second: Head 1 Male Bald
+  - first:
+      4: 400002
+    second: Head 1 Male Hair 1
+  - first:
+      4: 400004
+    second: Head 1 Male Hair 2
+  - first:
+      4: 400006
+    second: Head 1 Male Hair 3
+  - first:
+      4: 400008
+    second: LowManHead
+  - first:
+      4: 400010
+    second: LowManHead_end
+  - first:
+      4: 400012
+    second: LowManHips
+  - first:
+      4: 400014
+    second: LowManLeftArm
+  - first:
+      4: 400016
+    second: LowManLeftFoot
+  - first:
+      4: 400018
+    second: LowManLeftForeArm
+  - first:
+      4: 400020
+    second: LowManLeftHand
+  - first:
+      4: 400022
+    second: LowManLeftHandIndex1
+  - first:
+      4: 400024
+    second: LowManLeftHandIndex2
+  - first:
+      4: 400026
+    second: LowManLeftHandIndex2_end
+  - first:
+      4: 400028
+    second: LowManLeftHandMiddle1
+  - first:
+      4: 400030
+    second: LowManLeftHandMiddle2
+  - first:
+      4: 400032
+    second: LowManLeftHandMiddle2_end
+  - first:
+      4: 400034
+    second: LowManLeftHandPinky1
+  - first:
+      4: 400036
+    second: LowManLeftHandPinky2
+  - first:
+      4: 400038
+    second: LowManLeftHandPinky2_end
+  - first:
+      4: 400040
+    second: LowManLeftHandRing1
+  - first:
+      4: 400042
+    second: LowManLeftHandRing2
+  - first:
+      4: 400044
+    second: LowManLeftHandRing2_end
+  - first:
+      4: 400046
+    second: LowManLeftHandThumb1
+  - first:
+      4: 400048
+    second: LowManLeftHandThumb1_end
+  - first:
+      4: 400050
+    second: LowManLeftLeg
+  - first:
+      4: 400052
+    second: LowManLeftShoulder
+  - first:
+      4: 400054
+    second: LowManLeftToeBase
+  - first:
+      4: 400056
+    second: LowManLeftToeBase_end
+  - first:
+      4: 400058
+    second: LowManLeftUpLeg
+  - first:
+      4: 400060
+    second: LowManNeck
+  - first:
+      4: 400062
+    second: LowManRightArm
+  - first:
+      4: 400064
+    second: LowManRightFoot
+  - first:
+      4: 400066
+    second: LowManRightForeArm
+  - first:
+      4: 400068
+    second: LowManRightHand
+  - first:
+      4: 400070
+    second: LowManRightHandIndex1
+  - first:
+      4: 400072
+    second: LowManRightHandIndex2
+  - first:
+      4: 400074
+    second: LowManRightHandIndex2_end
+  - first:
+      4: 400076
+    second: LowManRightHandMiddle1
+  - first:
+      4: 400078
+    second: LowManRightHandMiddle2
+  - first:
+      4: 400080
+    second: LowManRightHandMiddle2_end
+  - first:
+      4: 400082
+    second: LowManRightHandPinky1
+  - first:
+      4: 400084
+    second: LowManRightHandPinky2
+  - first:
+      4: 400086
+    second: LowManRightHandPinky2_end
+  - first:
+      4: 400088
+    second: LowManRightHandRing1
+  - first:
+      4: 400090
+    second: LowManRightHandRing2
+  - first:
+      4: 400092
+    second: LowManRightHandRing2_end
+  - first:
+      4: 400094
+    second: LowManRightHandThumb1
+  - first:
+      4: 400096
+    second: LowManRightHandThumb1_end
+  - first:
+      4: 400098
+    second: LowManRightLeg
+  - first:
+      4: 400100
+    second: LowManRightShoulder
+  - first:
+      4: 400102
+    second: LowManRightToeBase
+  - first:
+      4: 400104
+    second: LowManRightToeBase_end
+  - first:
+      4: 400106
+    second: LowManRightUpLeg
+  - first:
+      4: 400108
+    second: LowManSpine
+  - first:
+      4: 400110
+    second: LowManSpine1
+  - first:
+      4: 400112
+    second: LowManSpine2
+  - first:
+      4: 400114
+    second: Male
+  - first:
+      4: 400116
+    second: //RootNode
+  - first:
+      4: 400118
+    second: Pants Male
+  - first:
+      4: 400120
+    second: Shorts Male
+  - first:
+      4: 400122
+    second: Torso Male Long Sleeves
+  - first:
+      4: 400124
+    second: Torso Male Short Sleeves
+  - first:
+      21: 2100000
+    second: Skin 3
+  - first:
+      21: 2100002
+    second: Fabric 1
+  - first:
+      21: 2100004
+    second: Boots
+  - first:
+      21: 2100006
+    second: Hair 1
+  - first:
+      21: 2100008
+    second: Skin 1
+  - first:
+      21: 2100010
+    second: Skin 1.003
+  - first:
+      21: 2100012
+    second: Shirt 2.002
+  - first:
+      43: 4300000
+    second: Head 1 Male Bald
+  - first:
+      43: 4300002
+    second: Pants Male
+  - first:
+      43: 4300004
+    second: Head 1 Male Hair 1
+  - first:
+      43: 4300006
+    second: Shorts Male
+  - first:
+      43: 4300008
+    second: Head 1 Male Hair 2
+  - first:
+      43: 4300010
+    second: Head 1 Male Hair 3
+  - first:
+      43: 4300012
+    second: Torso Male Long Sleeves
+  - first:
+      43: 4300014
+    second: Torso Male Short Sleeves
+  - first:
+      95: 9500000
+    second: //RootNode
+  - first:
+      137: 13700000
+    second: Head 1 Male Bald
+  - first:
+      137: 13700002
+    second: Head 1 Male Hair 1
+  - first:
+      137: 13700004
+    second: Head 1 Male Hair 2
+  - first:
+      137: 13700006
+    second: Head 1 Male Hair 3
+  - first:
+      137: 13700008
+    second: Pants Male
+  - first:
+      137: 13700010
+    second: Shorts Male
+  - first:
+      137: 13700012
+    second: Torso Male Long Sleeves
+  - first:
+      137: 13700014
+    second: Torso Male Short Sleeves
   externalObjects: {}
   materials:
-    importMaterials: 0
+    materialImportMode: 0
     materialName: 0
     materialSearch: 1
     materialLocation: 1
@@ -188,25 +488,32 @@ ModelImporter:
     meshCompression: 0
     addColliders: 0
     useSRGBMaterialColor: 1
+    sortHierarchyByName: 1
     importVisibility: 1
     importBlendShapes: 1
     importCameras: 1
     importLights: 1
+    fileIdsGeneration: 1
     swapUVChannels: 0
     generateSecondaryUV: 0
     useFileUnits: 1
-    optimizeMeshForGPU: 1
     keepQuads: 0
     weldVertices: 1
+    bakeAxisConversion: 0
     preserveHierarchy: 0
+    skinWeightsMode: 0
+    maxBonesPerVertex: 4
+    minBoneWeight: 0.001
+    meshOptimizationFlags: -1
     indexFormat: 0
     secondaryUVAngleDistortion: 8
     secondaryUVAreaDistortion: 15.000001
     secondaryUVHardAngle: 88
+    secondaryUVMarginMethod: 0
+    secondaryUVMinLightmapResolution: 40
+    secondaryUVMinObjectScale: 1
     secondaryUVPackMargin: 4
     useFileScale: 1
-    previousCalculatedGlobalScale: 0.01
-    hasPreviousCalculatedGlobalScale: 1
   tangentSpace:
     normalSmoothAngle: 60
     normalImportMode: 0
@@ -215,10 +522,10 @@ ModelImporter:
     legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
     blendShapeNormalImportMode: 1
     normalSmoothingSource: 0
+  referencedClips: []
   importAnimation: 1
-  copyAvatar: 0
   humanDescription:
-    serializedVersion: 2
+    serializedVersion: 3
     human: []
     skeleton: []
     armTwist: 0.5
@@ -228,13 +535,16 @@ ModelImporter:
     armStretch: 0.05
     legStretch: 0.05
     feetSpacing: 0
+    globalScale: 1
     rootMotionBoneName: 
     hasTranslationDoF: 0
     hasExtraRoot: 0
     skeletonHasParents: 1
   lastHumanDescriptionAvatarSource: {instanceID: 0}
+  autoGenerateAvatarMappingIfUnspecified: 1
   animationType: 2
   humanoidOversampling: 1
+  avatarSetup: 1
   additionalBone: 0
   userData: 
   assetBundleName: 
