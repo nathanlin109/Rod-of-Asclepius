@@ -20857,27 +20857,6 @@ NavMeshObstacle:
   m_CarveOnlyStationary: 1
   m_Center: {x: 0, y: 0.827, z: 0}
   m_TimeToStationary: 0.5
---- !u!1 &617860753 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 100006, guid: e5e8b8e20dd6b6b49bc061bb9814a92b, type: 3}
-  m_PrefabInstance: {fileID: 398841723}
-  m_PrefabAsset: {fileID: 0}
---- !u!208 &617860757
-NavMeshObstacle:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 617860753}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Shape: 1
-  m_Extents: {x: 1.291, y: 0.827, z: 0.14600001}
-  m_MoveThreshold: 0.1
-  m_Carve: 0
-  m_CarveOnlyStationary: 1
-  m_Center: {x: 0, y: 0.827, z: 0}
-  m_TimeToStationary: 0.5
 --- !u!4 &619779479 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7023165933335625951, guid: a73e9680647acdd40b863c4b6d3982b0, type: 3}
@@ -24742,6 +24721,10 @@ PrefabInstance:
       propertyPath: silenceCooldown
       value: 10
       objectReference: {fileID: 0}
+    - target: {fileID: 5637404889712093173, guid: 619f88d1e87438a43a166f80364f0fd4, type: 3}
+      propertyPath: flareCooldown
+      value: 14
+      objectReference: {fileID: 0}
     - target: {fileID: 6562031803846321546, guid: 619f88d1e87438a43a166f80364f0fd4, type: 3}
       propertyPath: m_Name
       value: Player
@@ -27514,27 +27497,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 400000, guid: 0c6a1b709e81ef54297ce22bcaca285d, type: 3}
   m_PrefabInstance: {fileID: 755282623}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &809880007 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 100000, guid: e5e8b8e20dd6b6b49bc061bb9814a92b, type: 3}
-  m_PrefabInstance: {fileID: 398841723}
-  m_PrefabAsset: {fileID: 0}
---- !u!208 &809880009
-NavMeshObstacle:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 809880007}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Shape: 1
-  m_Extents: {x: 0.5, y: 0.5, z: 0.5}
-  m_MoveThreshold: 0.1
-  m_Carve: 0
-  m_CarveOnlyStationary: 1
-  m_Center: {x: 0, y: 0, z: 0}
-  m_TimeToStationary: 0.5
 --- !u!1001 &811438725
 PrefabInstance:
   m_ObjectHideFlags: 0

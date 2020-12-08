@@ -14,7 +14,13 @@ public class UIManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        // Plays menu theme
+        if ((SceneManager.GetActiveScene().name == "MainMenu" ||
+            SceneManager.GetActiveScene().name == "Win") &&
+            GameObject.Find("AudioManager").GetComponent<AudioMan>().mainTheme.source.isPlaying == false)
+        {
+            GameObject.Find("AudioManager").GetComponent<AudioMan>().mainTheme.source.Play();
+        }
     }
 
     // Update is called once per frame

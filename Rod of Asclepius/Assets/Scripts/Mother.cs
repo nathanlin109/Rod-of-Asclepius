@@ -22,8 +22,9 @@ public class Mother : MonoBehaviour
     void Update()
     {
         animator.SetFloat("Speed", GetComponent<NavMeshAgent>().velocity.magnitude);
-        if (sceneMan.GetComponent<SceneMan>().gameState == GameState.Game ||
-            sceneMan.GetComponent<SceneMan>().gameState == GameState.Cutscene5 &&
+        if ((sceneMan.GetComponent<SceneMan>().gameState == GameState.Game ||
+            sceneMan.GetComponent<SceneMan>().gameState == GameState.Cutscene5 ||
+            sceneMan.GetComponent<SceneMan>().gameState == GameState.Win) &&
             sceneMan.GetComponent<SceneMan>().resurrectedMom == true)
         {
             GetComponent<NavMeshAgent>().isStopped = false;
