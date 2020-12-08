@@ -7,6 +7,7 @@ public class ObjectiveManager : MonoBehaviour
 {
     private GameObject sceneMan;
     private GameObject player;
+    public GameObject objectiveItemsCollectedBackground;
     public GameObject objectiveItemsCollectedText;
 
     // Start is called before the first frame update
@@ -20,9 +21,13 @@ public class ObjectiveManager : MonoBehaviour
     void Update()
     {
         // Game
-        if (sceneMan.GetComponent<SceneMan>().gameState == GameState.Game)
+        if (sceneMan.GetComponent<SceneMan>().gameState == GameState.Game && !sceneMan.GetComponent<SceneMan>().resurrectedMom)
         {
-            objectiveItemsCollectedText.SetActive(true);
+            objectiveItemsCollectedBackground.SetActive(true);
+        }
+        else
+        {
+            objectiveItemsCollectedBackground.SetActive(false);
         }
     }
 
