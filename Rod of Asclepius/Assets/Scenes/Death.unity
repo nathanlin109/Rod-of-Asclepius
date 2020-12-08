@@ -311,7 +311,7 @@ GameObject:
   - component: {fileID: 245081276}
   - component: {fileID: 245081275}
   m_Layer: 5
-  m_Name: WinCanvas
+  m_Name: DeathCanvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -538,7 +538,7 @@ GameObject:
   - component: {fileID: 505792807}
   - component: {fileID: 505792806}
   m_Layer: 5
-  m_Name: WinBackgroundCanvas
+  m_Name: DeathBackgroundCanvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -693,7 +693,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: You Win!
+  m_Text: You Died!
 --- !u!222 &557782670
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -895,7 +895,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: You have saved your mother!
+  m_Text: You failed to save your mother...
 --- !u!222 &1131412123
 CanvasRenderer:
   m_ObjectHideFlags: 0

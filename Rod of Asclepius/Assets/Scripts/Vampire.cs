@@ -27,6 +27,12 @@ public class Vampire : Enemy
         if (biting == true)
         {
             animationBiteDelayTimer += Time.deltaTime;
+
+            if (animationBiteDelayTimer >= animationBiteDelay + .1)
+            {
+                biting = false;
+                animationBiteDelayTimer = 0;
+            }
         }
     }
 

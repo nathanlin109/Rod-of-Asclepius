@@ -1,15 +1,19 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public enum GameState { Cutscene1, Cutscene2, Cutscene3, Cutscene4, Cutscene5,
-    Game, GameNoCombat, Pause, Death }
+    Game, GameNoCombat, Pause, Death, Win }
+
 
 public class SceneMan : MonoBehaviour
 {
     // Fields
     public GameState gameState;
+    public GameState gameStateBeforePause;
     public bool resurrectedMom;
 
     // Objective particles
@@ -24,9 +28,9 @@ public class SceneMan : MonoBehaviour
     public Texture2D cursorTexture;
 
     // Win game
-    public bool wonGame;
     public GameObject blackFadeTexture;
     public float fadeMultiplier = .1f;
+    private bool playedWinSound;
 
     // Start is called before the first frame update
     void Start()
@@ -34,8 +38,8 @@ public class SceneMan : MonoBehaviour
         gameState = GameState.Cutscene1;
         resurrectedMom = false;
         Cursor.SetCursor(cursorTexture, new Vector2(cursorTexture.width / 2, cursorTexture.height / 2), CursorMode.Auto);
-        wonGame = false;
         GameObject.Find("AudioManager").GetComponent<AudioMan>().Play("background-sounds");
+        playedWinSound = false;
     }
 
     // Update is called once per frame
@@ -58,11 +62,47 @@ public class SceneMan : MonoBehaviour
     // Fades to black when finished with game
     void FadeToBlack()
     {
-        if (wonGame == true)
+        if (gameState == GameState.Win)
         {
             Color fadeColor = blackFadeTexture.GetComponent<Image>().color;
             fadeColor.a += Time.deltaTime * fadeMultiplier;
             blackFadeTexture.GetComponent<Image>().color = fadeColor;
+
+            if (playedWinSound == false)
+            {
+                playedWinSound = true;
+                GameObject.Find("AudioManager").GetComponent<AudioMan>().Play("win-sound");
+            }
+
+            if (fadeColor.a >= .95f)
+            {
+                SceneManager.LoadScene("Win", LoadSceneMode.Single);
+
+                // Stops ambient sound
+                Sound backgroundSound = Array.Find(GameObject.Find("AudioManager").GetComponent<AudioMan>().sounds, sound => sound.name == "background-sounds");
+                if (backgroundSound != null && backgroundSound.source.isPlaying == true)
+                {
+                    backgroundSound.source.Stop();
+                }
+            }
+        }
+        else if (gameState == GameState.Death)
+        {
+            Color fadeColor = blackFadeTexture.GetComponent<Image>().color;
+            fadeColor.a += Time.deltaTime * fadeMultiplier;
+            blackFadeTexture.GetComponent<Image>().color = fadeColor;
+
+            if (fadeColor.a >= .95f)
+            {
+                SceneManager.LoadScene("Death", LoadSceneMode.Single);
+
+                // Stops ambient sound
+                Sound backgroundSound = Array.Find(GameObject.Find("AudioManager").GetComponent<AudioMan>().sounds, sound => sound.name == "background-sounds");
+                if (backgroundSound != null && backgroundSound.source.isPlaying == true)
+                {
+                    backgroundSound.source.Stop();
+                }
+            }
         }
     }
 }

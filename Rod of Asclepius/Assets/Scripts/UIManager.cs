@@ -33,6 +33,12 @@ public class UIManager : MonoBehaviour
         SceneManager.LoadScene("Game", LoadSceneMode.Single);
     }
 
+    public void RunMenuScene()
+    {
+        PlayClickSound();
+        SceneManager.LoadScene("MainMenu", LoadSceneMode.Single);
+    }
+
     public void QuitGame()
     {
         PlayClickSound();
@@ -77,6 +83,47 @@ public class UIManager : MonoBehaviour
             loreCanvas.SetActive(false);
         }
         mainCanvas.SetActive(true);
+    }
+
+    public void Pause()
+    {
+        PlayClickSound();
+        GameObject.Find("Player").GetComponent<Player>().moveVector = Vector3.zero;
+        GameObject sceneManager = GameObject.Find("SceneManager");
+        sceneManager.GetComponent<SceneMan>().gameStateBeforePause = sceneManager.GetComponent<SceneMan>().gameState;
+        sceneManager.GetComponent<SceneMan>().gameState = GameState.Pause;
+        if (sceneManager.GetComponent<InputManager>().pauseCanvas.activeSelf == false)
+        {
+            sceneManager.GetComponent<InputManager>().pauseCanvas.SetActive(true);
+        }
+        if (sceneManager.GetComponent<InputManager>().pauseButton.activeSelf == true)
+        {
+            sceneManager.GetComponent<InputManager>().pauseButton.SetActive(false);
+            /*sceneManager.GetComponent<InputManager>().pauseButton.GetComponent<ButtonHover>().spriteIndex = 0;
+            sceneManager.GetComponent<InputManager>().pauseButton.GetComponent<Image>().sprite = sceneManager.GetComponent<InputManager>().pauseButton.GetComponent<ButtonHover>().buttonSprites[0];
+            sceneManager.GetComponent<InputManager>().pauseButton.GetComponentInChildren<Text>().color = sceneManager.GetComponent<InputManager>().pauseButton.GetComponent<ButtonHover>().buttonColors[0];*/
+        }
+    }
+
+    public void UnPause()
+    {
+        PlayClickSound();
+        GameObject sceneManager = GameObject.Find("SceneManager");
+        sceneManager.GetComponent<SceneMan>().gameState = sceneManager.GetComponent<SceneMan>().gameStateBeforePause;
+        if (sceneManager.GetComponent<InputManager>().pauseCanvas.activeSelf == true)
+        {
+            /*GameObject.Find("PauseCanvas/ResumeButton").GetComponent<ButtonHover>().spriteIndex = 0;
+            GameObject.Find("PauseCanvas/ResumeButton").GetComponent<Image>().sprite = GameObject.Find("PauseCanvas/ResumeButton").GetComponent<ButtonHover>().buttonSprites[0];
+            GameObject.Find("PauseCanvas/ResumeButton").GetComponentInChildren<Text>().color = GameObject.Find("PauseCanvas/ResumeButton").GetComponent<ButtonHover>().buttonColors[0];
+            GameObject.Find("PauseCanvas/MenuButton").GetComponent<ButtonHover>().spriteIndex = 0;
+            GameObject.Find("PauseCanvas/MenuButton").GetComponent<Image>().sprite = GameObject.Find("PauseCanvas/MenuButton").GetComponent<ButtonHover>().buttonSprites[0];
+            GameObject.Find("PauseCanvas/MenuButton").GetComponentInChildren<Text>().color = GameObject.Find("PauseCanvas/MenuButton").GetComponent<ButtonHover>().buttonColors[0];*/
+            sceneManager.GetComponent<InputManager>().pauseCanvas.SetActive(false);
+        }
+        if (sceneManager.GetComponent<InputManager>().pauseButton.activeSelf == false)
+        {
+            sceneManager.GetComponent<InputManager>().pauseButton.SetActive(true);
+        }
     }
 
     private void PlayClickSound()

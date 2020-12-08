@@ -12,7 +12,7 @@ public class Player : MonoBehaviour
     public int health;
     GameObject sceneMan;
     public float moveSpeed;
-    private Vector3 moveVector;
+    public Vector3 moveVector;
     private bool playedDeathSound;
     public Animator animator;
     private bool isDead;
@@ -62,7 +62,7 @@ public class Player : MonoBehaviour
     public GameObject flareCooldownText;
 
     // Objectives
-    public int objectiveItemsCollected;
+    public float objectiveItemsCollected;
 
     // Cutscene movement
     public bool cutscene1ShouldMove;
@@ -70,7 +70,6 @@ public class Player : MonoBehaviour
     public bool cutscene2ShouldRotateVampire;
     public bool cutscene4ShouldRotateCoffin;
     public bool cutscene5ShouldRotate;
-    public bool cutscene5ShouldMove;
     private bool cutscene5ShouldCloseGate;
     private bool cutscene5ClosedGate;
 
@@ -173,20 +172,19 @@ void Update()
 
             if (sceneMan.GetComponent<SceneMan>().gameState == GameState.Cutscene5)
             {
-                // Moves player down in cutscene 5
-                if (cutscene5ShouldMove)
-                {
-                    moveVector = new Vector3(0, 0, -1.0f);
-                    GetComponent<Rigidbody>().transform.Translate(moveVector * moveSpeed / 2 * Time.deltaTime, Space.World);
-                }
-
                 // Closes gate in cutscene5
                 CloseGateCutscene5();
             }
-            else
-            {
-                moveVector = Vector3.zero;
-            }
+            moveVector = Vector3.zero;
+        }
+        else if (sceneMan.GetComponent<SceneMan>().gameState == GameState.Win)
+        {
+            // Moves player down in win
+            moveVector = new Vector3(0, 0, -1.0f);
+            GetComponent<Rigidbody>().transform.Translate(moveVector * moveSpeed / 2 * Time.deltaTime, Space.World);
+
+            // Closes gate in cutscene5
+            CloseGateCutscene5();
         }
     }
 
@@ -369,6 +367,7 @@ void Update()
             bloodColor.a = 1;
             sceneMan.GetComponent<InputManager>().blood.GetComponent<Image>().color = bloodColor;
             isDead = true;
+            sceneMan.GetComponent<SceneMan>().gameState = GameState.Death;
 
             // Plays death sound
             if (playedDeathSound == false)
@@ -659,10 +658,10 @@ void Update()
             }
 
             // Game to Cutscene4 (Trigger Mother's grave)
-            if (other.gameObject.tag == "TriggerMotherGrave" && objectiveItemsCollected == 6)
+            if (other.gameObject.tag == "TriggerMotherGrave" && objectiveItemsCollected >= 5)
             {
                 sceneMan.GetComponent<SceneMan>().gameState = GameState.Cutscene4;
-                objectiveItemsCollected++;
+                objectiveItemsCollected = -1;
                 cutscene4ShouldRotateCoffin = true;
             }
 
@@ -776,7 +775,7 @@ void Update()
                     sceneMan.GetComponent<ObjectiveManager>().UpdateUICollectedText();
                     GameObject.Find("AudioManager").GetComponent<AudioMan>().Play("item-pickup-sound");
 
-                    if (objectiveItemsCollected == 6)
+                    if (objectiveItemsCollected >= 5)
                     {
                         sceneMan.GetComponent<InputManager>().buttonPromptText.SetActive(true);
                         sceneMan.GetComponent<InputManager>().cutscene3Text.SetActive(true);

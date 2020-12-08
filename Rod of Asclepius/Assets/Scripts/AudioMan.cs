@@ -41,7 +41,9 @@ public class AudioMan : MonoBehaviour
     // Starts playing main theme
     private void Start()
     {
-        if (SceneManager.GetActiveScene().name == "MainMenu")
+        if ((SceneManager.GetActiveScene().name == "MainMenu" ||
+            SceneManager.GetActiveScene().name == "Win") &&
+            mainTheme.source.isPlaying == false)
         {
             mainTheme.source.Play();
         }
