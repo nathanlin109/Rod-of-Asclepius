@@ -15,6 +15,7 @@ public class SceneMan : MonoBehaviour
     public GameState gameState;
     public GameState gameStateBeforePause;
     public bool resurrectedMom;
+    private Vector2 mousePos;
 
     // Objective particles
     public GameObject birdParticles;
@@ -40,6 +41,7 @@ public class SceneMan : MonoBehaviour
         gameState = GameState.Cutscene1;
         resurrectedMom = false;
         Cursor.SetCursor(cursorTexture, new Vector2(cursorTexture.width / 2, cursorTexture.height / 2), CursorMode.Auto);
+        Cursor.visible = false;
         GameObject.Find("AudioManager").GetComponent<AudioMan>().Play("background-sounds");
         playedWinSound = false;
     }
@@ -48,6 +50,12 @@ public class SceneMan : MonoBehaviour
     void Update()
     {
         FadeToBlack();
+        mousePos = new Vector2(Input.mousePosition.x, Screen.height - Input.mousePosition.y);
+    }
+
+    private void OnGUI()
+    {
+        GUI.DrawTexture(new Rect(mousePos.x - (cursorTexture.width / 2), mousePos.y - (cursorTexture.height / 2), cursorTexture.width, cursorTexture.height), cursorTexture);
     }
 
     // Enables objective particles
