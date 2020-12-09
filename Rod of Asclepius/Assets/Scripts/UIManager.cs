@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using System;
 
 public class UIManager : MonoBehaviour
 {
@@ -43,6 +44,12 @@ public class UIManager : MonoBehaviour
     {
         PlayClickSound();
         SceneManager.LoadScene("MainMenu", LoadSceneMode.Single);
+
+        Sound backgroundSound = Array.Find(GameObject.Find("AudioManager").GetComponent<AudioMan>().sounds, sound => sound.name == "background-sounds");
+        if (backgroundSound != null && backgroundSound.source.isPlaying == true)
+        {
+            backgroundSound.source.Stop();
+        }
     }
 
     public void QuitGame()
