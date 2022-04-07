@@ -1,2 +1,2 @@
 # Rod of Asclepius
- A top down 3D survival horror game.
+Top down 3D survival horror game.
